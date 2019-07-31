@@ -1,10 +1,11 @@
-datasource sqlite {
-  url      = "file:dev.sqlite"
-  provider = "sqlite"
+datasource hammerDatasource {
+  url = env("PRISMA_URL")
+  provider = env("PRISMA_PROVIDER")
 }
 
 generator photonjs {
   provider = "photonjs"
+  output = "../generated/photon"
 }
 
 model User {
