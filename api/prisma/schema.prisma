@@ -6,6 +6,7 @@ datasource hammerDatasource {
 generator photonjs {
   provider = "photonjs"
   output = "../generated/photon"
+  platforms = ["native", "linux-glibc-libssl1.0.2"]
 }
 
 model User {
