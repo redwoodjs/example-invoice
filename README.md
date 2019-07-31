@@ -28,9 +28,7 @@ AUTH0_AUDIENCE=https://billable.me/api
 Generate a database:
 
 ```terminal
-cd api
-yarn prisma2 lift up
-cd ..
+yarn workspace api db:migrate
 ```
 
 ### Fire it up

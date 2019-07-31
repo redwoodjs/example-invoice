@@ -11,7 +11,7 @@ const FUNCTIONS_SRC_PATH = path.join(
 );
 const FUNCTIONS_BUILD_PATH = path.join(
   hammerConfig.baseDir,
-  "api/dist/packaged/"
+  "api/dist/zippedFunctions/"
 );
 
 try {

@@ -19,7 +19,7 @@
     "dev": "yarn db:generate && yarn workspace @hammerframework/hammer-dev-server dev",
     "db:generate": "yarn prisma2 generate",
     "db:migrate": "yarn prisma2 lift up",
-    "build": "yarn clean && NODE_ENV=production babel src --out-dir dist && node ./scripts/package-functions.js",
+    "build": "yarn clean && yarn db:generate && NODE_ENV=production babel src --out-dir dist && node ./scripts/package-functions.js",
     "clean": "rm -rf dist"
   }
 }
