@@ -11,11 +11,15 @@
     "nexus": "^0.11.7",
     "prisma2": "^2.0.0-preview-2"
   },
-  "scripts": {
-    "generate": "yarn prisma2 generate",
-    "dev": "yarn generate && yarn workspace @hammerframework/hammer-dev-server dev"
-  },
   "devDependencies": {
-    "babel-plugin-module-resolver": "^3.2.0"
+    "babel-plugin-module-resolver": "^3.2.0",
+    "@netlify/zip-it-and-ship-it": "^0.3.1"
+  },
+  "scripts": {
+    "dev": "yarn db:generate && yarn workspace @hammerframework/hammer-dev-server dev",
+    "db:generate": "yarn prisma2 generate",
+    "db:migrate": "yarn prisma2 lift up",
+    "build": "yarn clean && NODE_ENV=production babel src --out-dir dist && node ./scripts/package-functions.js",
+    "clean": "rm -rf dist"
   }
 }
