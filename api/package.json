@@ -5,15 +5,14 @@
   "dependencies": {
     "@hammerframework/hammer-api": "0.0.0",
     "dotenv": "^8.0.0",
-    "graphql": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.5.1",
-    "nexus": "^0.11.7",
+    "nexus": "^0.12.0-beta.6",
     "prisma2": "^2.0.0-preview-7"
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "^3.2.0",
-    "@netlify/zip-it-and-ship-it": "^0.3.1"
+    "@netlify/zip-it-and-ship-it": "^0.3.1",
+    "babel-plugin-module-resolver": "^3.2.0"
   },
   "scripts": {
     "dev": "yarn db:generate && yarn workspace @hammerframework/hammer-dev-server dev",
