@@ -20,4 +20,4 @@ fi
 echo "Prisma Provider: ${PRISMA_PROVIDER}"
 echo "Prisma URL     : ${PRISMA_URL}"
 
-export PRISMA_URL=$PRISMA_URL; export PRISMA_PROVIDER=$PRISMA_PROVIDER; yarn prisma2 $1
+export PRISMA_URL=$PRISMA_URL; export PRISMA_PROVIDER=$PRISMA_PROVIDER; yarn prisma2 $@
