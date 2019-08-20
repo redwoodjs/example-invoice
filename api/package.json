@@ -9,7 +9,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.5.1",
     "nexus": "^0.11.7",
-    "prisma2": "2.0.0-alpha.76"
+    "prisma2": "^2.0.0-preview-7"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.2.0",
@@ -17,9 +17,10 @@
   },
   "scripts": {
     "dev": "yarn db:generate && yarn workspace @hammerframework/hammer-dev-server dev",
-    "db:generate": "yarn prisma2 generate",
-    "db:migrate": "yarn prisma2 lift up",
-    "build": "yarn clean && yarn db:generate && NODE_ENV=production babel src --out-dir dist && node ./scripts/package-functions.js",
+    "db:generate": "./scripts/prisma-default-env-vars.sh generate",
+    "db:migrate": "./scripts/prisma-default-env-vars.sh lift up",
+    "build": "yarn clean && yarn db:generate && NODE_ENV=production babel src --out-dir dist",
+    "package": "node ./scripts/package-functions.js",
     "clean": "rm -rf dist"
   }
 }

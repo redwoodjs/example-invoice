@@ -23,6 +23,9 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "__HAMMER__.apiProxyPath": JSON.stringify(hammerConfig.web.apiProxyPath)
+    }),
+    new Dotenv({
+      path: `${hammerConfig.baseDir}/.env`
     })
   ],
   module: {

@@ -1,2 +1,0 @@
-export PRISMA_URL="file:dev.sqlite"
-export PRISMA_PROVIDER="sqlite"

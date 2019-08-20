@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.3.3",
-    "@hammerframework/hammer-cli": "^0.0.0-alpha.5"
+    "@hammerframework/hammer-cli": "^0.0.0-alpha.5",
+    "netlify-cli": "^2.12.0"
   },
   "scripts": {
     "dev": "yarn build:hammer && (yarn dev:api & yarn dev:web)",

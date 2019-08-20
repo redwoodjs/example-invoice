@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require("path");
 const merge = require("webpack-merge");
-const Dotenv = require("dotenv-webpack");
 const { getHammerConfig } = require("@hammerframework/hammer-api");
 const escapeRegExp = require("lodash.escaperegexp");
 
@@ -24,10 +23,5 @@ module.exports = merge(common, {
         }
       }
     }
-  },
-  plugins: [
-    new Dotenv({
-      path: `${hammerConfig.baseDir}/.env`
-    })
-  ]
+  }
 });
