@@ -5,6 +5,7 @@ yarn-error.log
 .docz
 .env
 .DS_Store
+.netlify
 
 api/prisma/dev.sqlite
 api/generated/*
