@@ -29,7 +29,7 @@ type Query {
   currentUser: User
   hammer: Hammer!
   help: String!
-  invoices: [Invoice!]
+  invoicesNewest: [Invoice!]
 }
 
 type User {
