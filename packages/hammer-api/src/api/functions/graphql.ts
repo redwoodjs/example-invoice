@@ -9,7 +9,11 @@ require("@babel/register")({
   ignore: ["node_modules"]
 });
 
-export const graphQLServerlessFunction = (context = undefined) => {
+export interface Config {
+  context: object;
+}
+
+export const graphQLServerlessFunction = ({ context }: Config) => {
   const hammerConfig = getHammerConfig();
 
   const BaseQueryType = queryType({
