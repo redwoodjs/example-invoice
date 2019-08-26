@@ -16,10 +16,20 @@ type HammerPackages {
   webSize: String!
 }
 
+type Invoice {
+  body: String!
+  id: Int!
+}
+
+type Mutation {
+  invoicesCreate(body: String!): Invoice!
+}
+
 type Query {
   currentUser: User
   hammer: Hammer!
   help: String!
+  invoices: [Invoice!]
 }
 
 type User {
