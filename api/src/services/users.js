@@ -1,9 +1,7 @@
-import { getPhoton } from "src/lib/photon";
+import { db } from "src/lib/photon";
 
 export const findOrCreate = async ({ email }) => {
-  const photon = await getPhoton();
-
-  return await photon.users.upsert({
+  return await db().users.upsert({
     where: { email },
     update: { email },
     create: { email }

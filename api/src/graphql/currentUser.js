@@ -1,4 +1,4 @@
-import { extendType, intArg, objectType } from "nexus";
+import { extendType, objectType } from "nexus";
 
 export const User = objectType({
   name: "User",
@@ -8,14 +8,14 @@ export const User = objectType({
   }
 });
 
-export default extendType({
+export const extendQuery = extendType({
   type: "Query",
   definition: t => {
     t.field("currentUser", {
       type: "User",
       nullable: true,
       resolve(_root, _args, { currentUser }) {
-        return currentUser;
+        return currentUser();
       }
     });
   }

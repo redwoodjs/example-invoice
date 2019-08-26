@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import fetch from "node-fetch";
 import { getHammerBaseDir } from "@hammerframework/hammer-core";
 
-import { user } from "src/services";
+import { users } from "src/services";
 
 dotenv.config({ path: `${getHammerBaseDir()}/.env` });
 
@@ -76,7 +76,7 @@ export const getCurrentUser = async event => {
   try {
     const token = tokenFromEvent(event);
     const { email } = await userProfileForToken(token);
-    return await user.findOrCreate({ email });
+    return await users.findOrCreate({ email });
   } catch (e) {
     return null;
   }
