@@ -9,18 +9,13 @@ export const create = async ({ user, body }) => {
   });
 };
 
-export const findManyByUser = async ({ user }) => {
+export const newest = async ({ user }) => {
   return db().invoices.findMany({
     where: {
       User: user
-    }
-  });
-};
-
-export const latest = async ({ user }) => {
-  return db().invoices.findMany({
-    where: {
-      User: user
+    },
+    orderBy: {
+      createdAt: "asc"
     }
   });
 };
