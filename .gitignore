@@ -5,7 +5,7 @@ yarn-error.log
 .env
 .DS_Store
 
-api/prisma/dev.sqlite
+api/prisma/dev.db
 api/generated/*
 
 web/generated
