@@ -18,7 +18,9 @@ type HammerPackages {
 
 type Invoice {
   body: String!
+  createdAt: String!
   id: Int!
+  updatedAt: String!
 }
 
 type Mutation {
