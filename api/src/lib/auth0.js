@@ -1,51 +1,39 @@
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
 import dotenv from "dotenv";
-import fetch from "node-fetch";
 import { getHammerBaseDir } from "@hammerframework/hammer-core";
-
-import { users } from "src/services";
 
 dotenv.config({ path: `${getHammerBaseDir()}/.env` });
 
-// TODO: Move this to @hammerframework/hammer-api-auth0
-const tokenFromEvent = event => {
-  if (typeof event.headers.authorization === "undefined") {
-    return undefined;
-  }
-  return event.headers.authorization.split(" ")[1];
-};
-
-const userProfileForToken = async token => {
-  const response = await fetch(`https://${process.env.AUTH0_DOMAIN}/userinfo`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  if (!response.ok) {
+const tokenFromHeaders = ({ authorization }) => {
+  if (!authorization) {
     throw new Error(
-      `Could not get user profile: ${response.status} ${response.body}`
+      "cannot get token, headers do not contain an `Authorization` part."
     );
   }
-
-  const userProfile = await response.json();
-  return userProfile;
+  return authorization.split(" ")[1];
 };
 
+// https://auth0.com/docs/api-auth/tutorials/verify-access-token
 const decodeVerifiedToken = token => {
   return new Promise((resolve, reject) => {
+    const jwksUri = `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`;
     const { AUTH0_DOMAIN, AUTH0_AUDIENCE, AUTH0_KID } = process.env;
-    if (!AUTH0_DOMAIN || !AUTH0_KID || !AUTH0_AUDIENCE) {
+
+    if (!AUTH0_KID) {
+      throw new Error(`"AUTH0_KID" env var not set, get it from: ${jwksUri}`);
+    }
+
+    if (!AUTH0_DOMAIN || !AUTH0_AUDIENCE) {
       throw new Error(
-        "`AUTH0_DOMAIN`, `AUTH0_KID` and `AUTH0_AUDIENCE` env vars are not set"
+        "`AUTH0_DOMAIN` and `AUTH0_AUDIENCE` env vars are not set"
       );
     }
 
     const client = jwksClient({
       cache: true,
       rateLimit: true,
-      jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
+      jwksUri
     });
 
     client.getSigningKey(process.env.AUTH0_KID, (keyError, { publicKey }) => {
@@ -72,12 +60,8 @@ const decodeVerifiedToken = token => {
   });
 };
 
-export const getCurrentUser = async event => {
-  try {
-    const token = tokenFromEvent(event);
-    const { email } = await userProfileForToken(token);
-    return await users.findOrCreate({ email });
-  } catch (e) {
-    return null;
-  }
+// https://auth0.com/docs/api-auth/tutorials/verify-access-token
+export const getAccessToken = headers => {
+  const rawToken = tokenFromHeaders(headers);
+  return decodeVerifiedToken(rawToken);
 };
