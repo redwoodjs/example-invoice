@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // types
 import { Response, Request } from "express";
 import { APIGatewayProxyResult, APIGatewayProxyEvent } from "aws-lambda";
@@ -13,6 +14,7 @@ import { APIGatewayProxyResult, APIGatewayProxyEvent } from "aws-lambda";
  */
 
 import path from "path";
+import { getHammerConfig } from "@hammerframework/hammer-core";
 import express from "express";
 // @ts-ignore
 import expressLogging from "express-logging";
@@ -20,7 +22,8 @@ import bodyParser from "body-parser";
 import qs from "qs";
 import args from "args";
 import requireDir from "require-dir";
-import { getHammerConfig } from "@hammerframework/hammer-core";
+
+import chokidar from "chokidar";
 
 const hammerConfig = getHammerConfig();
 
@@ -43,16 +46,28 @@ args
 const { port: PORT, path: PATH } = args.parse(process.argv);
 const HOSTNAME = `http://localhost:${PORT}`;
 
-// Find all the lambda functions that we should serve
-const lambdaFunctions = requireDir(PATH, { recurse: false });
-console.log("\n\nThe following functions are available:");
-console.log(
-  Object.keys(lambdaFunctions)
-    .map(routeName => `- ${HOSTNAME}/${routeName}/`)
-    .join("\n")
-);
+const requireLambdaFunctions = (path: string) => {
+  // @ts-ignore
+  const lambdas = requireDir(path, { recurse: false, noCache: true });
 
-// Express.js Setup
+  console.log("\n\nThe following functions are now available:");
+  console.log(
+    Object.keys(lambdas)
+      .map(routeName => `- ${HOSTNAME}/${routeName}/`)
+      .join("\n")
+  );
+  return lambdas;
+};
+
+// Find all the lambda functions that we should serve
+let lambdaFunctions = requireLambdaFunctions(PATH);
+const watcher = chokidar.watch(PATH);
+watcher.on("ready", () => {
+  watcher.on("all", (x, y) => {
+    lambdaFunctions = requireLambdaFunctions(PATH);
+  });
+});
+
 const app = express();
 app.use(
   bodyParser.text({
