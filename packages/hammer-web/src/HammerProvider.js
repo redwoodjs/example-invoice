@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider as RealThemeProvider } from "styled-components";
 import { GraphQLProvider as RealGraphQLProvider } from "src/graphql";
 
 let USE_AUTH;
@@ -10,10 +10,12 @@ export const useAuth = () => {
 };
 
 const HammerProvider = ({ auth = {}, theme = {}, children }) => {
-  const AuthProvider = auth.AuthProvider;
+  const AuthProvider = auth.AuthProvider || React.Fragment;
   const GraphQLProvider = auth.GraphQLProvider || RealGraphQLProvider;
+  USE_AUTH = auth.useAuth || (() => ({}));
 
-  USE_AUTH = auth.useAuth;
+  const ThemeProvider =
+    typeof theme !== "undefined" ? RealThemeProvider : React.Fragment;
 
   return (
     <AuthProvider>
