@@ -32,6 +32,7 @@
     "dev": "nodemon --watch ./src --exec 'babel-node --extensions \".ts\" ./src/main.ts'",
     "build": "yarn clean && yarn build:js",
     "build:js": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
+    "prepublish": "yarn build",
     "clean": "rm -rf dist"
   }
 }
