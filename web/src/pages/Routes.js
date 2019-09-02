@@ -1,7 +1,7 @@
 import {
   BrowserRouter,
   Switch,
-  AnonRoute,
+  Route,
   AuthRoute
 } from "@hammerframework/hammer-web";
 
@@ -13,7 +13,7 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <AnonRoute path="/" exact component={InvoicePage} />
+        <Route path="/" exact component={InvoicePage} />
         <AuthRoute path="/profile" component={Profile} />
         <AuthRoute path="/test" component={Test} />
       </Switch>
