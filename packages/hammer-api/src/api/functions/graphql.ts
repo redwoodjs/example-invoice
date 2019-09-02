@@ -3,26 +3,27 @@ import requireDir from "require-dir";
 import { queryType, makeSchema } from "nexus";
 import { ApolloServer } from "apollo-server-lambda";
 import { getHammerConfig } from "@hammerframework/hammer-core";
+// @ts-ignore
+import babelRegister from "@babel/register";
 
-require("@babel/register")({
-  rootMode: "upward",
+const hammerConfig = getHammerConfig();
+const hammerApiDir = path.join(hammerConfig.baseDir, "api");
+babelRegister({
+  extends: path.join(hammerApiDir, ".babelrc.js"),
+  only: [hammerApiDir],
   ignore: ["node_modules"]
 });
 
 export interface Config {
-  context: object;
+  context?: object;
 }
 
-export const graphQLServerlessFunction = ({ context }: Config) => {
-  const hammerConfig = getHammerConfig();
-
+export const graphQLServerlessFunction = ({ context }: Config = {}) => {
   const BaseQueryType = queryType({
     definition(t) {
       t.string("help", {
         resolve() {
-          return `Start adding your Nexus schema definitions in ${
-            hammerConfig.api.paths.graphql
-          }`;
+          return `Start adding your Nexus schema definitions in ${hammerConfig.api.paths.graphql}`;
         }
       });
     }
