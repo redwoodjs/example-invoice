@@ -9,7 +9,7 @@ export const useAuth = () => {
   return USE_AUTH();
 };
 
-const HammerProvider = ({ auth = {}, theme = {}, children }) => {
+const HammerProvider = ({ auth = {}, theme, children }) => {
   const AuthProvider = auth.AuthProvider || React.Fragment;
   const GraphQLProvider = auth.GraphQLProvider || RealGraphQLProvider;
   USE_AUTH = auth.useAuth || (() => ({}));
