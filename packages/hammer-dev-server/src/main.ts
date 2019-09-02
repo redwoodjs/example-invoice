@@ -22,16 +22,16 @@ import bodyParser from "body-parser";
 import qs from "qs";
 import args from "args";
 import requireDir from "require-dir";
-
 import chokidar from "chokidar";
+// @ts-ignore
+import babelRegister from "@babel/register";
 
 const hammerConfig = getHammerConfig();
+const hammerApiDir = path.join(hammerConfig.baseDir, "api");
 
-// We automatically transpile the serverless functions that are imported
-// for some reason the src path isn't working. they just cannot be resolved.
-require("@babel/register")({
-  extends: path.join(hammerConfig.baseDir, "api/.babelrc.js"),
-  only: [path.join(hammerConfig.baseDir, "api")],
+babelRegister({
+  extends: path.join(hammerApiDir, ".babelrc.js"),
+  only: [hammerApiDir],
   ignore: ["node_modules"]
 });
 
@@ -61,7 +61,7 @@ const requireLambdaFunctions = (path: string) => {
 
 // Find all the lambda functions that we should serve
 let lambdaFunctions = requireLambdaFunctions(PATH);
-const watcher = chokidar.watch(PATH);
+const watcher = chokidar.watch(path.join(hammerConfig.baseDir, "api"));
 watcher.on("ready", () => {
   watcher.on("all", (x, y) => {
     lambdaFunctions = requireLambdaFunctions(PATH);
