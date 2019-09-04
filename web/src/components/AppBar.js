@@ -33,7 +33,9 @@ export default () => {
         >
           {!isAuthenticated && (
             <>
-              <Button onClick={() => loginWithRedirect({})}>Log in</Button>
+              <Button onClick={() => loginWithRedirect({})} mr={1}>
+                Log in
+              </Button>
               <Button onClick={() => loginWithRedirect({})}>Sign up</Button>
             </>
           )}
