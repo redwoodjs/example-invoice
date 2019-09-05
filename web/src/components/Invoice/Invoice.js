@@ -8,35 +8,16 @@ import Summary from "../Summary";
 
 const MARGIN_BOTTOM = 5;
 
-const Invoice = () => {
-  const [title, setTitle] = useState("I  N  V  O  I  C  E");
-  const [companyName, setCompanyName] = useState("Lolsoft Inc.");
-  const [companyInfo, setCompanyInfo] = useState(
-    "Peter Pistorius\nBusiness Address\n101010\nBerlin, Germany"
-  );
-  const [recipient, setRecipient] = useState(
-    "Reliable customer\nBusiness address\n12345\nBerlin, Germany"
-  );
-  const [invoiceInfo, setInvoiceInfo] = useState([
-    [{ value: "Invoice #" }, { value: "001" }],
-    [{ value: "Date" }, { value: new Intl.DateTimeFormat().format(new Date()) }]
-  ]);
-
-  const [lineItems, setLineItems] = useState([
-    [{ value: "Description" }, { value: "Quantity" }, { value: "Price" }],
-    [{ value: "Wheel of cheese" }, { value: 1 }, { value: 500 }],
-    [{ value: "Jar of sausages" }, { value: 2 }, { value: 2.99 }],
-    [{ value: "Tin of waffles" }, { value: 2 }, { value: 3.01 }]
-  ]);
-
-  const [summary, setSummary] = useState([
-    [{ value: "Subtotal" }, undefined, "0.0"],
-    [{ value: "VAT" }, { value: 14 }, "0.0"],
-    [{ value: "Total" }, { value: "£" }, "0.0"]
-  ]);
-
-  const [notesA, setNotesA] = useState("");
-  const [notesB, setNotesB] = useState("Invoice by Billable.me");
+const Invoice = ({ ...invoice }) => {
+  const [title, setTitle] = useState(invoice.title);
+  const [companyName, setCompanyName] = useState(invoice.companyName);
+  const [companyInfo, setCompanyInfo] = useState(invoice.companyInfo);
+  const [recipient, setRecipient] = useState(invoice.recipient);
+  const [information, setInformation] = useState(invoice.information);
+  const [lineItems, setLineItems] = useState(invoice.lineItems);
+  const [summary, setSummary] = useState(invoice.summary);
+  const [notesA, setNotesA] = useState(invoice.notesA);
+  const [notesB, setNotesB] = useState(invoice.notesB);
 
   return (
     <>
@@ -81,8 +62,8 @@ const Invoice = () => {
           width={1 / 2}
         />
         <InvoiceInfo
-          value={invoiceInfo}
-          onChange={setInvoiceInfo}
+          value={information}
+          onChange={setInformation}
           width={1 / 2}
           ml="auto"
         />
@@ -117,7 +98,7 @@ const Invoice = () => {
           width={1 / 2}
           textAlign="right"
         />
-      </Flex>{" "}
+      </Flex>
     </>
   );
 };
