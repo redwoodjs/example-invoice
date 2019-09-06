@@ -24,7 +24,7 @@ type Invoice {
 }
 
 type Mutation {
-  invoicesCreate(body: String!, id: String): Invoice!
+  invoicesCreate(body: String!, id: Int): Invoice!
 }
 
 type Query {

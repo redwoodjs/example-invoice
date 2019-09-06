@@ -4,14 +4,13 @@ import { getAccessToken } from "src/lib/auth0";
 import { users } from "src/services";
 
 const server = graphQLServerlessFunction({
-  context: async ({ event }) => {
+  context: async ({ event, context, callback }) => {
     return {
       currentUser: async () => {
         try {
           const accessToken = await getAccessToken(event.headers);
           return users.findOrCreate(accessToken);
         } catch (e) {
-          console.log(e);
           throw new Error("You are not authenticated");
         }
       }

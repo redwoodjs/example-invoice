@@ -1,4 +1,4 @@
-import { extendType, objectType, stringArg } from "nexus";
+import { extendType, objectType, stringArg, intArg } from "nexus";
 
 import { invoices } from "src/services";
 
@@ -17,7 +17,7 @@ export const extendMutation = extendType({
   definition: t => {
     t.field("invoicesCreate", {
       type: Invoice,
-      args: { id: stringArg(), body: stringArg({ required: true }) },
+      args: { id: intArg(), body: stringArg({ required: true }) },
       async resolve(_root, { id, body }, { currentUser }) {
         const user = await currentUser();
         return invoices.create({ id, user, body });

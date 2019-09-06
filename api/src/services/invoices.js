@@ -1,14 +1,15 @@
 import { db } from "src/lib/photon";
 
 export const create = async ({ id, user, body }) => {
-  const data = {
-    User: { connect: { id: user.id } },
-    body
-  };
   return await db().invoices.upsert({
     where: { id },
-    create: data,
-    update: data
+    create: {
+      User: { connect: { id: user.id } },
+      body
+    },
+    update: {
+      body
+    }
   });
 };
 
@@ -24,7 +25,7 @@ export const newest = async ({ user }) => {
   });
 
   if (!invoices) {
-    return {};
+    return null;
   }
   return invoices[0];
 };
