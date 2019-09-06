@@ -68,6 +68,7 @@ const parseInvoiceData = data => {
 
 const Page = () => {
   const [loading, setLoading] = useState(true);
+  const [localSaveInvoiceLoading, setLocalSaveInvoiceLoading] = useState(false);
 
   // Do not fetch the user's invoice if they're not authenticated
   const { loading: authLoading, isAuthenticated } = useAuth();
@@ -102,8 +103,11 @@ const Page = () => {
           <>
             <Box my={2}>
               <Button
-                disabled={saveInvoiceLoading}
                 onClick={() => {
+                  if (saveInvoiceLoading || localSaveInvoiceLoading) {
+                    return;
+                  }
+
                   const body = invoiceRef.current.getBody();
                   if (isAuthenticated) {
                     saveInvoice({
@@ -117,12 +121,17 @@ const Page = () => {
                       LOCALSTORAGE_KEY,
                       JSON.stringify(body)
                     );
+                    // mock something that makes it look like we're
+                    // saving over the network
+                    setLocalSaveInvoiceLoading(true);
+                    setTimeout(() => setLocalSaveInvoiceLoading(false), 300);
                   }
                 }}
               >
-                {saveInvoiceLoading ? "Saving..." : "Save"}
-              </Button>{" "}
-              <Button>Print</Button>
+                {saveInvoiceLoading || localSaveInvoiceLoading
+                  ? "Saving..."
+                  : "Save"}
+              </Button>
             </Box>
             <Invoice ref={invoiceRef} {...invoiceData} />
           </>
