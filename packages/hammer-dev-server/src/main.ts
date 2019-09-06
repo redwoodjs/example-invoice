@@ -24,6 +24,8 @@ import args from "args";
 import requireDir from "require-dir";
 import chokidar from "chokidar";
 // @ts-ignore
+import clear from "clear";
+// @ts-ignore
 import babelRegister from "@babel/register";
 
 const hammerConfig = getHammerConfig();
@@ -46,6 +48,18 @@ args
 const { port: PORT, path: PATH } = args.parse(process.argv);
 const HOSTNAME = `http://localhost:${PORT}`;
 
+const showHeader = (lambdas: Object) => {
+  console.log(`\n⚒ HammerFramework's API Development Server\n`);
+  console.log(`◌ Listening on ${HOSTNAME}`);
+  console.log(`◌ Watching ${hammerApiDir}`);
+  console.log("\nNow serving\n");
+  console.log(
+    Object.keys(lambdas)
+      .map(routeName => `► ${HOSTNAME}/${routeName}/`)
+      .join("\n")
+  );
+};
+
 // These removes everything in the cache. It's a bit extreme, but we
 // can always refine the mechanism here.
 const purgeRequireCache = () => {
@@ -54,30 +68,11 @@ const purgeRequireCache = () => {
   });
 };
 
-const requireLambdaFunctions = (path: string) => {
-  // @ts-ignore
-  const lambdas = requireDir(path, { recurse: false });
-
-  console.log("\n\nThe following functions are now available:");
-  console.log(
-    Object.keys(lambdas)
-      .map(routeName => `- ${HOSTNAME}/${routeName}/`)
-      .join("\n")
-  );
-  return lambdas;
-};
-
-// Find all the lambda functions that we should serve
-let lambdaFunctions = requireLambdaFunctions(PATH);
-const watcher = chokidar.watch(path.join(hammerConfig.baseDir, "api"));
-watcher.on("ready", () => {
-  watcher.on("all", () => {
-    purgeRequireCache();
-    lambdaFunctions = requireLambdaFunctions(PATH);
-  });
-});
+const requireLambdaFunctions = (path: string) =>
+  requireDir(path, { recurse: false });
 
 const app = express();
+
 app.use(
   bodyParser.text({
     type: ["text/*", "application/json", "multipart/form-data"]
@@ -85,6 +80,9 @@ app.use(
 );
 app.use(bodyParser.raw({ type: "*/*" }));
 app.use(expressLogging(console));
+
+// Find all the lambda functions that we should serve
+let lambdaFunctions = requireLambdaFunctions(PATH);
 
 app.all("/", (_, res) => {
   return res.send(`
@@ -196,6 +194,15 @@ app.all("/:routeName", async (req, res) => {
   }
 });
 
-app.listen(PORT, () =>
-  console.log(`\n\n⚒ hammer-dev-server on ${HOSTNAME}\n\n`)
-);
+const startServer = () => app.listen(PORT, () => showHeader(lambdaFunctions));
+const server = startServer();
+server.setTimeout(100);
+const watcher = chokidar.watch(hammerApiDir);
+watcher.on("ready", () => {
+  watcher.on("all", async () => {
+    purgeRequireCache();
+    lambdaFunctions = requireLambdaFunctions(PATH);
+    clear();
+    showHeader(lambdaFunctions);
+  });
+});
