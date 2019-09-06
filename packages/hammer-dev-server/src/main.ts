@@ -46,9 +46,17 @@ args
 const { port: PORT, path: PATH } = args.parse(process.argv);
 const HOSTNAME = `http://localhost:${PORT}`;
 
+// These removes everything in the cache. It's a bit extreme, but we
+// can always refine the mechanism here.
+const purgeRequireCache = () => {
+  Object.keys(require.cache).forEach(cacheKey => {
+    delete require.cache[cacheKey];
+  });
+};
+
 const requireLambdaFunctions = (path: string) => {
   // @ts-ignore
-  const lambdas = requireDir(path, { recurse: false, noCache: true });
+  const lambdas = requireDir(path, { recurse: false });
 
   console.log("\n\nThe following functions are now available:");
   console.log(
@@ -63,7 +71,8 @@ const requireLambdaFunctions = (path: string) => {
 let lambdaFunctions = requireLambdaFunctions(PATH);
 const watcher = chokidar.watch(path.join(hammerConfig.baseDir, "api"));
 watcher.on("ready", () => {
-  watcher.on("all", (x, y) => {
+  watcher.on("all", () => {
+    purgeRequireCache();
     lambdaFunctions = requireLambdaFunctions(PATH);
   });
 });
