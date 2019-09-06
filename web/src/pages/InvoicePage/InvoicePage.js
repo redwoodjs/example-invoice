@@ -37,14 +37,25 @@ const DEFAULT_INVOICE = {
   notesB: "Invoice by Billable.me"
 };
 
+const parseInvoiceData = data => {
+  if (data && data.invoicesNewest) {
+    const { id, body } = data.invoicesNewest;
+    return {
+      id,
+      ...JSON.parse(body)
+    };
+  }
+
+  return DEFAULT_INVOICE;
+};
+
 const Page = () => {
-  const [invoice, setInvoice] = useState({});
   const [loading, setLoading] = useState(true);
 
   // Do not fetch the user's invoice if they're not authenticated
   const { loading: authLoading, isAuthenticated } = useAuth();
   const { loading: fetchLoading, data } = useQuery(FETCH_LATEST_INVOICE, {
-    skip: authLoading || !isAuthenticated
+    skip: !(isAuthenticated === true)
   });
 
   useEffect(() => {
@@ -53,7 +64,7 @@ const Page = () => {
     }
   }, [authLoading, fetchLoading]);
 
-  const invoiceData = loading && isAuthenticated ? {} : DEFAULT_INVOICE;
+  const invoiceData = parseInvoiceData(data);
 
   return (
     <>

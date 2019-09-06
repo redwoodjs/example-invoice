@@ -24,14 +24,14 @@ type Invoice {
 }
 
 type Mutation {
-  invoicesCreate(body: String!): Invoice!
+  invoicesCreate(body: String!, id: String): Invoice!
 }
 
 type Query {
   currentUser: User
   hammer: Hammer!
   help: String!
-  invoicesNewest: [Invoice!]
+  invoicesNewest: Invoice
 }
 
 type User {

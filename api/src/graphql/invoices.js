@@ -17,10 +17,10 @@ export const extendMutation = extendType({
   definition: t => {
     t.field("invoicesCreate", {
       type: Invoice,
-      args: { body: stringArg({ required: true }) },
-      async resolve(_root, { body }, { currentUser }) {
+      args: { id: stringArg(), body: stringArg({ required: true }) },
+      async resolve(_root, { id, body }, { currentUser }) {
         const user = await currentUser();
-        return invoices.create({ user, body });
+        return invoices.create({ id, user, body });
       }
     });
   }
@@ -29,7 +29,7 @@ export const extendMutation = extendType({
 export const extendQuery = extendType({
   type: "Query",
   definition: t => {
-    t.list.field("invoicesNewest", {
+    t.field("invoicesNewest", {
       type: "Invoice",
       nullable: true,
       async resolve(_root, _args, { currentUser }) {
