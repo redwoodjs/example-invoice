@@ -194,15 +194,25 @@ app.all("/:routeName", async (req, res) => {
   }
 });
 
+const reloadLambdas = (path: string) => {
+  console.log("\nReloading...\n");
+  purgeRequireCache();
+  lambdaFunctions = requireLambdaFunctions(PATH);
+  clear();
+  showHeader(lambdaFunctions);
+};
+
 const startServer = () => app.listen(PORT, () => showHeader(lambdaFunctions));
 const server = startServer();
-server.setTimeout(100);
-const watcher = chokidar.watch(hammerApiDir);
+server.setTimeout(10 * 1000);
+
+const watcher = chokidar.watch(hammerApiDir, {
+  ignored: ["node_modules/.cache", ".git"],
+  cwd: hammerApiDir
+});
+
 watcher.on("ready", () => {
-  watcher.on("all", async () => {
-    purgeRequireCache();
-    lambdaFunctions = requireLambdaFunctions(PATH);
-    clear();
-    showHeader(lambdaFunctions);
-  });
+  watcher.on("add", reloadLambdas);
+  watcher.on("change", reloadLambdas);
+  watcher.on("unlink", reloadLambdas);
 });
