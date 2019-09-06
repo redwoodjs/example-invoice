@@ -1,12 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useAuth, useQuery } from "@hammerframework/hammer-web";
 
-import { Box } from "src/lib/primitives";
+import { Box, Button } from "src/lib/primitives";
 import { AppBar, Invoice } from "src/components";
+import { useMutation } from "@apollo/react-hooks";
+
+const LOCALSTORAGE_KEY = "invoice";
 
 const FETCH_LATEST_INVOICE = gql`
   query FETCH_LATEST_INVOICE {
     invoicesNewest {
+      id
+      body
+    }
+  }
+`;
+
+const SAVE_INVOICE = gql`
+  mutation invoicesCreate($id: Int, $body: String!) {
+    invoicesCreate(id: $id, body: $body) {
       id
       body
     }
@@ -46,6 +58,11 @@ const parseInvoiceData = data => {
     };
   }
 
+  const localInvoiceBody = localStorage.getItem(LOCALSTORAGE_KEY);
+  if (localInvoiceBody) {
+    return JSON.parse(localInvoiceBody);
+  }
+
   return DEFAULT_INVOICE;
 };
 
@@ -65,6 +82,10 @@ const Page = () => {
   }, [authLoading, fetchLoading]);
 
   const invoiceData = parseInvoiceData(data);
+  const invoiceRef = useRef();
+  const [saveInvoice, { loading: saveInvoiceLoading }] = useMutation(
+    SAVE_INVOICE
+  );
 
   return (
     <>
@@ -75,7 +96,37 @@ const Page = () => {
           max-width: 800px;
         `}
       >
-        {loading ? "Loading..." : <Invoice {...invoiceData} />}
+        {loading ? (
+          "Loading..."
+        ) : (
+          <>
+            <Box my={2}>
+              <Button
+                disabled={saveInvoiceLoading}
+                onClick={() => {
+                  const body = invoiceRef.current.getBody();
+                  if (isAuthenticated) {
+                    saveInvoice({
+                      variables: {
+                        id: invoiceData.id,
+                        body: JSON.stringify(body)
+                      }
+                    });
+                  } else {
+                    localStorage.setItem(
+                      LOCALSTORAGE_KEY,
+                      JSON.stringify(body)
+                    );
+                  }
+                }}
+              >
+                {saveInvoiceLoading ? "Saving..." : "Save"}
+              </Button>{" "}
+              <Button>Print</Button>
+            </Box>
+            <Invoice ref={invoiceRef} {...invoiceData} />
+          </>
+        )}
       </Box>
     </>
   );

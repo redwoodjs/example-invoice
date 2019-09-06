@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { Flex } from "src/lib/primitives";
 
 import TextInput from "../TextInput";
@@ -8,7 +8,7 @@ import Summary from "../Summary";
 
 const MARGIN_BOTTOM = 5;
 
-const Invoice = ({ ...invoice }) => {
+const Invoice = forwardRef(({ ...invoice }, ref) => {
   const [title, setTitle] = useState(invoice.title);
   const [companyName, setCompanyName] = useState(invoice.companyName);
   const [companyInfo, setCompanyInfo] = useState(invoice.companyInfo);
@@ -18,6 +18,22 @@ const Invoice = ({ ...invoice }) => {
   const [summary, setSummary] = useState(invoice.summary);
   const [notesA, setNotesA] = useState(invoice.notesA);
   const [notesB, setNotesB] = useState(invoice.notesB);
+
+  useImperativeHandle(ref, () => ({
+    getBody() {
+      return {
+        title,
+        companyName,
+        companyInfo,
+        recipient,
+        information,
+        lineItems,
+        summary,
+        notesA,
+        notesB
+      };
+    }
+  }));
 
   return (
     <>
@@ -101,6 +117,6 @@ const Invoice = ({ ...invoice }) => {
       </Flex>
     </>
   );
-};
+});
 
 export default Invoice;
