@@ -1,3 +1,5 @@
-import * as user from "./user";
+import * as users from "./users";
+import * as invoices from "./invoices";
 
-export { user };
+export { users };
+export { invoices };

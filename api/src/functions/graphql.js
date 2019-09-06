@@ -1,14 +1,21 @@
 import { graphQLServerlessFunction } from "@hammerframework/hammer-api";
-import { getCurrentUser } from "src/lib/auth0";
+import { getAccessToken } from "src/lib/auth0";
 
-const createHandler = async event => {
-  const currentUser = await getCurrentUser(event);
-  const server = graphQLServerlessFunction({
-    currentUser
-  });
-  return server.createHandler();
-};
+import { users } from "src/services";
 
-export const handler = (event, context, callback) => {
-  createHandler(event).then(handler => handler(event, context, callback));
-};
+const server = graphQLServerlessFunction({
+  context: async ({ event, context, callback }) => {
+    return {
+      currentUser: async () => {
+        try {
+          const accessToken = await getAccessToken(event.headers);
+          return users.findOrCreate(accessToken);
+        } catch (e) {
+          throw new Error("You are not authenticated");
+        }
+      }
+    };
+  }
+});
+
+export const handler = server.createHandler();

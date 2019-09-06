@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route as AnonRoute, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useAuth } from "./HammerProvider";
 
 export const AuthRoute = ({ component: Component, path, ...rest }) => {
@@ -19,7 +19,7 @@ export const AuthRoute = ({ component: Component, path, ...rest }) => {
   const render = props =>
     isAuthenticated === true ? <Component {...props} /> : null;
 
-  return <AnonRoute path={path} render={render} {...rest} />;
+  return <Route path={path} render={render} {...rest} />;
 };
 
-export { BrowserRouter, Switch, AnonRoute };
+export { BrowserRouter, Switch, Route };

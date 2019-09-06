@@ -9,8 +9,14 @@ generator photonjs {
 
 model User {
   id                Int               @id
-  email             String            @unique
+  tokens            UserToken[]
   invoices          Invoice[]
+}
+
+model UserToken {
+  id                Int               @id
+  user              User
+  sub               String            @unique
 }
 
 model Invoice {

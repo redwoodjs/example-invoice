@@ -1,139 +1,141 @@
-import { useState } from "react";
-import { Box, Flex } from "src/lib/primitives";
+import { useState, useRef, useEffect } from "react";
+import { useAuth, useQuery } from "@hammerframework/hammer-web";
 
-import {
-  AppBar,
-  TextInput,
-  InvoiceInfo,
-  LineItems,
-  Summary
-} from "src/components";
+import { Box, Button } from "src/lib/primitives";
+import { AppBar, Invoice } from "src/components";
+import { useMutation } from "@apollo/react-hooks";
 
-const MARGIN_BOTTOM = 5;
+const LOCALSTORAGE_KEY = "invoice";
 
-const Page = () => {
-  const [title, setTitle] = useState("I  N  V  O  I  C  E");
-  const [companyName, setCompanyName] = useState("Lolsoft Inc.");
-  const [companyInfo, setCompanyInfo] = useState(
-    "Peter Pistorius\nBusiness Address\n101010\nBerlin, Germany"
-  );
-  const [recipient, setRecipient] = useState(
-    "Reliable customer\nBusiness address\n12345\nUnited Kingdom"
-  );
-  const [invoiceInfo, setInvoiceInfo] = useState([
+const FETCH_LATEST_INVOICE = gql`
+  query FETCH_LATEST_INVOICE {
+    invoicesNewest {
+      id
+      body
+    }
+  }
+`;
+
+const SAVE_INVOICE = gql`
+  mutation invoicesCreate($id: Int, $body: String!) {
+    invoicesCreate(id: $id, body: $body) {
+      id
+      body
+    }
+  }
+`;
+
+const DEFAULT_INVOICE = {
+  title: "I N V O I C E",
+  companyName: "Lolsoft Inc.",
+  companyInfo: "Peter Pistorius\nBusiness Address\n101010\nBerlin, Germany",
+  recipient: "Reliable customer\nBusiness address\n12345\nBerlin, Germany",
+  information: [
     [{ value: "Invoice #" }, { value: "001" }],
     [{ value: "Date" }, { value: new Intl.DateTimeFormat().format(new Date()) }]
-  ]);
-
-  const [lineItems, setLineItems] = useState([
+  ],
+  lineItems: [
     [{ value: "Description" }, { value: "Quantity" }, { value: "Price" }],
-    [{ value: "x" }, { value: 2 }, { value: 100 }],
-    [{ value: "x" }, { value: 1 }, { value: 200 }],
-    [{ value: "x" }, { value: 2 }, { value: 300 }]
-  ]);
-
-  const [summary, setSummary] = useState([
+    [{ value: "Wheel of cheese" }, { value: 1 }, { value: 500 }],
+    [{ value: "Jar of sausages" }, { value: 2 }, { value: 2.99 }],
+    [{ value: "Tin of waffles" }, { value: 2 }, { value: 3.01 }]
+  ],
+  summary: [
     [{ value: "Subtotal" }, undefined, "0.0"],
     [{ value: "VAT" }, { value: 14 }, "0.0"],
-    [{ value: "Total" }, { value: "$" }, "0.0"]
-  ]);
+    [{ value: "Total" }, { value: "£" }, "0.0"]
+  ],
+  notesA: "",
+  notesB: "Invoice by Billable.me"
+};
 
-  const [notesA, setNotesA] = useState("");
-  const [notesB, setNotesB] = useState("Invoice by Billable.me");
+const parseInvoiceData = data => {
+  if (data && data.invoicesNewest) {
+    const { id, body } = data.invoicesNewest;
+    return {
+      id,
+      ...JSON.parse(body)
+    };
+  }
+
+  const localInvoiceBody = localStorage.getItem(LOCALSTORAGE_KEY);
+  if (localInvoiceBody) {
+    return JSON.parse(localInvoiceBody);
+  }
+
+  return DEFAULT_INVOICE;
+};
+
+const Page = () => {
+  const [loading, setLoading] = useState(true);
+  const [localSaveInvoiceLoading, setLocalSaveInvoiceLoading] = useState(false);
+
+  // Do not fetch the user's invoice if they're not authenticated
+  const { loading: authLoading, isAuthenticated } = useAuth();
+  const { loading: fetchLoading, data } = useQuery(FETCH_LATEST_INVOICE, {
+    skip: !(isAuthenticated === true)
+  });
+
+  useEffect(() => {
+    if (!authLoading && !fetchLoading) {
+      setLoading(false);
+    }
+  }, [authLoading, fetchLoading]);
+
+  const invoiceData = parseInvoiceData(data);
+  const invoiceRef = useRef();
+  const [saveInvoice, { loading: saveInvoiceLoading }] = useMutation(
+    SAVE_INVOICE
+  );
 
   return (
     <>
       <AppBar />
-
       <Box
         mx="auto"
         css={`
           max-width: 800px;
         `}
       >
-        <TextInput
-          value={title}
-          onChange={setTitle}
-          width={1}
-          my={MARGIN_BOTTOM}
-          textAlign="center"
-          css={`
-            border: 1px #d4d6d9 solid;
-            border-width: 1px 0;
-            height: 48px;
-            line-height: 48px;
-          `}
-        />
+        {loading ? (
+          "Loading..."
+        ) : (
+          <>
+            <Box my={2}>
+              <Button
+                onClick={() => {
+                  if (saveInvoiceLoading || localSaveInvoiceLoading) {
+                    return;
+                  }
 
-        <Flex mb={MARGIN_BOTTOM}>
-          <TextInput
-            multiline
-            value={companyName}
-            onChange={setCompanyName}
-            width={1 / 2}
-            css={`
-              textarea {
-                font-size: 40px;
-              }
-            `}
-          />
-          <TextInput
-            multiline
-            value={companyInfo}
-            onChange={setCompanyInfo}
-            width={1 / 2}
-            textAlign="right"
-          />
-        </Flex>
-
-        <Flex mb={MARGIN_BOTTOM}>
-          <TextInput
-            multiline
-            value={recipient}
-            onChange={setRecipient}
-            width={1 / 2}
-          />
-          <InvoiceInfo
-            value={invoiceInfo}
-            onChange={setInvoiceInfo}
-            width={1 / 2}
-            ml="auto"
-          />
-        </Flex>
-
-        <LineItems
-          value={lineItems}
-          onChange={setLineItems}
-          width={1}
-          mb={2}
-          css={`
-            width: calc(100% + 48px);
-          `}
-        />
-
-        <Summary
-          ml="auto"
-          mb={MARGIN_BOTTOM}
-          value={summary}
-          onChange={setSummary}
-          lineItems={lineItems}
-        />
-
-        <Flex mb={MARGIN_BOTTOM}>
-          <TextInput
-            multiline
-            value={notesA}
-            onChange={setNotesA}
-            width={1 / 2}
-          />
-          <TextInput
-            multiline
-            value={notesB}
-            onChange={setNotesB}
-            width={1 / 2}
-            textAlign="right"
-          />
-        </Flex>
+                  const body = invoiceRef.current.getBody();
+                  if (isAuthenticated) {
+                    saveInvoice({
+                      variables: {
+                        id: invoiceData.id,
+                        body: JSON.stringify(body)
+                      }
+                    });
+                  } else {
+                    localStorage.setItem(
+                      LOCALSTORAGE_KEY,
+                      JSON.stringify(body)
+                    );
+                    // mock something that makes it look like we're
+                    // saving over the network
+                    setLocalSaveInvoiceLoading(true);
+                    setTimeout(() => setLocalSaveInvoiceLoading(false), 300);
+                  }
+                }}
+              >
+                {saveInvoiceLoading || localSaveInvoiceLoading
+                  ? "Saving..."
+                  : "Save"}
+              </Button>
+            </Box>
+            <Invoice ref={invoiceRef} {...invoiceData} />
+          </>
+        )}
       </Box>
     </>
   );

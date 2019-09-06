@@ -8,10 +8,12 @@
 // api/src/functions/graphql
 import { graphQLServerlessFunction } from '@hammerframework/hammer'
 
-module.exports = graphQLServerlessFunction({
+const server = graphQLServerlessFunction({
     context:  {
         photon: /* ... */,
         currentUser: /* ... */,
     },
 })
+
+export const handler = server.createHandler();
 ```

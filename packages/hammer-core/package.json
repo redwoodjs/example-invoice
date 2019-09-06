@@ -1,6 +1,6 @@
 {
   "name": "@hammerframework/hammer-core",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.7",
   "main": "dist/main.js",
   "files": [
     "dist"
@@ -8,7 +8,6 @@
   "types": "./dist/main.d.ts",
   "license": "MIT",
   "dependencies": {
-    "@babel/register": "^7.4.4",
     "findup-sync": "^3.0.0",
     "toml": "^3.0.0"
   },
@@ -21,6 +20,7 @@
     "build:js": "babel src --out-dir dist --extensions \".ts\" --source-maps inline",
     "build:types": "tsc --declaration --emitDeclarationOnly",
     "build:watch": "nodemon --ignore dist --exec 'yarn build'",
+    "prepublish": "yarn build",
     "clean": "rm -rf dist"
   }
 }

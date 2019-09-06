@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // types
 import { Response, Request } from "express";
 import { APIGatewayProxyResult, APIGatewayProxyEvent } from "aws-lambda";
@@ -13,6 +14,7 @@ import { APIGatewayProxyResult, APIGatewayProxyEvent } from "aws-lambda";
  */
 
 import path from "path";
+import { getHammerConfig } from "@hammerframework/hammer-core";
 import express from "express";
 // @ts-ignore
 import expressLogging from "express-logging";
@@ -20,15 +22,18 @@ import bodyParser from "body-parser";
 import qs from "qs";
 import args from "args";
 import requireDir from "require-dir";
-import { getHammerConfig } from "@hammerframework/hammer-core";
+import chokidar from "chokidar";
+// @ts-ignore
+import clear from "clear";
+// @ts-ignore
+import babelRegister from "@babel/register";
 
 const hammerConfig = getHammerConfig();
+const hammerApiDir = path.join(hammerConfig.baseDir, "api");
 
-// We automatically transpile the serverless functions that are imported
-// for some reason the src path isn't working. they just cannot be resolved.
-require("@babel/register")({
-  extends: path.join(hammerConfig.baseDir, "api/.babelrc.js"),
-  only: [path.join(hammerConfig.baseDir, "api")],
+babelRegister({
+  extends: path.join(hammerApiDir, ".babelrc.js"),
+  only: [hammerApiDir],
   ignore: ["node_modules"]
 });
 
@@ -43,17 +48,31 @@ args
 const { port: PORT, path: PATH } = args.parse(process.argv);
 const HOSTNAME = `http://localhost:${PORT}`;
 
-// Find all the lambda functions that we should serve
-const lambdaFunctions = requireDir(PATH, { recurse: false });
-console.log("\n\nThe following functions are available:");
-console.log(
-  Object.keys(lambdaFunctions)
-    .map(routeName => `- ${HOSTNAME}/${routeName}/`)
-    .join("\n")
-);
+const showHeader = (lambdas: Object) => {
+  console.log(`\n⚒ HammerFramework's API Development Server\n`);
+  console.log(`◌ Listening on ${HOSTNAME}`);
+  console.log(`◌ Watching ${hammerApiDir}`);
+  console.log("\nNow serving\n");
+  console.log(
+    Object.keys(lambdas)
+      .map(routeName => `► ${HOSTNAME}/${routeName}/`)
+      .join("\n")
+  );
+};
 
-// Express.js Setup
+// These removes everything in the cache. It's a bit extreme, but we
+// can always refine the mechanism here.
+const purgeRequireCache = () => {
+  Object.keys(require.cache).forEach(cacheKey => {
+    delete require.cache[cacheKey];
+  });
+};
+
+const requireLambdaFunctions = (path: string) =>
+  requireDir(path, { recurse: false });
+
 const app = express();
+
 app.use(
   bodyParser.text({
     type: ["text/*", "application/json", "multipart/form-data"]
@@ -61,6 +80,9 @@ app.use(
 );
 app.use(bodyParser.raw({ type: "*/*" }));
 app.use(expressLogging(console));
+
+// Find all the lambda functions that we should serve
+let lambdaFunctions = requireLambdaFunctions(PATH);
 
 app.all("/", (_, res) => {
   return res.send(`
@@ -172,6 +194,25 @@ app.all("/:routeName", async (req, res) => {
   }
 });
 
-app.listen(PORT, () =>
-  console.log(`\n\n⚒ hammer-dev-server on ${HOSTNAME}\n\n`)
-);
+const reloadLambdas = (path: string) => {
+  console.log("\nReloading...\n");
+  purgeRequireCache();
+  lambdaFunctions = requireLambdaFunctions(PATH);
+  clear();
+  showHeader(lambdaFunctions);
+};
+
+const startServer = () => app.listen(PORT, () => showHeader(lambdaFunctions));
+const server = startServer();
+server.setTimeout(10 * 1000);
+
+const watcher = chokidar.watch(hammerApiDir, {
+  ignored: ["node_modules/.cache", ".git"],
+  cwd: hammerApiDir
+});
+
+watcher.on("ready", () => {
+  watcher.on("add", reloadLambdas);
+  watcher.on("change", reloadLambdas);
+  watcher.on("unlink", reloadLambdas);
+});

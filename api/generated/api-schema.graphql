@@ -16,10 +16,22 @@ type HammerPackages {
   webSize: String!
 }
 
+type Invoice {
+  body: String!
+  createdAt: String!
+  id: Int!
+  updatedAt: String!
+}
+
+type Mutation {
+  invoicesCreate(body: String!, id: Int): Invoice!
+}
+
 type Query {
   currentUser: User
   hammer: Hammer!
   help: String!
+  invoicesNewest: Invoice
 }
 
 type User {

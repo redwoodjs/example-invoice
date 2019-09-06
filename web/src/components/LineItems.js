@@ -1,16 +1,16 @@
-import React from 'react'
-import produce from 'immer'
+import React from "react";
+import produce from "immer";
 
-import { Box, Button } from 'src/lib/primitives'
-import { TextInput } from 'src/components'
+import { Box, Button } from "src/lib/primitives";
+import { TextInput } from "src/components";
 
 const LineItems = ({ value, onChange, ...rest }) => {
   const handleChange = (rowIndex, colIndex) => newValue =>
     onChange(
       produce(value, draft => {
-        draft[rowIndex][colIndex].value = newValue
+        draft[rowIndex][colIndex].value = newValue;
       })
-    )
+    );
 
   return (
     <Box
@@ -45,7 +45,7 @@ const LineItems = ({ value, onChange, ...rest }) => {
               <TextInput
                 onChange={handleChange(rowIndex, 1)}
                 width={1}
-                type={rowIndex !== 0 ? 'number' : 'text'}
+                type={rowIndex !== 0 ? "number" : "text"}
                 {...row[1]}
               />
             </td>
@@ -53,7 +53,7 @@ const LineItems = ({ value, onChange, ...rest }) => {
               <TextInput
                 onChange={handleChange(rowIndex, 2)}
                 width={1}
-                type={rowIndex !== 0 ? 'number' : 'text'}
+                type={rowIndex !== 0 ? "number" : "text"}
                 {...row[2]}
               />
             </td>
@@ -69,11 +69,11 @@ const LineItems = ({ value, onChange, ...rest }) => {
                 `}
               >
                 <Button
-                  width="24px"
+                  width="28px"
                   onClick={() =>
                     onChange(
                       produce(value, draft => {
-                        delete draft[rowIndex]
+                        delete draft[rowIndex];
                       })
                     )
                   }
@@ -102,15 +102,15 @@ const LineItems = ({ value, onChange, ...rest }) => {
           >
             <Box textAlign="right">
               <Button
-                width="24px"
+                width="28px"
                 onClick={() =>
                   onChange(
                     produce(value, draft => {
                       draft.push([
-                        { value: '' },
+                        { value: "" },
                         { value: 1 },
-                        { value: '0.0' },
-                      ])
+                        { value: "0.0" }
+                      ]);
                     })
                   )
                 }
@@ -122,7 +122,7 @@ const LineItems = ({ value, onChange, ...rest }) => {
         </tr>
       </tbody>
     </Box>
-  )
-}
+  );
+};
 
-export default LineItems
+export default LineItems;
