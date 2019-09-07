@@ -1,29 +1,29 @@
-const path = require("path");
+const path = require('path')
 
 module.exports = {
-  extends: "../babel.config.js",
+  extends: '../babel.config.js',
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
         targets: {
           // Node.js version available on Netlify
-          node: "8.10.0"
+          node: '8.10.0',
         },
-        useBuiltIns: "entry",
-        corejs: 3
-      }
-    ]
+        useBuiltIns: 'entry',
+        corejs: 3,
+      },
+    ],
   ],
   plugins: [
     [
-      "babel-plugin-module-resolver",
+      'babel-plugin-module-resolver',
       {
-        cwd: "babelrc",
+        cwd: 'babelrc',
         alias: {
-          src: path.join(__dirname, "src")
-        }
-      }
-    ]
-  ]
-};
+          src: path.join(__dirname, 'src'),
+        },
+      },
+    ],
+  ],
+}

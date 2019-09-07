@@ -1,26 +1,26 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
-import { Flex } from "src/lib/primitives";
+import { forwardRef, useImperativeHandle, useState } from 'react'
+import { Flex } from 'src/lib/primitives'
 
-import TextInput from "../TextInput";
-import InvoiceInfo from "../InvoiceInfo";
-import LineItems from "../LineItems";
-import Summary from "../Summary";
+import TextInput from '../TextInput'
+import InvoiceInfo from '../InvoiceInfo'
+import LineItems from '../LineItems'
+import Summary from '../Summary'
 
-const MARGIN_BOTTOM = 5;
+const MARGIN_BOTTOM = 5
 
 const Invoice = forwardRef(({ ...invoice }, ref) => {
-  const [title, setTitle] = useState(invoice.title);
-  const [companyName, setCompanyName] = useState(invoice.companyName);
-  const [companyInfo, setCompanyInfo] = useState(invoice.companyInfo);
-  const [recipient, setRecipient] = useState(invoice.recipient);
-  const [information, setInformation] = useState(invoice.information);
-  const [lineItems, setLineItems] = useState(invoice.lineItems);
-  const [summary, setSummary] = useState(invoice.summary);
-  const [notesA, setNotesA] = useState(invoice.notesA);
-  const [notesB, setNotesB] = useState(invoice.notesB);
+  const [title, setTitle] = useState(invoice.title)
+  const [companyName, setCompanyName] = useState(invoice.companyName)
+  const [companyInfo, setCompanyInfo] = useState(invoice.companyInfo)
+  const [recipient, setRecipient] = useState(invoice.recipient)
+  const [information, setInformation] = useState(invoice.information)
+  const [lineItems, setLineItems] = useState(invoice.lineItems)
+  const [summary, setSummary] = useState(invoice.summary)
+  const [notesA, setNotesA] = useState(invoice.notesA)
+  const [notesB, setNotesB] = useState(invoice.notesB)
 
   useImperativeHandle(ref, () => ({
-    getBody() {
+    getBody () {
       return {
         title,
         companyName,
@@ -30,10 +30,10 @@ const Invoice = forwardRef(({ ...invoice }, ref) => {
         lineItems,
         summary,
         notesA,
-        notesB
-      };
-    }
-  }));
+        notesB,
+      }
+    },
+  }))
 
   return (
     <>
@@ -116,7 +116,7 @@ const Invoice = forwardRef(({ ...invoice }, ref) => {
         />
       </Flex>
     </>
-  );
-});
+  )
+})
 
-export default Invoice;
+export default Invoice

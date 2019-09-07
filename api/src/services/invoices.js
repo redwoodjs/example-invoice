@@ -1,31 +1,31 @@
-import { db } from "src/lib/photon";
+import { db } from 'src/lib/photon'
 
 export const create = async ({ id, user, body }) => {
   return await db().invoices.upsert({
     where: { id },
     create: {
       User: { connect: { id: user.id } },
-      body
+      body,
     },
     update: {
-      body
-    }
-  });
-};
+      body,
+    },
+  })
+}
 
 export const newest = async ({ user }) => {
   const invoices = await db().invoices.findMany({
     where: {
-      User: user
+      User: user,
     },
     orderBy: {
-      createdAt: "asc"
+      createdAt: 'asc',
     },
-    first: 1
-  });
+    first: 1,
+  })
 
   if (!invoices) {
-    return null;
+    return null
   }
-  return invoices[0];
-};
+  return invoices[0]
+}

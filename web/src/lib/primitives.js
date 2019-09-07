@@ -1,13 +1,13 @@
-import { extend } from "rebass-extend";
+import { extend } from 'rebass-extend'
 import {
   display,
   height,
   maxWidth,
   textAlign,
   fontStyle,
-  borders
-} from "styled-system";
-import styled from "styled-components";
+  borders,
+} from 'styled-system'
+import styled from 'styled-components'
 
 const {
   Box,
@@ -17,11 +17,11 @@ const {
   Button: RealButton,
   Link,
   Image,
-  Card
+  Card,
 } = extend({
   Box: [display, textAlign, maxWidth, height, borders],
-  Text: [fontStyle]
-});
+  Text: [fontStyle],
+})
 
 const Button = styled(RealButton)`
   padding: 0 8px;
@@ -36,6 +36,6 @@ const Button = styled(RealButton)`
   &:hover {
     opacity: 0.9;
   }
-`;
+`
 
-export { Box, Flex, Text, Heading, Button, Link, Image, Card };
+export { Box, Flex, Text, Heading, Button, Link, Image, Card }
