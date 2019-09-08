@@ -3,77 +3,132 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const WebpackAssetsManifest = require('webpack-assets-manifest')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+
 const { getHammerConfig } = require('@hammerframework/hammer-core')
 
 const hammerConfig = getHammerConfig()
 
-module.exports = {
-  entry: {
-    app: path.resolve(__dirname, '../src/index.js'),
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
-    new webpack.ProvidePlugin({
-      React: 'react',
-      PropTypes: 'prop-types',
-      gql: ['@hammerframework/hammer-web', 'gql'],
-    }),
-    new webpack.DefinePlugin({
-      '__HAMMER__.apiProxyPath': JSON.stringify(hammerConfig.web.apiProxyPath),
-    }),
-  ],
-  module: {
-    rules: [
+module.exports = (webpackEnv) => {
+  const isEnvProduction = webpackEnv === 'production'
+
+  const getStyleLoaders = () => {
+    return [
       {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            cacheDirectory: true,
-          },
-        },
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.scss$/,
         use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            },
-          },
+          isEnvProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'sass-loader',
         ],
       },
       {
         test: /\.css$/,
         use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
+          isEnvProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
         ],
       },
-    ],
-  },
-  output: {
-    publicPath: '/',
-    pathinfo: true,
-    filename: '[name].chunk.js',
-    path: path.resolve(__dirname, '../dist'),
-  },
-  resolve: {
+    ]
+  }
+
+  return {
+    entry: {
+      app: path.resolve(__dirname, '../src/index.js'),
+    },
+    resolve: {
+      plugins: [
+        new DirectoryNamedWebpackPlugin({
+          honorIndex: true,
+          exclude: /node_modules/,
+        }),
+      ],
+    },
     plugins: [
-      new DirectoryNamedWebpackPlugin({
-        honorIndex: true,
-        exclude: /node_modules/,
+      new WebpackAssetsManifest({
+        entrypoints: true,
+        writeToDisk: true,
+        publicPath: true,
       }),
-    ],
-  },
+      isEnvProduction &&
+        new MiniCssExtractPlugin({
+          filename: '[name].[contenthash:8].css',
+          chunkFilename: '[name].[contenthash:8].css',
+        }),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+      }),
+      new webpack.ProvidePlugin({
+        React: 'react',
+        PropTypes: 'prop-types',
+        gql: ['@hammerframework/hammer-web', 'gql'],
+      }),
+      new webpack.DefinePlugin({
+        '__HAMMER__.apiProxyPath': JSON.stringify(
+          hammerConfig.web.apiProxyPath
+        ),
+      }),
+      new FaviconsWebpackPlugin(
+        path.join(hammerConfig.baseDir, 'web/src/favicon.png')
+      ),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    ].filter(Boolean),
+    module: {
+      rules: [
+        {
+          oneOf: [
+            {
+              loader: 'null-loader',
+              test: /\.(md|test\.js|stories\.js)$/,
+            },
+            {
+              test: /\.js$/,
+              exclude: /(node_modules)/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['@babel/preset-env'],
+                  cacheDirectory: true,
+                },
+              },
+            },
+            {
+              test: /\.(png|jpg|gif|svg)$/,
+              use: [
+                {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 8192,
+                    name: '[name].[hash:8].[ext]',
+                  },
+                },
+              ],
+            },
+            ...getStyleLoaders(),
+            {
+              loader: 'file-loader',
+              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+              options: {
+                name: '[name].[hash:8].[ext]',
+              },
+            },
+          ],
+        },
+      ],
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+      runtimeChunk: true,
+    },
+    output: {
+      publicPath: '/',
+      pathinfo: true,
+      filename: '[name].[hash:8].bundle.js',
+      path: path.resolve(__dirname, '../dist'),
+    },
+  }
 }
