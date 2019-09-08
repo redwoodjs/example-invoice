@@ -1,6 +1,6 @@
 {
   "name": "@hammerframework/hammer-api",
-  "version": "0.0.1-alpha.7",
+  "version": "0.0.1-alpha.8",
   "main": "dist/main.js",
   "files": [
     "dist"
@@ -9,7 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/register": "^7.5.5",
-    "@hammerframework/hammer-core": "^0.0.1-alpha.7",
+    "@hammerframework/hammer-core": "^0.0.1-alpha.8",
     "apollo-server-lambda": "^2.9.3",
     "findup-sync": "^3.0.0",
     "graphql": "^14.5.4"
