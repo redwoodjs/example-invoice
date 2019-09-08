@@ -5,14 +5,17 @@ const Dotenv = require('dotenv-webpack')
 const { getHammerConfig } = require('@hammerframework/hammer-core')
 const escapeRegExp = require('lodash.escaperegexp')
 
-const common = require('./webpack.common.js')
+const webpackConfig = require('./webpack.common.js')
+const WEBPACK_MODE = 'development'
 
 const hammerConfig = getHammerConfig()
 
-module.exports = merge(common, {
-  mode: 'development',
+module.exports = merge(webpackConfig(), {
+  mode: WEBPACK_MODE,
   devtool: 'inline-source-map',
   devServer: {
+    hot: true,
+    writeToDisk: false,
     historyApiFallback: true,
     contentBase: path.resolve(__dirname, '../dist'),
     port: hammerConfig.web.port,
@@ -24,6 +27,13 @@ module.exports = merge(common, {
         },
       },
     },
+    inline: true,
+    overlay: true,
+  },
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
   },
   plugins: [
     new Dotenv({
