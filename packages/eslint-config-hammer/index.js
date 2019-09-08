@@ -21,6 +21,7 @@ module.exports = {
   globals: {
     gql: 'readonly',
     React: 'readonly',
+    __HAMMER__: 'readyonly',
   },
   rules: {
     'prefer-object-spread': 'warn',
@@ -39,6 +40,7 @@ module.exports = {
       { avoidEscape: true, allowTemplateLiterals: true },
     ],
     'space-before-function-paren': ['error', 'always'],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     // react rules
     'react/prop-types': [
       'error',
