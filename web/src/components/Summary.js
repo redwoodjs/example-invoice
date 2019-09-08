@@ -1,10 +1,9 @@
-import React from 'react'
 import produce from 'immer'
 
 import { Box } from 'src/lib/primitives'
 import { TextInput } from 'src/components'
 
-const calculateSubtotal = lineItems => {
+const calculateSubtotal = (lineItems) => {
   return lineItems
     .slice(1) // remove heading items
     .map(([_, { value: quantity }, { value: price }]) => [
@@ -28,9 +27,9 @@ const calculateTotal = (subtotal, rows) => {
 const Summary = ({ value, onChange, lineItems, ...rest }) => {
   calculateSubtotal(lineItems)
 
-  const handleChange = (rowIndex, colIndex) => newValue =>
+  const handleChange = (rowIndex, colIndex) => (newValue) =>
     onChange(
-      produce(value, draft => {
+      produce(value, (draft) => {
         draft[rowIndex][colIndex].value = newValue
       })
     )

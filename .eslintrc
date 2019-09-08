@@ -1,0 +1,3 @@
+{
+  "extends": "@hammerframework/eslint-config-hammer"
+}

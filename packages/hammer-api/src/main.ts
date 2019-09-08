@@ -1,3 +1,3 @@
-import { graphQLServerlessFunction } from "src/api/functions/graphql";
+import { graphQLServerlessFunction } from 'src/api/functions/graphql'
 
-export { graphQLServerlessFunction };
+export { graphQLServerlessFunction }

@@ -1,7 +1,7 @@
-import React from "react";
-import { Query } from "@apollo/react-components";
+import React from 'react'
+import { Query } from '@apollo/react-components'
 
-import Skeleton from "./subcomponents/Skeleton";
+import Skeleton from './subcomponents/Skeleton'
 
 /**
  * This is a wrapper around Apollo's `Query` component that
@@ -21,16 +21,16 @@ import Skeleton from "./subcomponents/Skeleton";
  */
 export default ({ children, component: Component, ...rest }) => {
   const { query, skeleton, dataToProps } =
-    (Component && Component.queryProps) || rest;
+    (Component && Component.queryProps) || rest
 
   return (
     <Query query={query} {...rest}>
       {({ loading, error, data, refetch }) => {
         if (loading) {
-          if (typeof skeleton !== "undefined") {
-            return <Skeleton {...skeleton} />;
+          if (typeof skeleton !== 'undefined') {
+            return <Skeleton {...skeleton} />
           }
-          return <p>Loading...</p>;
+          return <p>Loading...</p>
         }
 
         if (error) {
@@ -38,22 +38,22 @@ export default ({ children, component: Component, ...rest }) => {
             <pre>
               <code>{error}</code>
             </pre>
-          );
+          )
         }
 
-        let cleanData = data;
-        if (typeof dataToProps === "function") {
-          cleanData = dataToProps(data);
+        let cleanData = data
+        if (typeof dataToProps === 'function') {
+          cleanData = dataToProps(data)
         }
         // children takes precedence
         if (children) {
-          return children({ data: cleanData, refetch });
+          return children({ data: cleanData, refetch })
         }
 
         // if the user does not supply a children function, then just render
         // the component.
-        return <Component {...cleanData} refetch={refetch} />;
+        return <Component {...cleanData} refetch={refetch} />
       }}
     </Query>
-  );
-};
+  )
+}

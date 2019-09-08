@@ -1,4 +1,4 @@
-import { db } from "src/lib/photon";
+import { db } from 'src/lib/photon'
 
 export const findOrCreate = async ({ sub }) => {
   const { id, user } = await db().accessTokens.upsert({
@@ -8,12 +8,12 @@ export const findOrCreate = async ({ sub }) => {
     select: {
       id: true,
       sub: true,
-      user: true
-    }
-  });
+      user: true,
+    },
+  })
 
   if (user) {
-    return user;
+    return user
   }
 
   // If the user is null then we have to create one.
@@ -24,9 +24,9 @@ export const findOrCreate = async ({ sub }) => {
   const newUser = await db().users.create({
     data: {
       accessTokens: {
-        connect: { id: id }
-      }
-    }
-  });
-  return newUser;
-};
+        connect: { id: id },
+      },
+    },
+  })
+  return newUser
+}
