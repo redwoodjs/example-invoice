@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+
 const { getHammerConfig } = require('@hammerframework/hammer-core')
 
 const hammerConfig = getHammerConfig()
@@ -68,6 +70,9 @@ module.exports = (webpackEnv) => {
           hammerConfig.web.apiProxyPath
         ),
       }),
+      new FaviconsWebpackPlugin(
+        path.join(hammerConfig.baseDir, 'web/src/favicon.png')
+      ),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ].filter(Boolean),
     module: {
