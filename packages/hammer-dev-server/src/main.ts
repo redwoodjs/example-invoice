@@ -207,8 +207,7 @@ const server = startServer()
 server.setTimeout(10 * 1000)
 
 const watcher = chokidar.watch(hammerApiDir, {
-  ignored: ['node_modules/.cache', '.git'],
-  cwd: hammerApiDir,
+  ignored: (path: string) => path.includes('node_modules'),
 })
 
 watcher.on('ready', () => {
