@@ -1,6 +1,6 @@
 {
   "name": "@hammerframework/hammer-dev-server",
-  "version": "0.0.1-alpha.8",
+  "version": "0.0.1-alpha.8.1",
   "bin": {
     "hammer-dev-server": "./dist/main.js"
   },
