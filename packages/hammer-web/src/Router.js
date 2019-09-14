@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 import { useAuth } from './HammerProvider'
 
 export const AuthRoute = ({ component: Component, path, ...rest }) => {

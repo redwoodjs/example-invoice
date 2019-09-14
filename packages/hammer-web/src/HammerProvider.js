@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { ThemeProvider as RealThemeProvider } from 'styled-components'
+
 import { GraphQLProvider as RealGraphQLProvider } from 'src/graphql'
 
 let USE_AUTH
