@@ -29,7 +29,7 @@ export const extendMutation = extendType({
 export const extendQuery = extendType({
   type: 'Query',
   definition: (t) => {
-    t.field('invoicesNewest', {
+    t.list.field('invoices', {
       type: 'Invoice',
       nullable: true,
       async resolve (_root, _args, { currentUser }) {

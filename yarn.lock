@@ -958,6 +958,25 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
+"@hammerframework/hammer-api@0.0.1-alpha.7":
+  version "0.0.1-alpha.7"
+  resolved "https://registry.yarnpkg.com/@hammerframework/hammer-api/-/hammer-api-0.0.1-alpha.7.tgz#9eefda08b1c926385609db98d484a8ff12514cfb"
+  integrity sha512-wtI87npxESZQBAZlnua77NnaGSNKL9rqTnZ1kkgh7tIKBV8OmB65VcUYAN9vIutsc9vpiP+iOfogHze9Qk9y1A==
+  dependencies:
+    "@babel/register" "^7.5.5"
+    "@hammerframework/hammer-core" "^0.0.1-alpha.7"
+    apollo-server-lambda "^2.9.3"
+    findup-sync "^3.0.0"
+    graphql "^14.5.4"
+
+"@hammerframework/hammer-auth-auth0@0.0.1-alpha.7":
+  version "0.0.1-alpha.7"
+  resolved "https://registry.yarnpkg.com/@hammerframework/hammer-auth-auth0/-/hammer-auth-auth0-0.0.1-alpha.7.tgz#5d92f91428cb907b2ec4088fd99a8c9b49285f16"
+  integrity sha512-eEfyltw6uLHPLlNCe+kLqE7GyO7mxYSBsfu44XCVjV37F/Y9k7jaBuOyF+yCVcoY9wJ5WbJWCnq2JWlWPR3NEA==
+  dependencies:
+    "@auth0/auth0-spa-js" "^1.0.2"
+    "@hammerframework/hammer-web" "^0.0.1-alpha.7"
+
 "@hammerframework/hammer-cli@^0.0.0-alpha.5":
   version "0.0.0-alpha.5"
   resolved "https://registry.yarnpkg.com/@hammerframework/hammer-cli/-/hammer-cli-0.0.0-alpha.5.tgz#51e45c6ac39bbbaab18eea9e6acde27036f71cd4"
@@ -970,6 +989,30 @@
     react "^16.8.6"
     require-dir "^1.2.0"
     yargs-parser "^13.1.1"
+
+"@hammerframework/hammer-core@0.0.1-alpha.7":
+  version "0.0.1-alpha.7"
+  resolved "https://registry.yarnpkg.com/@hammerframework/hammer-core/-/hammer-core-0.0.1-alpha.7.tgz#9a829da673b51417a3915a9dfcd46abcf8ef71b9"
+  integrity sha512-LNpC2PG/5pxb74s9VOgmGeogyJWtJD4lnpkHZqraGQfkM4u58UfVcGKp8Z2tCeK7j5eKCYsBugSYf3iFNsdnyg==
+  dependencies:
+    findup-sync "^3.0.0"
+    toml "^3.0.0"
+
+"@hammerframework/hammer-web@0.0.1-alpha.7":
+  version "0.0.1-alpha.7"
+  resolved "https://registry.yarnpkg.com/@hammerframework/hammer-web/-/hammer-web-0.0.1-alpha.7.tgz#54d2f3f3a6e6a9b60f397daf0c594ea9ce498ed6"
+  integrity sha512-xO0Lyry9ao+5iAFjWkgODREys9r+Uisd8FJ2ASy4DK87PGQmtIDeP1VdDS/VGMixnbhS8DR9Y3X+hKVxVwJwrA==
+  dependencies:
+    "@apollo/react-components" "^3.0.1"
+    "@apollo/react-hooks" "^3.0.1"
+    apollo-boost "^0.4.4"
+    apollo-cache "^1.3.2"
+    apollo-client "^2.6.4"
+    apollo-link "^1.2.12"
+    apollo-utilities "^1.3.2"
+    graphql "^14.5.4"
+    proptypes "^1.1.0"
+    react-content-loader "^4.2.2"
 
 "@jimp/bmp@^0.5.4":
   version "0.5.4"
@@ -4982,6 +5025,14 @@ eslint-config-prettier@^6.2.0:
   integrity sha512-VLsgK/D+S/FEsda7Um1+N8FThec6LqE3vhcMyp8mlmto97y3fGf3DX7byJexGuOb1QY0Z/zz222U5t+xSfcZDQ==
   dependencies:
     get-stdin "^6.0.0"
+
+eslint-import-resolver-babel-module@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-babel-module/-/eslint-import-resolver-babel-module-5.1.0.tgz#50dac176dfbce2824b0e12100d6c23370d4325c0"
+  integrity sha512-fnWkQ9+fVjQ4H9qk5sH8zUfC8TPyWJAakLPjLqUgdlexhyT6PGk8AieXuEvdeskIXLOcO2WLI4kothFBigjFjA==
+  dependencies:
+    pkg-up "^2.0.0"
+    resolve "^1.10.0"
 
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"

@@ -19,7 +19,7 @@
     "typescript": "^3.5.3",
     "@babel/preset-typescript": "^7.3.3",
     "@hammerframework/hammer-cli": "^0.0.0-alpha.5",
-    "@hammerframework/eslint-config-hammer": "0.0.1-alpha.7"
+    "@hammerframework/eslint-config-hammer": "0.0.1-alpha.8"
   },
   "dependencies": {},
   "scripts": {

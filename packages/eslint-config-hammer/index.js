@@ -1,13 +1,15 @@
-// Hammerframework's ESLint configuration is a mixture between ESLint's
-// recommended rules[1], React's recommended rules[2], and a bit of our stylistic
+// Hammer's ESLint configuration is a mixture between ESLint's recommended
+// rules [^1], React's recommended rules [^2], and a bit of our stylistic
 // flair:
 // - no semicolons
 // - comma dangle when multiline
 // - single quotes
-// - always use parens around arrow functions
+// - always use parenthesis around arrow functions
+// - enforced import sorting
 //
-// 1. https://eslint.org/docs/rules/
-// 2. https://www.npmjs.com/package/eslint-plugin-react#list-of-supported-rules
+// [^1] https://eslint.org/docs/rules/
+// [^2] https://www.npmjs.com/package/eslint-plugin-react#list-of-supported-rules
+
 module.exports = {
   parser: 'babel-eslint',
   extends: [
@@ -19,6 +21,9 @@ module.exports = {
   settings: {
     react: {
       version: 'detect',
+    },
+    'import/resolver': {
+      'babel-module': {},
     },
   },
   env: {
@@ -34,6 +39,23 @@ module.exports = {
     __HAMMER__: 'readyonly',
   },
   rules: {
+    // We disable rules related to code formatting that are aleady covered
+    // by prettier based on their recommendation:
+    //
+    // semi: ['error', 'never'],
+    // 'comma-dangle': ['error', 'always-multiline'],
+    // quotes: [
+    //   'error',
+    //   'single',
+    //   { avoidEscape: true, allowTemplateLiterals: true },
+    // ],
+    // 'arrow-parens': ['error', 'always'],
+    // 'object-curly-spacing': ['error', 'always'],
+
+    // Code formatting rules not covered by prettier
+    'space-before-function-paren': ['error', 'always'],
+
+    //
     'prefer-object-spread': 'warn',
     'prefer-spread': 'warn',
     'no-unused-expressions': [
@@ -44,18 +66,22 @@ module.exports = {
     camelcase: ['warn', { properties: 'never' }],
     'no-new': 'warn',
     'new-cap': ['error', { newIsCap: true, capIsNew: false }],
-    'space-before-function-paren': ['error', 'always'],
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    semi: ['error', 'never'],
-    'comma-dangle': ['error', 'always-multiline'],
-    quotes: [
+    'import/order': [
       'error',
-      'single',
-      { avoidEscape: true, allowTemplateLiterals: true },
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        'newlines-between': 'always',
+      },
     ],
-    'arrow-parens': ['error', 'always'],
-    'object-curly-spacing': ['error', 'always'],
-    // react rules
+    // React rules
     'react/prop-types': [
       'error',
       {
@@ -64,5 +90,7 @@ module.exports = {
       },
     ],
     'react/display-name': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
 }

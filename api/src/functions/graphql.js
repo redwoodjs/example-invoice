@@ -1,6 +1,6 @@
 import { graphQLServerlessFunction } from '@hammerframework/hammer-api'
-import { getAccessToken } from 'src/lib/auth0'
 
+import { getAccessToken } from 'src/lib/auth0'
 import { users } from 'src/services'
 
 const server = graphQLServerlessFunction({
