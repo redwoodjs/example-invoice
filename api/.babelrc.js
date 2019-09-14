@@ -25,6 +25,7 @@ module.exports = {
     [
       "babel-plugin-module-resolver",
       {
+        cwd: "babelrc",
         alias: {
           src: SRC_ALIAS__DIR
         }

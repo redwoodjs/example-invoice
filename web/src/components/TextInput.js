@@ -1,14 +1,13 @@
-import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 
 import { Box } from 'src/lib/primitives'
 
-const Textarea = ({ value, onChange, rows, type, ...rest }) => {
+const Textarea = ({ value, onChange, type, ...rest }) => {
   return (
     <Box {...rest}>
       <TextareaAutosize
         value={value}
-        onChange={e => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         type={type}
         style={{
           width: '100%',
@@ -26,7 +25,7 @@ const Input = ({ value, onChange, type = 'text', ...rest }) => {
       as="input"
       type={type}
       value={value}
-      onChange={e => onChange(e.target.value)}
+      onChange={(e) => onChange(e.target.value)}
       {...rest}
     />
   )

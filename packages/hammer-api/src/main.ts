@@ -1,13 +1,3 @@
-import { graphQLServerlessFunction } from "src/api/functions/graphql";
-import {
-  getHammerConfigPath,
-  getHammerBaseDir,
-  getHammerConfig
-} from "src/core";
+import { graphQLServerlessFunction } from 'src/api/functions/graphql'
 
-export {
-  graphQLServerlessFunction,
-  getHammerBaseDir,
-  getHammerConfigPath,
-  getHammerConfig
-};
+export { graphQLServerlessFunction }

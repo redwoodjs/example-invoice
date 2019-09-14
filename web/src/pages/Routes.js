@@ -1,24 +1,15 @@
-import {
-  BrowserRouter,
-  Switch,
-  AnonRoute,
-  AuthRoute
-} from "@hammerframework/hammer-web";
+import { BrowserRouter, Switch, Route } from '@hammerframework/hammer-web'
 
-import InvoicePage from "./InvoicePage";
-import Profile from "./Profile";
-import Test from "./Test";
+import InvoicePage from './InvoicePage'
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <AnonRoute path="/" exact component={InvoicePage} />
-        <AuthRoute path="/profile" component={Profile} />
-        <AuthRoute path="/test" component={Test} />
+        <Route path="/" exact component={InvoicePage} />
       </Switch>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default Routes;
+export default Routes

@@ -1,9 +1,9 @@
-import { useAuth } from "@hammerframework/hammer-web";
+import { useAuth } from '@hammerframework/hammer-web'
 
-import { Flex, Box, Button } from "src/lib/primitives";
+import { Flex, Box, Button } from 'src/lib/primitives'
 
 export default () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth();
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth()
 
   return (
     <Box
@@ -33,7 +33,9 @@ export default () => {
         >
           {!isAuthenticated && (
             <>
-              <Button onClick={() => loginWithRedirect({})}>Log in</Button>
+              <Button onClick={() => loginWithRedirect({})} mr={1}>
+                Log in
+              </Button>
               <Button onClick={() => loginWithRedirect({})}>Sign up</Button>
             </>
           )}
@@ -45,5 +47,5 @@ export default () => {
         </Box>
       </Flex>
     </Box>
-  );
-};
+  )
+}

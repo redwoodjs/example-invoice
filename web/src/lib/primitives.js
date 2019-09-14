@@ -24,11 +24,18 @@ const {
 })
 
 const Button = styled(RealButton)`
-  padding: 0 4px;
+  padding: 0 8px;
   border-radius: 3px;
-  line-height: 22px;
-  height: 24px;
-  background: #88898b;
+  line-height: 26px;
+  font-weight: normal;
+  height: 28px;
+  background: white;
+  color: blue;
+  border: 1px blue solid;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `
 
 export { Box, Flex, Text, Heading, Button, Link, Image, Card }

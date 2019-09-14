@@ -27,7 +27,6 @@ breakpoints.lg = breakpoints[2]
 
 export default {
   fontSizes,
-  //fontWeights,
   colors,
   radii,
   space,
