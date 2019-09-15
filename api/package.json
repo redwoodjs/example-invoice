@@ -3,19 +3,18 @@
   "name": "api",
   "version": "1.0.0",
   "dependencies": {
-    "@hammerframework/hammer-api": "0.0.1-alpha.7",
+    "@hammerframework/hammer-api": "0.0.1-alpha.8",
     "dotenv": "^8.0.0",
     "graphql": "^14.5.4",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.5.1",
     "nexus": "^0.12.0-beta.8",
-    "prisma2": "^2.0.0-preview-9.1"
-  },
-  "scripts": {
-    "generate": "yarn prisma2 generate",
-    "dev": "yarn hammer-dev-server"
+    "prisma2": "^2.0.0-preview-11"
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "^3.2.0"
+    "@hammerframework/hammer-dev-server": "^0.0.1-alpha.8.1"
+  },
+  "scripts": {
+    "dev": "yarn hammer-dev-server"
   }
 }
