@@ -2,20 +2,6 @@
 ### Do not make changes to this file directly
 
 
-type Hammer {
-  authors: [String!]!
-  packages: HammerPackages!
-  serverlessFunctions: [String!]!
-  version: String!
-}
-
-type HammerPackages {
-  api: [String!]!
-  apiSize: String!
-  web: [String!]!
-  webSize: String!
-}
-
 type Invoice {
   body: String!
   createdAt: String!
@@ -24,14 +10,15 @@ type Invoice {
 }
 
 type Mutation {
-  invoicesCreate(body: String!, id: Int): Invoice!
+  invoiceCreate(body: String!): Invoice!
+  invoiceUpdate(body: String!, id: Int!): Invoice!
 }
 
 type Query {
   currentUser: User
-  hammer: Hammer!
   help: String!
-  invoicesNewest: Invoice
+  invoice(id: Int!): Invoice
+  invoices: [Invoice!]
 }
 
 type User {
