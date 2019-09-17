@@ -1,9 +1,26 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route as RealRoute, Switch } from 'react-router-dom'
 
 import { useAuth } from './HammerProvider'
 
-export const AuthRoute = ({ component: Component, path, ...rest }) => {
+// Routes that are passed in as children to `Private` get the
+// `authRequired` prop.
+export const Private = ({ children }) => {
+  return React.Children.map(children, (child) => {
+    return React.cloneElement(child, { authRequired: true })
+  })
+}
+
+// `PrivateRoute` will wait to determine if a user is authenticated
+// before routing them to the login or rendering the component.
+// <Router>
+//   <Route path="/" />
+//   <Private>
+//     <Route path="/invoices" />
+//     <Route path="/invoice/:id" />
+//   </Private>
+// </Router>
+export const PrivateRoute = ({ component: Component, path, ...rest }) => {
   const { loading, isAuthenticated, loginWithRedirect } = useAuth()
 
   useEffect(() => {
@@ -17,10 +34,21 @@ export const AuthRoute = ({ component: Component, path, ...rest }) => {
     !loading && fn()
   }, [loading, isAuthenticated, loginWithRedirect, path])
 
-  const render = (props) =>
-    isAuthenticated === true ? <Component {...props} /> : null
-
-  return <Route path={path} render={render} {...rest} />
+  // TODO: Allow the user to pass in some sort of loading
+  // component instead of rendering null.
+  return (
+    <RealRoute
+      path={path}
+      render={(props) =>
+        isAuthenticated === true ? <Component {...props} /> : null
+      }
+      {...rest}
+    />
+  )
 }
 
-export { BrowserRouter, Switch, Route }
+export const Route = ({ authRequired, ...rest }) => {
+  return authRequired ? <PrivateRoute {...rest} /> : <RealRoute {...rest} />
+}
+
+export { BrowserRouter, Switch }
