@@ -17,6 +17,11 @@
     "@hammerframework/hammer-dev-server": "^0.0.1-alpha.8.1"
   },
   "scripts": {
-    "dev": "yarn hammer-dev-server"
+    "dev": "yarn hammer-dev-server",
+    "db:up": "./scripts/prisma-default-env-vars.sh generate",
+    "db:save": "./scripts/prisma-default-env-vars.sh lift up",
+    "build": "yarn clean && NODE_ENV=production yarn db:up && NODE_ENV=production babel src --out-dir dist",
+    "package": "node ./scripts/package-functions.js",
+    "clean": "rm -rf dist"
   }
 }
