@@ -1,5 +1,3 @@
-import { forwardRef, useImperativeHandle, useState } from 'react'
-
 import { Flex } from 'src/lib/primitives'
 
 import TextInput from '../TextInput'
@@ -9,38 +7,24 @@ import Summary from '../Summary'
 
 const MARGIN_BOTTOM = 5
 
-const Invoice = forwardRef(({ ...invoice }, ref) => {
-  const [title, setTitle] = useState(invoice.title)
-  const [companyName, setCompanyName] = useState(invoice.companyName)
-  const [companyInfo, setCompanyInfo] = useState(invoice.companyInfo)
-  const [recipient, setRecipient] = useState(invoice.recipient)
-  const [information, setInformation] = useState(invoice.information)
-  const [lineItems, setLineItems] = useState(invoice.lineItems)
-  const [summary, setSummary] = useState(invoice.summary)
-  const [notesA, setNotesA] = useState(invoice.notesA)
-  const [notesB, setNotesB] = useState(invoice.notesB)
-
-  useImperativeHandle(ref, () => ({
-    getBody () {
-      return {
-        title,
-        companyName,
-        companyInfo,
-        recipient,
-        information,
-        lineItems,
-        summary,
-        notesA,
-        notesB,
-      }
-    },
-  }))
+const Invoice = ({ invoice, onInvoiceChange }) => {
+  const {
+    title,
+    companyName,
+    companyInfo,
+    recipient,
+    information,
+    lineItems,
+    summary,
+    notesA,
+    notesB,
+  } = invoice
 
   return (
     <>
       <TextInput
         value={title}
-        onChange={setTitle}
+        onChange={(value) => onInvoiceChange({ ...invoice, title: value })}
         width={1}
         my={MARGIN_BOTTOM}
         textAlign="center"
@@ -55,7 +39,9 @@ const Invoice = forwardRef(({ ...invoice }, ref) => {
         <TextInput
           multiline
           value={companyName}
-          onChange={setCompanyName}
+          onChange={(value) =>
+            onInvoiceChange({ ...invoice, companyName: value })
+          }
           width={1 / 2}
           css={`
             textarea {
@@ -66,7 +52,9 @@ const Invoice = forwardRef(({ ...invoice }, ref) => {
         <TextInput
           multiline
           value={companyInfo}
-          onChange={setCompanyInfo}
+          onChange={(value) =>
+            onInvoiceChange({ ...invoice, companyInfo: value })
+          }
           width={1 / 2}
           textAlign="right"
         />
@@ -75,19 +63,23 @@ const Invoice = forwardRef(({ ...invoice }, ref) => {
         <TextInput
           multiline
           value={recipient}
-          onChange={setRecipient}
+          onChange={(value) =>
+            onInvoiceChange({ ...invoice, recipient: value })
+          }
           width={1 / 2}
         />
         <InvoiceInfo
           value={information}
-          onChange={setInformation}
+          onChange={(value) =>
+            onInvoiceChange({ ...invoice, information: value })
+          }
           width={1 / 2}
           ml="auto"
         />
       </Flex>
       <LineItems
         value={lineItems}
-        onChange={setLineItems}
+        onChange={(value) => onInvoiceChange({ ...invoice, lineItems: value })}
         width={1}
         mb={2}
         css={`
@@ -95,29 +87,29 @@ const Invoice = forwardRef(({ ...invoice }, ref) => {
         `}
       />
       <Summary
+        value={summary}
+        lineItems={lineItems}
+        onChange={(value) => onInvoiceChange({ ...invoice, summary: value })}
         ml="auto"
         mb={MARGIN_BOTTOM}
-        value={summary}
-        onChange={setSummary}
-        lineItems={lineItems}
       />
       <Flex mb={MARGIN_BOTTOM}>
         <TextInput
           multiline
           value={notesA}
-          onChange={setNotesA}
+          onChange={(value) => onInvoiceChange({ ...invoice, notesA: value })}
           width={1 / 2}
         />
         <TextInput
           multiline
           value={notesB}
-          onChange={setNotesB}
+          onChange={(value) => onInvoiceChange({ ...invoice, notesB: value })}
           width={1 / 2}
           textAlign="right"
         />
       </Flex>
     </>
   )
-})
+}
 
 export default Invoice

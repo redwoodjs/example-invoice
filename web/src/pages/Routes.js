@@ -1,12 +1,23 @@
-import { BrowserRouter, Switch, Route } from '@hammerframework/hammer-web'
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  PrivateRoute,
+} from '@hammerframework/hammer-web'
 
-import InvoicePage from './InvoicePage'
+import DemoInvoice from './DemoInvoice'
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={InvoicePage} />
+        <PrivateRoute
+          exact
+          path="/"
+          redirectTo="/invoice/demo"
+          component={() => 'TODO'}
+        />
+        <Route exact path="/invoice/demo" component={DemoInvoice} />
       </Switch>
     </BrowserRouter>
   )
