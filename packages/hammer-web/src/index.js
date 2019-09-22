@@ -5,4 +5,4 @@ export { default as Query } from './graphql/Query'
 export { GraphQLProvider, createGraphQLClient } from './graphql'
 export { useQuery, useMutation } from '@apollo/react-hooks'
 
-export { BrowserRouter, Switch, Route, Private } from './Router'
+export { BrowserRouter, Switch, Route, Private, PrivateRoute } from './Router'
