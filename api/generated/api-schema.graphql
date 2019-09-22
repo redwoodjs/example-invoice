@@ -10,8 +10,7 @@ type Invoice {
 }
 
 type Mutation {
-  invoiceCreate(body: String!): Invoice!
-  invoiceUpdate(body: String!, id: Int!): Invoice!
+  invoiceSave(body: String!, id: Int): Invoice!
 }
 
 type Query {

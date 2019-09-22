@@ -1,54 +1,47 @@
-import { extendType, objectType, stringArg, intArg } from 'nexus'
+import { extendType, objectType, stringArg } from 'nexus'
 
 const Invoice = objectType({
   name: 'Invoice',
   definition (t) {
-    t.int('id')
+    t.string('id')
     t.string('body')
     t.string('createdAt')
     t.string('updatedAt')
   },
 })
 
-export const invoiceCreate = extendType({
-  type: 'Mutation',
-  definition: (t) => {
-    t.field('invoiceCreate', {
-      type: Invoice,
-      args: { body: stringArg({ required: true }) },
-      async resolve (_root, { body }, { currentUser, photon }) {
-        const user = await currentUser()
-        return await photon().invoices.create({
-          data: {
-            User: { connect: { id: user.id } },
-            body,
-          },
-        })
-      },
-    })
-  },
-})
+// optionalChaining
 
-export const invoiceUpdate = extendType({
+export const invoiceSave = extendType({
   type: 'Mutation',
   definition: (t) => {
-    t.field('invoiceUpdate', {
+    t.field('invoiceSave', {
       type: Invoice,
       args: {
-        id: intArg({ required: true }),
+        id: stringArg(),
         body: stringArg({ required: true }),
       },
       async resolve (_root, { id, body }, { currentUser, photon }) {
         const user = await currentUser()
-        return await photon().invoices.update({
-          where: {
-            id,
-            User: user,
-          },
-          data: {
-            body,
-          },
-        })
+
+        if (id) {
+          return photon.invoices.update({
+            where: {
+              id,
+            },
+            data: {
+              User: { connect: { id: user.id } },
+              body,
+            },
+          })
+        } else {
+          return photon.invoices.create({
+            data: {
+              User: { connect: { id: user.id } },
+              body,
+            },
+          })
+        }
       },
     })
   },
@@ -81,7 +74,7 @@ export const invoice = extendType({
     t.field('invoice', {
       type: 'Invoice',
       args: {
-        id: intArg(),
+        id: stringArg(),
       },
       nullable: true,
       async resolve (_root, { id }, { currentUser, photon }) {
@@ -95,7 +88,7 @@ export const invoice = extendType({
           },
           first: 1,
         })
-        return invoices?[0]
+        return invoices?.[0]
       },
     })
   },

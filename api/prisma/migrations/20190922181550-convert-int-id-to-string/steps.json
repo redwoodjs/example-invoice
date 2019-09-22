@@ -1,0 +1,20 @@
+{
+  "version": "0.2.50",
+  "steps": [
+    {
+      "stepType": "UpdateField",
+      "model": "Invoice",
+      "name": "id",
+      "type": {
+        "Base": "String"
+      },
+      "default": {
+        "Expression": [
+          "cuid",
+          "String",
+          []
+        ]
+      }
+    }
+  ]
+}
