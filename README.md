@@ -28,9 +28,7 @@ AUTH0_AUDIENCE=https://billable.me/api
 Generate a database:
 
 ```terminal
-cd api
-yarn prisma2 lift up
-cd ..
+yarn db:up
 ```
 
 ### Fire it up
@@ -55,8 +53,7 @@ We use Prisma's Lift (Migrations) and PhotonJS (ORM).
 To create a development database:
 
 ```terminal
-cd api
-yarn prisma2 lift up
+yarn db:up
 ```
 
 Will read the schema definition in `api/prisma/schema.prisma` and
@@ -72,7 +69,6 @@ and place it under `web/src/components/MyShinyComponent`
 There are a bunch of packages in this repository that will eventually be published
 under `@hammerframework`:
 
-- `@hammerframework/hammer-core`
 - `@hammerframework/hammer-api`
 - `@hammerframework/hammer-web`
 - `@hammerframework/hammer-dev-server`
