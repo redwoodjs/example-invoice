@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@hammerframework/hammer-api": "0.0.1-alpha.8",
+    "@hammerframework/hammer-core": "^0.0.1-alpha.8",
     "apollo-server-lambda": "^2.9.3",
     "dotenv": "^8.0.0",
     "graphql": "^14.5.6",
@@ -13,8 +14,8 @@
     "prisma2": "^2.0.0-preview-11"
   },
   "devDependencies": {
-    "@netlify/zip-it-and-ship-it": "^0.3.1",
-    "@hammerframework/hammer-dev-server": "^0.0.1-alpha.8.1"
+    "@hammerframework/hammer-dev-server": "^0.0.1-alpha.8.1",
+    "@netlify/zip-it-and-ship-it": "https://github.com/netlify/zip-it-and-ship-it.git#feature/allow-parent-dirs"
   },
   "scripts": {
     "dev": "yarn hammer-dev-server",

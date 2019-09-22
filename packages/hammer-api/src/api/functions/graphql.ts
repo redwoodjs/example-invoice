@@ -33,6 +33,8 @@ export const graphQLServerlessFunction = ({ context }: Config = {}) => {
     recurse: false,
   })
 
+  console.log(moreGraphQLTypes)
+
   const schema = makeSchema({
     types: [BaseQueryType, ...Object.values(moreGraphQLTypes)],
     outputs: {

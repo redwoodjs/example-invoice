@@ -20,10 +20,11 @@
     "@babel/preset-typescript": "^7.3.3",
     "@hammerframework/eslint-config-hammer": "0.0.1-alpha.8",
     "@hammerframework/hammer-cli": "^0.0.0-alpha.5",
-    "netlify-cli": "^2.12.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "core-js": "^3.2.1",
     "lerna": "^3.16.4",
+    "netlify-cli": "^2.12.0",
+    "nodemon": "^1.19.2",
     "typescript": "^3.5.3"
   },
   "dependencies": {},
@@ -37,6 +38,8 @@
     "build:hammer": "yarn lerna run build",
     "build:hammer:watch": "yarn lerna run --parallel build:watch",
     "lint": "yarn eslint 'web/src/**/*.js' 'api/src/**/*.js' 'packages/**/src/**/*.js'",
-    "lint:fix": "yarn eslint --fix 'web/src/**/*.js' 'api/src/**/*.js' 'packages/**/src/**/*.js'"
+    "lint:fix": "yarn eslint --fix 'web/src/**/*.js' 'api/src/**/*.js' 'packages/**/src/**/*.js'",
+    "clean": "yarn workspace api clean && yarn workspace web clean",
+    "build": "yarn build:hammer && yarn workspace api build && yarn workspace api package && yarn workspace web build"
   }
 }

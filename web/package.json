@@ -37,6 +37,7 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js",
+    "clean": "rm -rf dist",
     "build": "webpack --config config/webpack.prod.js"
   }
 }
