@@ -5,18 +5,18 @@
 type Invoice {
   body: String!
   createdAt: String!
-  id: Int!
+  id: String!
   updatedAt: String!
 }
 
 type Mutation {
-  invoiceSave(body: String!, id: Int): Invoice!
+  invoiceSave(body: String!, id: String): Invoice!
 }
 
 type Query {
   currentUser: User
   help: String!
-  invoice(id: Int): Invoice
+  invoice(id: String): Invoice
   invoices: [Invoice!]
 }
 

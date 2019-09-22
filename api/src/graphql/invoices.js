@@ -10,8 +10,6 @@ const Invoice = objectType({
   },
 })
 
-// optionalChaining
-
 export const invoiceSave = extendType({
   type: 'Mutation',
   definition: (t) => {
