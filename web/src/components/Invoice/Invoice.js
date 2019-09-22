@@ -4,6 +4,7 @@ import TextInput from '../TextInput'
 import InvoiceInfo from '../InvoiceInfo'
 import LineItems from '../LineItems'
 import Summary from '../Summary'
+import { INVOICES } from 'src/api/api'
 
 const MARGIN_BOTTOM = 5
 
@@ -26,7 +27,7 @@ const Invoice = ({ invoice, onInvoiceChange }) => {
         value={title}
         onChange={(value) => onInvoiceChange({ ...invoice, title: value })}
         width={1}
-        my={MARGIN_BOTTOM}
+        mb={MARGIN_BOTTOM}
         textAlign="center"
         css={`
           border: 1px #d4d6d9 solid;
@@ -110,6 +111,34 @@ const Invoice = ({ invoice, onInvoiceChange }) => {
       </Flex>
     </>
   )
+}
+
+Invoice.DEFAULT_INVOICE = {
+  title: 'I N V O I C E',
+  companyName: 'Example Inc.',
+  companyInfo: 'example.com\ninfo@example.com',
+  recipient:
+    'Michael Scott Paper Company Inc.\n1725 Slough Avenue\nScranton, Pennsylvania',
+  information: [
+    [{ value: 'Invoice #' }, { value: '044' }],
+    [
+      { value: 'Date' },
+      { value: new Intl.DateTimeFormat().format(new Date()) },
+    ],
+  ],
+  lineItems: [
+    [{ value: 'Description' }, { value: 'Quantity' }, { value: 'Price' }],
+    [{ value: 'Wheel of cheese' }, { value: 1 }, { value: 500 }],
+    [{ value: 'Jar of sausages' }, { value: 2 }, { value: 2.99 }],
+    [{ value: 'Tin of waffles' }, { value: 2 }, { value: 3.01 }],
+  ],
+  summary: [
+    [{ value: 'Subtotal' }, undefined, '0.0'],
+    [{ value: 'Tax Rate' }, { value: 0 }, '0.0'],
+    [{ value: 'Total' }, { value: '$' }, '0.0'],
+  ],
+  notesA: '',
+  notesB: 'Invoice by billable.me',
 }
 
 export default Invoice
