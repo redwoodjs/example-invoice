@@ -31,7 +31,7 @@ const DEFAULT_INVOICE = {
   notesB: 'Invoice by billable.me',
 }
 
-const Page = () => {
+const DemoInvoicePage = () => {
   const { loginWithRedirect } = useAuth()
   const [invoice, setInvoice] = useState(DEFAULT_INVOICE)
 
@@ -62,4 +62,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default DemoInvoicePage

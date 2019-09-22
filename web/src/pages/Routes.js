@@ -5,6 +5,7 @@ import {
   PrivateRoute,
 } from '@hammerframework/hammer-web'
 
+import Invoice from './Invoice'
 import DemoInvoice from './DemoInvoice'
 
 const Routes = () => {
@@ -15,7 +16,7 @@ const Routes = () => {
           exact
           path="/"
           redirectTo="/invoice/demo"
-          component={() => 'TODO'}
+          component={Invoice}
         />
         <Route exact path="/invoice/demo" component={DemoInvoice} />
       </Switch>
