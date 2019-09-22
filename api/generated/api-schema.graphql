@@ -17,7 +17,7 @@ type Mutation {
 type Query {
   currentUser: User
   help: String!
-  invoice(id: Int!): Invoice
+  invoice(id: Int): Invoice
   invoices: [Invoice!]
 }
 

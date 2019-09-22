@@ -81,16 +81,21 @@ export const invoice = extendType({
     t.field('invoice', {
       type: 'Invoice',
       args: {
-        id: intArg({ required: true }),
+        id: intArg(),
       },
       nullable: true,
       async resolve (_root, { id }, { currentUser, photon }) {
-        return photon.invoices.fineOne({
+        const invoices = await photon.invoices.findMany({
           where: {
             id,
             User: await currentUser(),
           },
+          orderBy: {
+            createdAt: 'asc',
+          },
+          first: 1,
         })
+        return invoices?[0]
       },
     })
   },

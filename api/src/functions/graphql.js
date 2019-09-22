@@ -7,7 +7,7 @@ import Photon from '../../generated/photon'
 export const userFindOrCreate = async ({ sub }) => {
   const photon = new Photon()
 
-  const { id, user } = await photon().accessTokens.upsert({
+  const { id, user } = await photon.accessTokens.upsert({
     where: { sub },
     update: { sub },
     create: { sub },
@@ -27,7 +27,7 @@ export const userFindOrCreate = async ({ sub }) => {
   // like the email address, but for now we'll just stick to
   // one account per identity service.
   // https://auth0.com/docs/users/normalized/auth0/identify-users
-  const newUser = await photon().users.create({
+  const newUser = await photon.users.create({
     data: {
       accessTokens: {
         connect: { id: id },
