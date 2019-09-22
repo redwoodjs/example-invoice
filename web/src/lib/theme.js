@@ -1,29 +1,22 @@
 const fontSizes = [12, 14, 16, 20, 24, 32]
+fontSizes.sm = 14
+fontSizes.md = 16
+fontSizes.lg = 20
 
 const colors = {
   white: '#fff',
-  blues: [
-    '#B4C0BD',
-    '#2F5756',
-    '#9DACA9',
-    '#394353',
-    '#537171',
-    '#3D6362',
-    '#718A8A',
-    '#9EC0BB',
-    '#657F7F',
-    '#A0C1BC',
-  ],
+  blue: 'blue',
+  yellows: ['#f8f5c6', '#f9f3a7'],
 }
 
 const radii = [3]
 
 const space = [4, 8, 16, 24, 32, 48, 64]
+space.sm = 8
+space.md = 16
+space.lg = 32
 
-const breakpoints = ['40em', '64em', '80em']
-breakpoints.sm = breakpoints[0]
-breakpoints.md = breakpoints[1]
-breakpoints.lg = breakpoints[2]
+const breakpoints = [320, 800]
 
 export default {
   fontSizes,

@@ -15,7 +15,7 @@ const {
   Text,
   Heading,
   Button: RealButton,
-  Link,
+  Link: RealLink,
   Image,
   Card,
 } = extend({
@@ -36,6 +36,10 @@ const Button = styled(RealButton)`
   &:hover {
     opacity: 0.9;
   }
+`
+
+const Link = styled(RealLink)`
+  cursor: pointer;
 `
 
 export { Box, Flex, Text, Heading, Button, Link, Image, Card }

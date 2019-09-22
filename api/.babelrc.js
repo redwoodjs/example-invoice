@@ -13,7 +13,6 @@ module.exports = {
       "@babel/preset-env",
       {
         targets: {
-          // Node.js version available on Netlify
           node: "8.10.0"
         },
         useBuiltIns: "entry",

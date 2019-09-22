@@ -3,24 +3,20 @@
   "name": "api",
   "version": "1.0.0",
   "dependencies": {
-    "@hammerframework/hammer-api": "0.0.1-alpha.7",
+    "@hammerframework/hammer-api": "0.0.1-alpha.8",
+    "apollo-server-lambda": "^2.9.3",
     "dotenv": "^8.0.0",
-    "graphql": "^14.5.4",
+    "graphql": "^14.5.6",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.5.1",
     "nexus": "^0.12.0-beta.8",
-    "prisma2": "^2.0.0-preview-9.1"
+    "prisma2": "^2.0.0-preview-11"
   },
   "devDependencies": {
     "@netlify/zip-it-and-ship-it": "^0.3.1",
-    "babel-plugin-module-resolver": "^3.2.0"
+    "@hammerframework/hammer-dev-server": "^0.0.1-alpha.8.1"
   },
   "scripts": {
-    "dev": "yarn db:generate && yarn workspace @hammerframework/hammer-dev-server dev",
-    "db:generate": "./scripts/prisma-default-env-vars.sh generate",
-    "db:migrate": "./scripts/prisma-default-env-vars.sh lift up",
-    "build": "yarn clean && yarn db:generate && NODE_ENV=production babel src --out-dir dist",
-    "package": "node ./scripts/package-functions.js",
-    "clean": "rm -rf dist"
+    "dev": "yarn hammer-dev-server"
   }
 }

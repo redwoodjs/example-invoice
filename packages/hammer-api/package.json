@@ -10,11 +10,11 @@
   "dependencies": {
     "@babel/register": "^7.5.5",
     "@hammerframework/hammer-core": "^0.0.1-alpha.8",
-    "apollo-server-lambda": "^2.9.3",
-    "findup-sync": "^3.0.0",
-    "graphql": "^14.5.4"
+    "findup-sync": "^3.0.0"
   },
   "devDependencies": {
+    "apollo-server-lambda": "^2.9.3",
+    "graphql": "^14.5.6",
     "@types/aws-lambda": "^8.10.27",
     "@types/findup-sync": "^2.0.2",
     "@types/graphql": "^14.2.2",
@@ -25,7 +25,8 @@
     "ttypescript": "^1.5.7"
   },
   "peerDependencies": {
-    "nexus": "0.12.x"
+    "nexus": "^0.12.0-beta.8",
+    "apollo-server-lambda": "^2.9.3"
   },
   "scripts": {
     "build": "yarn clean && yarn build:js && yarn build:types",
