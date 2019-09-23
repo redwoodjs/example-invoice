@@ -14,7 +14,7 @@ if [[ -z "${PRISMA_PROVIDER}" ]]; then
 fi
 
 if [[ -z "${PRISMA_URL}" ]]; then
-  PRISMA_URL="file:dev.sqlite"
+  PRISMA_URL="file:./dev.db"
 fi
 
 echo "Prisma Provider: ${PRISMA_PROVIDER}"

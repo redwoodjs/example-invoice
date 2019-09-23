@@ -1,6 +1,6 @@
 datasource hammerDatasource {
-  url = env("PRISMA_URL")
   provider = env("PRISMA_PROVIDER")
+  url = env("PRISMA_URL")
 }
 
 generator photonjs {
