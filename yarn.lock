@@ -10699,7 +10699,7 @@ prettyjson@^1.2.1:
     colors "^1.1.2"
     minimist "^1.2.0"
 
-prisma2@^2.0.0-preview-11:
+prisma2@^2.0.0-preview-12:
   version "2.0.0-preview-12"
   resolved "https://registry.yarnpkg.com/prisma2/-/prisma2-2.0.0-preview-12.tgz#d5c1793ce19950580d21c4d1bf02583e06610ce4"
   integrity sha512-IZ6oXNo+uBpN9AuT/eSrIWsanbEk+eYNdcJyeaOZsG1OmiC/iPsRZpJAH1e/29uPwFAi9CgD4YBuVq82X0KICg==
