@@ -2,6 +2,8 @@ import { graphQLServerlessFunction } from '@hammerframework/hammer-api'
 import { AuthenticationError } from 'apollo-server-lambda'
 
 import { getAccessToken } from 'src/lib/auth0'
+import * as currentUser from 'src/graphql/currentUser'
+import * as invoices from 'src/graphql/invoices'
 
 import { Photon } from '../../generated/photon'
 const photon = new Photon()
@@ -51,6 +53,7 @@ const server = graphQLServerlessFunction({
       },
     }
   },
+  schemaTypes: { currentUser, invoices },
 })
 
 export const handler = server.createHandler()
