@@ -3,8 +3,17 @@ import { queryType, makeSchema } from 'nexus'
 import { ApolloServer } from 'apollo-server-lambda'
 import { getHammerConfig } from '@hammerframework/hammer-core'
 
-const hammerConfig = getHammerConfig()
-const hammerApiDir = path.join(hammerConfig.baseDir, 'api')
+const schemaTypegenOuputs = () => {
+  // Type generation only happens during development
+  const hammerConfig = getHammerConfig()
+  return {
+    schema: path.join(hammerConfig.api.paths.generated, 'api-schema.graphql'),
+    typegen: path.join(
+      hammerConfig.api.paths.generated,
+      'generated-types.d.ts'
+    ),
+  }
+}
 
 export interface Config {
   context?: object
@@ -18,7 +27,7 @@ export const graphQLServerlessFunction = (
     definition(t) {
       t.string('help', {
         resolve() {
-          return `Start adding your Nexus schema definitions in ${hammerConfig.api.paths.graphql}`
+          return `Learn more about adding nexus definitions over here: "https://nexus.js.org/docs/api-extendtype"`
         },
       })
     },
@@ -26,13 +35,8 @@ export const graphQLServerlessFunction = (
 
   const schema = makeSchema({
     types: [BaseQueryType, ...Object.values(schemaTypes)],
-    outputs: {
-      schema: path.join(hammerConfig.api.paths.generated, 'api-schema.graphql'),
-      typegen: path.join(
-        hammerConfig.api.paths.generated,
-        'generated-types.d.ts'
-      ),
-    },
+    outputs:
+      process.env.NODE_ENV !== 'development' ? false : schemaTypegenOuputs(),
   })
 
   return new ApolloServer({
