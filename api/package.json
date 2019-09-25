@@ -19,8 +19,8 @@
   },
   "scripts": {
     "dev": "yarn hammer-dev-server",
-    "db:up": "./scripts/prisma-default-env-vars.sh generate",
-    "db:save": "./scripts/prisma-default-env-vars.sh lift up",
+    "db:up": "./scripts/prisma-default-env-vars.sh lift up && ./scripts/prisma-default-env-vars.sh generate",
+    "db:save": "./scripts/prisma-default-env-vars.sh lift save",
     "build": "yarn clean && NODE_ENV=production yarn db:up && NODE_ENV=production babel src --out-dir dist",
     "package": "node ./scripts/package-functions.js",
     "clean": "rm -rf dist"
