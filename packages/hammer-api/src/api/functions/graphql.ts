@@ -36,7 +36,7 @@ export const graphQLServerlessFunction = (
   const schema = makeSchema({
     types: [BaseQueryType, ...Object.values(schemaTypes)],
     outputs:
-      process.env.NODE_ENV !== 'development' ? false : schemaTypegenOuputs(),
+      process.env.NODE_ENV === 'development' ? schemaTypegenOuputs() : false,
   })
 
   return new ApolloServer({

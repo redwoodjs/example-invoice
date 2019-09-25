@@ -3,7 +3,9 @@ import jwksClient from 'jwks-rsa'
 import dotenv from 'dotenv'
 import { getHammerBaseDir } from '@hammerframework/hammer-core'
 
-dotenv.config({ path: `${getHammerBaseDir()}/.env` })
+if (process.env.NODE_ENV === 'development') {
+  dotenv.config({ path: `${getHammerBaseDir()}/.env` })
+}
 
 const tokenFromHeaders = ({ authorization }) => {
   if (!authorization) {
