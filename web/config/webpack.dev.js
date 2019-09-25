@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path')
 const merge = require('webpack-merge')
-const Dotenv = require('dotenv-webpack')
 const { getHammerConfig } = require('@hammerframework/hammer-core')
 const escapeRegExp = require('lodash.escaperegexp')
 
@@ -35,9 +34,4 @@ module.exports = merge(webpackConfig(), {
     removeEmptyChunks: false,
     splitChunks: false,
   },
-  plugins: [
-    new Dotenv({
-      path: `${hammerConfig.baseDir}/.env`,
-    }),
-  ],
 })
