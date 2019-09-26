@@ -1,0 +1,10 @@
+{
+  "name": "@generated/photon",
+  "private": true,
+  "version": "0.0.0",
+  "files": [
+    "runtime/query-engine-linux-glibc-libssl1.0.2",
+    "runtime/index.js"
+  ],
+  "main": "index.js"
+}

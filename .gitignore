@@ -11,4 +11,5 @@ api/prisma/dev.db
 api/generated/*
 
 web/generated
+packages/photon
 

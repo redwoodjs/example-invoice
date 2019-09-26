@@ -5,6 +5,7 @@
   "dependencies": {
     "@hammerframework/hammer-api": "0.0.1-alpha.8",
     "@hammerframework/hammer-core": "^0.0.1-alpha.8",
+    "@generated/photon": "0.0.0",
     "apollo-server-lambda": "^2.9.3",
     "dotenv": "^8.0.0",
     "graphql": "^14.5.6",
