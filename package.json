@@ -1,11 +1,13 @@
 {
   "name": "billable",
   "private": true,
-  "workspaces": [
-    "api",
-    "web",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "api",
+      "web",
+      "packages/*"
+    ]
+  },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
@@ -21,6 +23,8 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "core-js": "^3.2.1",
     "lerna": "^3.16.4",
+    "netlify-cli": "^2.12.0",
+    "nodemon": "^1.19.2",
     "typescript": "^3.5.3"
   },
   "dependencies": {},
@@ -29,11 +33,13 @@
     "open": "open http://localhost:8910",
     "dev:api": "yarn workspace api dev",
     "dev:web": "yarn workspace web dev",
-    "db:save": "yarn workspace api prisma2 lift save",
-    "db:up": "yarn workspace api prisma2 lift up && yarn workspace api prisma2 generate",
+    "db:up": "yarn workspace api db:up",
+    "db:save": "yarn workspace api db:save",
     "build:hammer": "yarn lerna run build",
     "build:hammer:watch": "yarn lerna run --parallel build:watch",
     "lint": "yarn eslint 'web/src/**/*.js' 'api/src/**/*.js' 'packages/**/src/**/*.js'",
-    "lint:fix": "yarn eslint --fix 'web/src/**/*.js' 'api/src/**/*.js' 'packages/**/src/**/*.js'"
+    "lint:fix": "yarn eslint --fix 'web/src/**/*.js' 'api/src/**/*.js' 'packages/**/src/**/*.js'",
+    "clean": "yarn workspace api clean && yarn workspace web clean",
+    "build": "yarn build:hammer && yarn workspace api build && yarn workspace api package && yarn workspace web build"
   }
 }

@@ -1,12 +1,14 @@
 import { graphQLServerlessFunction } from '@hammerframework/hammer-api'
+import { Photon } from '@generated/photon'
 import { AuthenticationError } from 'apollo-server-lambda'
 
 import { getAccessToken } from 'src/lib/auth0'
-import Photon from '../../generated/photon'
+import * as currentUser from 'src/graphql/currentUser'
+import * as invoices from 'src/graphql/invoices'
+
+const photon = new Photon()
 
 export const userFindOrCreate = async ({ sub }) => {
-  const photon = new Photon()
-
   const { id, user } = await photon.accessTokens.upsert({
     where: { sub },
     update: { sub },
@@ -39,8 +41,6 @@ export const userFindOrCreate = async ({ sub }) => {
 
 const server = graphQLServerlessFunction({
   context: async ({ event }) => {
-    const photon = new Photon()
-
     return {
       photon,
       currentUser: async () => {
@@ -53,6 +53,7 @@ const server = graphQLServerlessFunction({
       },
     }
   },
+  schemaTypes: { currentUser, invoices },
 })
 
 export const handler = server.createHandler()

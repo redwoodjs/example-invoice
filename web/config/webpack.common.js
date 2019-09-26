@@ -6,6 +6,7 @@ const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 const { getHammerConfig } = require('@hammerframework/hammer-core')
 
@@ -73,6 +74,9 @@ module.exports = (webpackEnv) => {
       new FaviconsWebpackPlugin(
         path.join(hammerConfig.baseDir, 'web/src/favicon.png')
       ),
+      new Dotenv({
+        path: `${hammerConfig.baseDir}/.env`,
+      }),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ].filter(Boolean),
     module: {

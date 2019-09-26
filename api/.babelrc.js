@@ -20,7 +20,7 @@ module.exports = {
       {
         cwd: 'babelrc',
         alias: {
-          src: path.join(__dirname, 'src'),
+          src: './src',
         },
       },
     ],

@@ -1,12 +1,15 @@
 node_modules
 dist
+dist-functions
 yarn-error.log
 .docz
 .env
 .DS_Store
+.netlify
 
 api/prisma/dev.db
 api/generated/*
 
 web/generated
+packages/photon
 
