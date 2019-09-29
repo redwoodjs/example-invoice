@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useQuery, useMutation } from '@hammerframework/hammer-web'
+import { useQuery, useMutation, Redirect } from '@hammerframework/hammer-web'
 
 import { Box, Button } from 'src/lib/primitives'
 import { AppBar, Invoice, PageContainer } from 'src/components'
 import { INVOICE_LATEST, INVOICE_SAVE } from 'src/api'
 
 import FirstInvoice from './components/FirstInvoice'
-import { Redirect } from '@hammerframework/hammer-web/dist/Router'
 
 const InvoicePage = () => {
   const [invoice, setInvoice] = useState(Invoice.DEFAULT_INVOICE)

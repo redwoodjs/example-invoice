@@ -46,6 +46,15 @@ module.exports = (webpackEnv) => {
           exclude: /node_modules/,
         }),
       ],
+      alias: {
+        // https://www.styled-components.com/docs/faqs#duplicated-module-in-node_modules
+        'styled-components': path.resolve(
+          hammerConfig.baseDir,
+          'node_modules',
+          'styled-components'
+        ),
+        react: path.resolve(hammerConfig.baseDir, 'node_modules', 'react'),
+      },
     },
     plugins: [
       new WebpackAssetsManifest({

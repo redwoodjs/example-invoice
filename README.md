@@ -1,4 +1,4 @@
-# Billable
+# Example Invoice App
 
 This is an example Hammer app. In order to figure out what Hammer should be
 like, we're first developing a simple app with the technology stack we want and
