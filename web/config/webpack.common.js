@@ -138,9 +138,9 @@ module.exports = (webpackEnv) => {
       runtimeChunk: true,
     },
     output: {
-      publicPath: '/',
       pathinfo: true,
       filename: '[name].[hash:8].bundle.js',
+      chunkFilename: '[name].[hash:8].bundle.js',
       path: path.resolve(__dirname, '../dist'),
     },
   }
