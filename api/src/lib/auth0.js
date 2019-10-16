@@ -3,7 +3,7 @@ import jwksClient from 'jwks-rsa'
 import dotenv from 'dotenv'
 import { getHammerBaseDir } from '@hammerframework/hammer-core'
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   dotenv.config({ path: `${getHammerBaseDir()}/.env` })
 }
 
