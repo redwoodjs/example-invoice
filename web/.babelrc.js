@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": "../babel.config.js",
   "presets": [
     [
@@ -14,6 +14,7 @@
     [
       "babel-plugin-module-resolver",
       {
+        cwd: 'babelrc',
         "alias": {
           "src": "./src"
         }
