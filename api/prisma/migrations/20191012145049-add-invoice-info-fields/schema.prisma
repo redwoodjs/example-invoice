@@ -24,7 +24,7 @@ model Invoice {
   id                String            @default(cuid()) @id
   user              User
   invoiceNumber     String
-  date              String
+  date              DateTime          @default(now())
   body              String
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt

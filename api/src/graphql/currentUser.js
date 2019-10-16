@@ -1,22 +1,14 @@
-import { extendType, objectType } from 'nexus'
+import { queryField, objectType } from 'nexus'
 
 export const User = objectType({
   name: 'User',
-  definition (t) {
+  definition(t) {
     t.int('id')
     t.string('email')
   },
 })
 
-export const extendQuery = extendType({
-  type: 'Query',
-  definition: (t) => {
-    t.field('currentUser', {
-      type: 'User',
-      nullable: true,
-      resolve (_root, _args, { currentUser }) {
-        return currentUser()
-      },
-    })
-  },
+export const getCurrentUser = queryField('getCurrentUser', {
+  type: User,
+  resolve: (_root, _args, { currentUser }) => currentUser(),
 })
