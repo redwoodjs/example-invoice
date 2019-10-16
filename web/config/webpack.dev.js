@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path')
+
 const merge = require('webpack-merge')
 const { getHammerConfig } = require('@hammerframework/hammer-core')
 const escapeRegExp = require('lodash.escaperegexp')

@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require('path')
+
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
@@ -7,12 +8,24 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
-
 const { getHammerConfig } = require('@hammerframework/hammer-core')
 
 const hammerConfig = getHammerConfig()
 
-module.exports = (webpackEnv) => {
+const plugins = {
+  provide: () =>
+    new webpack.ProvidePlugin({
+      React: 'react',
+      PropTypes: 'prop-types',
+      gql: ['@hammerframework/hammer-web', 'gql'],
+    }),
+  define: () =>
+    new webpack.DefinePlugin({
+      '__HAMMER__.apiProxyPath': JSON.stringify(hammerConfig.web.apiProxyPath),
+    }),
+}
+
+const webpackConfig = (webpackEnv) => {
   const isEnvProduction = webpackEnv === 'production'
 
   const getStyleLoaders = () => {
@@ -70,16 +83,8 @@ module.exports = (webpackEnv) => {
       new HtmlWebpackPlugin({
         template: './src/index.html',
       }),
-      new webpack.ProvidePlugin({
-        React: 'react',
-        PropTypes: 'prop-types',
-        gql: ['@hammerframework/hammer-web', 'gql'],
-      }),
-      new webpack.DefinePlugin({
-        '__HAMMER__.apiProxyPath': JSON.stringify(
-          hammerConfig.web.apiProxyPath
-        ),
-      }),
+      plugins.provide(),
+      plugins.define(),
       new FaviconsWebpackPlugin(
         path.join(hammerConfig.baseDir, 'web/src/favicon.png')
       ),
@@ -142,6 +147,10 @@ module.exports = (webpackEnv) => {
       filename: '[name].[hash:8].bundle.js',
       chunkFilename: '[name].[hash:8].bundle.js',
       path: path.resolve(__dirname, '../dist'),
+      publicPath: '/',
     },
   }
 }
+
+module.exports = webpackConfig
+module.exports.plugins = plugins
