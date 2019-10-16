@@ -19,7 +19,7 @@ export default () => {
         pl="8px"
         m="auto"
         css={`
-          width: 800px;
+          max-width: 800px;
           line-height: 64px;
         `}
       >
