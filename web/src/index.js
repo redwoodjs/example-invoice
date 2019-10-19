@@ -3,8 +3,8 @@ import { initAuth } from '@hammerframework/hammer-auth-auth0'
 import { HammerProvider } from '@hammerframework/hammer-web'
 
 import theme from 'src/lib/theme'
-import Routes from 'src/routes'
 
+import Routes from './Routes'
 import './index.css'
 
 ReactDOM.render(
