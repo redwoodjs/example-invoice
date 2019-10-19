@@ -28,13 +28,17 @@ const Button = styled(RealButton)`
   border-radius: 3px;
   line-height: 26px;
   font-weight: normal;
-  height: 28px;
+  font-size: 13px;
+  xheight: 28px;
   background: white;
   color: blue;
   border: 1px blue solid;
-
+  text-transform: uppercase;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.3s;
   &:hover {
-    opacity: 0.9;
+    opacity: 1;
   }
 `
 
