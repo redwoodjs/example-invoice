@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import { useAuth } from '@hammerframework/hammer-web'
+
 import { Box, Link } from 'src/lib/primitives'
 import { AppBar, PageContainer, Invoice } from 'src/components'
-import { useAuth } from '@hammerframework/hammer-web'
 
 const DemoInvoicePage = () => {
   const { loginWithRedirect } = useAuth()
-  const [invoice, setInvoice] = useState(Invoice.DEFAULT_INVOICE)
 
   return (
     <>
@@ -23,12 +22,6 @@ const DemoInvoicePage = () => {
           Want to save your invoice?{' '}
           <Link onClick={() => loginWithRedirect()}>Sign up!</Link>
         </Box>
-        <Invoice
-          invoice={invoice}
-          onInvoiceChange={(newInvoice) => {
-            setInvoice(newInvoice)
-          }}
-        />
       </PageContainer>
     </>
   )
