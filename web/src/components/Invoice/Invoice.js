@@ -1,14 +1,40 @@
+import { useState } from 'react'
+
 import { Flex } from 'src/lib/primitives'
+import TextInput from 'src/components/TextInput'
+import InvoiceInfo from 'src/components/InvoiceInfo'
+import LineItems from 'src/components/LineItems'
+import Summary from 'src/components/Summary'
 
-import TextInput from '../TextInput'
-import InvoiceInfo from '../InvoiceInfo'
-import LineItems from '../LineItems'
-import Summary from '../Summary'
-import { INVOICES } from 'src/api/api'
+const MARGIN_BOTTOM = 4
 
-const MARGIN_BOTTOM = 5
+export const query = gql`
+  query GET_INVOICE($id: String) {
+    getInvoice(id: $id) {
+      id
+      invoiceNumber
+      date
+      body
+    }
+  }
+`
 
-const Invoice = ({ invoice, onInvoiceChange }) => {
+export const parseData = ({ getInvoice }) => {
+  const initialInvoice = {
+    ...getInvoice,
+    ...JSON.parse(getInvoice.body),
+  }
+
+  return {
+    initialInvoice,
+  }
+}
+
+export const Loader = () => 'Loading...'
+
+const Invoice = ({ initialInvoice }) => {
+  const [invoice, setInvoice] = useState(initialInvoice)
+
   const {
     title,
     companyName,
@@ -25,7 +51,7 @@ const Invoice = ({ invoice, onInvoiceChange }) => {
     <>
       <TextInput
         value={title}
-        onChange={(value) => onInvoiceChange({ ...invoice, title: value })}
+        onChange={(value) => setInvoice({ ...invoice, title: value })}
         width={1}
         mb={MARGIN_BOTTOM}
         textAlign="center"
@@ -40,9 +66,7 @@ const Invoice = ({ invoice, onInvoiceChange }) => {
         <TextInput
           multiline
           value={companyName}
-          onChange={(value) =>
-            onInvoiceChange({ ...invoice, companyName: value })
-          }
+          onChange={(value) => setInvoice({ ...invoice, companyName: value })}
           width={1 / 2}
           css={`
             textarea {
@@ -53,9 +77,7 @@ const Invoice = ({ invoice, onInvoiceChange }) => {
         <TextInput
           multiline
           value={companyInfo}
-          onChange={(value) =>
-            onInvoiceChange({ ...invoice, companyInfo: value })
-          }
+          onChange={(value) => setInvoice({ ...invoice, companyInfo: value })}
           width={1 / 2}
           textAlign="right"
         />
@@ -64,23 +86,19 @@ const Invoice = ({ invoice, onInvoiceChange }) => {
         <TextInput
           multiline
           value={recipient}
-          onChange={(value) =>
-            onInvoiceChange({ ...invoice, recipient: value })
-          }
+          onChange={(value) => setInvoice({ ...invoice, recipient: value })}
           width={1 / 2}
         />
         <InvoiceInfo
           value={information}
-          onChange={(value) =>
-            onInvoiceChange({ ...invoice, information: value })
-          }
+          onChange={(value) => setInvoice({ ...invoice, information: value })}
           width={1 / 2}
           ml="auto"
         />
       </Flex>
       <LineItems
         value={lineItems}
-        onChange={(value) => onInvoiceChange({ ...invoice, lineItems: value })}
+        onChange={(value) => setInvoice({ ...invoice, lineItems: value })}
         width={1}
         mb={2}
         css={`
@@ -90,7 +108,7 @@ const Invoice = ({ invoice, onInvoiceChange }) => {
       <Summary
         value={summary}
         lineItems={lineItems}
-        onChange={(value) => onInvoiceChange({ ...invoice, summary: value })}
+        onChange={(value) => setInvoice({ ...invoice, summary: value })}
         ml="auto"
         mb={MARGIN_BOTTOM}
       />
@@ -98,13 +116,13 @@ const Invoice = ({ invoice, onInvoiceChange }) => {
         <TextInput
           multiline
           value={notesA}
-          onChange={(value) => onInvoiceChange({ ...invoice, notesA: value })}
+          onChange={(value) => setInvoice({ ...invoice, notesA: value })}
           width={1 / 2}
         />
         <TextInput
           multiline
           value={notesB}
-          onChange={(value) => onInvoiceChange({ ...invoice, notesB: value })}
+          onChange={(value) => setInvoice({ ...invoice, notesB: value })}
           width={1 / 2}
           textAlign="right"
         />
