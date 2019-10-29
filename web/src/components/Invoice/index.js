@@ -1,4 +1,4 @@
-import { useCell } from 'src/lib/api'
+import { useCell } from '@hammerframework/hammer-web'
 
 import * as Invoice from './Invoice'
 
