@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "@hammerframework/hammer-core": "0.0.1-alpha.9",
-    "@hammerframework/hammer-storybook": "0.0.1-alpha.8",
     "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.10.6",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
