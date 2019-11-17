@@ -1,0 +1,31 @@
+datasource hammerDatasource {
+  provider = "sqlite"
+  url = "***"
+}
+
+generator photonjs {
+  provider = "photonjs"
+  output = "../../packages/photon"
+}
+
+model User {
+  id                Int               @id
+  accessTokens      AccessToken[]
+  invoices          Invoice[]
+}
+
+model AccessToken {
+  id                Int               @id
+  user              User?
+  sub               String            @unique
+}
+
+model Invoice {
+  id                String            @default(cuid()) @id
+  user              User
+  invoiceNumber     String
+  date              String
+  body              String
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
