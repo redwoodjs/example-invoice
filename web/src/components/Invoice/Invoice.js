@@ -9,7 +9,7 @@ import Summary from 'src/components/Summary'
 const MARGIN_BOTTOM = 4
 
 export const query = gql`
-  query GET_INVOICE($id: String) {
+  query GET_INVOICE($id: ID) {
     getInvoice(id: $id) {
       id
       invoiceNumber

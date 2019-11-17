@@ -1,6 +1,9 @@
-import { graphQLServerlessFunction } from '@hammerframework/hammer-api'
+import {
+  server,
+  makeMergedSchema,
+  AuthenticationError,
+} from '@hammerframework/api'
 import { Photon } from '@generated/photon'
-import { AuthenticationError } from 'apollo-server-lambda'
 
 import { getAccessToken } from 'src/lib/auth0'
 import * as currentUser from 'src/graphql/currentUser'
@@ -13,11 +16,6 @@ export const userFindOrCreate = async ({ sub }) => {
     where: { sub },
     update: { sub },
     create: { sub },
-    select: {
-      id: true,
-      sub: true,
-      user: true,
-    },
   })
 
   if (user) {
@@ -39,7 +37,7 @@ export const userFindOrCreate = async ({ sub }) => {
   return newUser
 }
 
-const server = graphQLServerlessFunction({
+export const handler = server({
   context: async ({ event }) => {
     return {
       photon,
@@ -53,7 +51,5 @@ const server = graphQLServerlessFunction({
       },
     }
   },
-  schemaTypes: { currentUser, invoices },
-})
-
-export const handler = server.createHandler()
+  schema: makeMergedSchema([currentUser, invoices]),
+}).createHandler()

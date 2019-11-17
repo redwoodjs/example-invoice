@@ -1,96 +1,79 @@
-import {
-  queryField,
-  mutationField,
-  objectType,
-  stringArg,
-  inputObjectType,
-} from 'nexus'
+import { gql } from '@hammerframework/api'
 
-const Invoice = objectType({
-  name: 'Invoice',
-  definition(t) {
-    t.string('id')
-    t.string('body')
-    t.string('date')
-    t.string('invoiceNumber')
-    t.string('createdAt')
-    t.string('updatedAt')
-  },
-})
+export const schema = gql`
+  type Invoice {
+    id: ID!
+    body: String!
+    date: DateTime!
+    invoiceNumber: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
 
-export const InvoiceSaveInput = inputObjectType({
-  name: 'InvoiceSaveInput',
-  definition(t) {
-    t.string('id')
-    t.string('date', { required: true })
-    t.string('invoiceNumber', { required: true })
-    t.string('body', { required: true })
-  },
-})
+  type Query {
+    getInvoice(id: ID): Invoice
+    getInvoices(search: String!): [Invoice]
+  }
 
-export const setInvoice = mutationField('setInvoice', {
-  type: Invoice,
-  args: {
-    input: InvoiceSaveInput,
-  },
-  resolve: async (_root, { input }, { currentUser, photon }) => {
-    const user = await currentUser()
-    if (input.id) {
-      return photon.invoices.update({
+  input InvoiceInput {
+    id: ID!
+    date: DateTime!
+    invoiceNumber: String!
+    body: String!
+  }
+  type Mutation {
+    setInvoice(input: InvoiceInput!): Invoice
+  }
+`
+
+export const resolvers = {
+  Query: {
+    getInvoice: async (_root, { id }, { currentUser, photon }) => {
+      const invoices = await photon.invoices.findMany({
         where: {
-          id: input.id,
+          id,
+          user: await currentUser(),
         },
-        data: {
-          user: { connect: { id: user.id } },
-          ...input,
+        orderBy: {
+          createdAt: 'asc',
+        },
+        first: 1,
+      })
+      return invoices?.[0]
+    },
+    getInvoices: async (_root, _args, { currentUser, photon }) => {
+      const user = await currentUser()
+      return photon.invoices.findMany({
+        where: {
+          user,
+        },
+        orderBy: {
+          date: 'asc',
         },
       })
-    } else {
-      return photon.invoices.create({
-        data: {
-          user: { connect: { id: user.id } },
-          ...input,
-        },
-      })
-    }
+    },
   },
-})
-
-export const getInvoiceList = queryField('getInvoiceList', {
-  type: Invoice,
-  list: true,
-  nullable: true,
-  args: {
-    search: stringArg(),
+  Mutation: {
+    setInvoice: async (_root, { input }, { currentUser, photon }) => {
+      const user = await currentUser()
+      if (input.id) {
+        return photon.invoices.update({
+          where: {
+            id: input.id,
+          },
+          data: {
+            user: { connect: { id: user.id } },
+            ...input,
+          },
+        })
+      } else {
+        return photon.invoices.create({
+          data: {
+            user: { connect: { id: user.id } },
+            ...input,
+          },
+        })
+      }
+    },
   },
-  resolve: async (_root, _args, { currentUser, photon }) => {
-    return photon.invoices.findMany({
-      where: {
-        user: await currentUser(),
-      },
-      orderBy: {
-        date: 'asc',
-      },
-    })
-  },
-})
-
-export const getInvoice = queryField('getInvoice', {
-  type: Invoice,
-  args: {
-    id: stringArg(),
-  },
-  resolve: async (_root, { id }, { currentUser, photon }) => {
-    const invoices = await photon.invoices.findMany({
-      where: {
-        id,
-        user: await currentUser(),
-      },
-      orderBy: {
-        createdAt: 'asc',
-      },
-      first: 1,
-    })
-    return invoices?.[0]
-  },
-})
+}

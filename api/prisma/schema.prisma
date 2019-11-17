@@ -1,6 +1,6 @@
 datasource hammerDatasource {
-  provider = env("PRISMA_PROVIDER")
-  url = env("PRISMA_URL")
+  provider = "sqlite"
+  url = "file:dev.db"
 }
 
 generator photonjs {

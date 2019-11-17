@@ -10,8 +10,7 @@ const WEBPACK_MODE = 'development'
 
 const hammerConfig = getHammerConfig()
 
-module.exports = merge(webpackConfig(), {
-  mode: WEBPACK_MODE,
+module.exports = merge(webpackConfig(WEBPACK_MODE), {
   devtool: 'inline-source-map',
   devServer: {
     hot: true,

@@ -20,7 +20,6 @@ module.exports = {
         },
       },
     ],
-    'babel-plugin-syntax-dynamic-import',
     'babel-plugin-styled-components',
   ],
 }

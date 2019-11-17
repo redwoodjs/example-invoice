@@ -1,14 +1,20 @@
-import { queryField, objectType } from 'nexus'
+import { gql } from '@hammerframework/api'
 
-export const User = objectType({
-  name: 'User',
-  definition(t) {
-    t.int('id')
-    t.string('email')
+export const schema = gql`
+  type User {
+    id: ID!
+    email: String!
+  }
+
+  type Query {
+    getCurrentUser: User
+  }
+`
+
+export const resolvers = {
+  Query: {
+    getCurrentUser: (_root, _args, { currentUser }) => {
+      return currentUser
+    },
   },
-})
-
-export const getCurrentUser = queryField('getCurrentUser', {
-  type: User,
-  resolve: (_root, _args, { currentUser }) => currentUser(),
-})
+}
