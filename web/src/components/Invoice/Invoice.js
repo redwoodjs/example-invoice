@@ -20,6 +20,10 @@ export const query = gql`
 `
 
 export const parseData = ({ getInvoice }) => {
+  if (!getInvoice) {
+    return
+  }
+
   const initialInvoice = {
     ...getInvoice,
     ...JSON.parse(getInvoice.body),
@@ -32,7 +36,7 @@ export const parseData = ({ getInvoice }) => {
 
 export const Loader = () => 'Loading...'
 
-const Invoice = ({ initialInvoice }) => {
+const Invoice = ({ initialInvoice = Invoice.DEFAULT_INVOICE }) => {
   const [invoice, setInvoice] = useState(initialInvoice)
 
   const {
