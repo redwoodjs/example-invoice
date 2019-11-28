@@ -4,20 +4,19 @@ export const schema = gql`
   type Invoice {
     id: ID!
     body: String!
-    date: DateTime!
+    date: String!
     invoiceNumber: String!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
 
   type Query {
-    getInvoice(id: ID): Invoice
-    getInvoices(search: String!): [Invoice]
+    invoice(id: ID): Invoice
   }
 
   input InvoiceInput {
-    id: ID!
-    date: DateTime!
+    id: ID
+    date: String!
     invoiceNumber: String!
     body: String!
   }
@@ -28,7 +27,7 @@ export const schema = gql`
 
 export const resolvers = {
   Query: {
-    getInvoice: async (_root, { id }, { currentUser, photon }) => {
+    invoice: async (_root, { id }, { currentUser, photon }) => {
       const invoices = await photon.invoices.findMany({
         where: {
           id,
@@ -40,17 +39,6 @@ export const resolvers = {
         first: 1,
       })
       return invoices?.[0]
-    },
-    getInvoices: async (_root, _args, { currentUser, photon }) => {
-      const user = await currentUser()
-      return photon.invoices.findMany({
-        where: {
-          user,
-        },
-        orderBy: {
-          date: 'asc',
-        },
-      })
     },
   },
   Mutation: {

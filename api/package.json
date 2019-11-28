@@ -3,8 +3,9 @@
   "name": "api",
   "version": "1.0.0",
   "dependencies": {
-    "@hammerframework/api": "0.0.1-alpha.13.2",
     "@generated/photon": "0.0.0",
+    "@hammerframework/api": "0.0.1-alpha.13.2",
+    "@prisma/photon": "2.0.0-preview017.1",
     "dotenv": "^8.0.0",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.5.1"
@@ -12,7 +13,7 @@
   "devDependencies": {
     "@hammerframework/hammer-core": "0.0.1-alpha.12.5",
     "@hammerframework/hammer-dev-server": "0.0.1-alpha.12.5",
-    "prisma2": "^2.0.0-preview014"
+    "prisma2": "2.0.0-preview016.2"
   },
   "scripts": {
     "dev": "yarn hammer-dev-server",

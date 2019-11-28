@@ -5,9 +5,8 @@ import {
 } from '@hammerframework/api'
 import { Photon } from '@generated/photon'
 
+import * as invoices from 'src/graphql/invoices.schema'
 import { getAccessToken } from 'src/lib/auth0'
-import * as currentUser from 'src/graphql/currentUser'
-import * as invoices from 'src/graphql/invoices'
 
 const photon = new Photon()
 
@@ -51,5 +50,5 @@ export const handler = server({
       },
     }
   },
-  schema: makeMergedSchema([currentUser, invoices]),
+  schema: makeMergedSchema([invoices]),
 }).createHandler()
