@@ -1,4 +1,4 @@
-import { useAuth } from '@hammerframework/hammer-web'
+import { useAuth } from '@hammerframework/web'
 
 import { Flex, Box, Button } from 'src/lib/primitives'
 

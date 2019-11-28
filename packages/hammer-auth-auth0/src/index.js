@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import {
   createGraphQLClient,
   GraphQLProvider as RealGraphQlProvider,
-} from '@hammerframework/hammer-web'
+} from '@hammerframework/web'
 
 import { Auth0Provider, useAuth0 } from './Auth0Provider'
 
@@ -22,7 +22,7 @@ export const GraphQLProvider = (props) => {
       )
     }
     isAuthenticated && fn()
-  }, [isAuthenticated])
+  }, [getTokenSilently, isAuthenticated])
   return <RealGraphQlProvider client={client} {...props} />
 }
 

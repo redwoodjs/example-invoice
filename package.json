@@ -9,7 +9,7 @@
     ]
   },
   "devDependencies": {
-    "@hammerframework/hammer-scripts": "^0.0.1-alpha.12.5",
+    "@hammerframework/scripts": "^0.0.1-alpha.13",
     "@hammerframework/hammer-cli": "0.0.1-alpha.12.5",
     "@hammerframework/eslint-config-hammer": "0.0.1-alpha.12",
     "lerna": "3.18.4"

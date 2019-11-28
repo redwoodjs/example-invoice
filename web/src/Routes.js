@@ -2,14 +2,15 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  Private,
+  PrivateRoute,
   Redirect,
   useAuth,
-} from '@hammerframework/hammer-web'
-import Demo from 'src/pages/Demo'
+} from '@hammerframework/web'
+//
+import DemoInvoice from 'src/pages/Demo'
 import Invoice from 'src/pages/Invoice'
 
-const URL_DEMO = '/try'
+const URL_DEMO = '/invoice/demo'
 const URL_LATEST_INVOICE = '/invoice/latest'
 
 const RedirectForAuthState = () => {
@@ -25,13 +26,8 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={RedirectForAuthState} />
-        <Route exact path={URL_DEMO} component={Demo} />
-        <Private>
-          <Switch>
-            <Route exact path={URL_LATEST_INVOICE} component={Invoice} />
-            <Route exact path="/invoice/:id" component={Invoice} />
-          </Switch>
-        </Private>
+        <Route exact path={URL_DEMO} component={DemoInvoice} />
+        <PrivateRoute exact path={URL_LATEST_INVOICE} component={Invoice} />
       </Switch>
     </BrowserRouter>
   )
