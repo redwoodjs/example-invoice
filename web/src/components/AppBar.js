@@ -1,9 +1,7 @@
-import { useAuth } from '@hammerframework/web'
-
-import { Flex, Box, Button } from 'src/lib/primitives'
+import { Flex, Box } from 'src/lib/primitives'
 
 export default () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth()
+
 
   return (
     <Box
@@ -24,27 +22,6 @@ export default () => {
         `}
       >
         Billable
-        <Box
-          ml="auto"
-          css={`
-            display: flex;
-            align-items: center;
-          `}
-        >
-          {!isAuthenticated && (
-            <>
-              <Button onClick={() => loginWithRedirect({})} mr={1}>
-                Log in
-              </Button>
-              <Button onClick={() => loginWithRedirect({})}>Sign up</Button>
-            </>
-          )}
-          {isAuthenticated && (
-            <>
-              <Button onClick={() => logout()}>Log out</Button>
-            </>
-          )}
-        </Box>
       </Flex>
     </Box>
   )

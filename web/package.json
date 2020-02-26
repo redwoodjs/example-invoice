@@ -17,7 +17,6 @@
     "react-textarea-autosize": "^7.1.2",
     "rebass": "^4.0.7",
     "rebass-extend": "^1.0.1",
-    "styled-components": "^5.0.1",
     "styled-system": "^5.1.5"
 
   }
