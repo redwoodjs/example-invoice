@@ -1,35 +1,20 @@
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  PrivateRoute,
-  Redirect,
-  useAuth,
-} from '@hammerframework/web'
+// In this file, all Page components from 'src/pages` are auto-imported. Nested
+// directories are supported, and should be uppercase. Each subdirectory will be
+// prepended onto the component name.
 //
-import DemoInvoice from 'src/pages/Demo'
-import Invoice from 'src/pages/Invoice'
+// Examples:
+//
+// 'src/pages/HomePage/HomePage.js'         -> HomePage
+// 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-const URL_DEMO = '/invoice/demo'
-const URL_LATEST_INVOICE = '/invoice/latest'
-
-const RedirectForAuthState = () => {
-  const { loading, isAuthenticated } = useAuth()
-  if (loading) {
-    return null
-  }
-  return <Redirect to={isAuthenticated ? URL_LATEST_INVOICE : URL_DEMO} />
-}
+import { Router, Route } from '@redwoodjs/router'
 
 const Routes = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={RedirectForAuthState} />
-        <Route exact path={URL_DEMO} component={DemoInvoice} />
-        <PrivateRoute exact path={URL_LATEST_INVOICE} component={Invoice} />
-      </Switch>
-    </BrowserRouter>
+    <Router>
+      <Route path="/" page={HomePage} name="home" />
+      <Route notfound page={NotFoundPage} />
+    </Router>
   )
 }
 
