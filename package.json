@@ -1,35 +1,13 @@
 {
-  "name": "billable",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "api",
-      "web",
-      "packages/*"
-    ]
-  },
+  "workspaces": [
+    "api",
+    "web"
+  ],
   "devDependencies": {
-    "@hammerframework/scripts": "^0.0.1-alpha.13",
-    "@hammerframework/hammer-cli": "0.0.1-alpha.12.5",
-    "@hammerframework/eslint-config-hammer": "0.0.1-alpha.12",
-    "lerna": "3.18.4"
+    "@redwoodjs/core": "^0.0.1-alpha.31"
   },
-  "dependencies": {},
   "eslintConfig": {
-    "extends": "@hammerframework/eslint-config-hammer"
-  },
-  "scripts": {
-    "dev": "yarn build:hammer && (yarn dev:api & yarn dev:web)",
-    "open": "open http://localhost:8910",
-    "dev:api": "yarn workspace api dev",
-    "dev:web": "yarn workspace web dev",
-    "db:up": "yarn workspace api db:up",
-    "db:save": "yarn workspace api db:save",
-    "build:hammer": "yarn lerna run build",
-    "build:hammer:watch": "yarn lerna run --parallel build:watch",
-    "lint": "yarn eslint 'web/src/**/*.js' 'api/src/**/*.js' 'packages/**/src/**/*.js'",
-    "lint:fix": "yarn eslint --fix 'web/src/**/*.js' 'api/src/**/*.js' 'packages/**/src/**/*.js'",
-    "clean": "yarn workspace api clean && yarn workspace web clean",
-    "build": "yarn build:hammer && yarn workspace api build && yarn workspace api package && yarn workspace web build"
+    "extends": "@redwoodjs/eslint-config"
   }
 }

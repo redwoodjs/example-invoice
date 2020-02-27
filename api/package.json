@@ -1,26 +1,11 @@
 {
   "private": true,
   "name": "api",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "dependencies": {
-    "@generated/photon": "0.0.0",
-    "@hammerframework/api": "0.0.1-alpha.13.2",
-    "@prisma/photon": "2.0.0-preview017.1",
-    "dotenv": "^8.0.0",
+    "@redwoodjs/api": "^0.0.1-alpha.31",
+
     "jsonwebtoken": "^8.5.1",
-    "jwks-rsa": "^1.5.1"
-  },
-  "devDependencies": {
-    "@hammerframework/hammer-core": "0.0.1-alpha.12.5",
-    "@hammerframework/hammer-dev-server": "0.0.1-alpha.12.5",
-    "prisma2": "2.0.0-preview016.2"
-  },
-  "scripts": {
-    "dev": "yarn hammer-dev-server",
-    "db:up": "./scripts/prisma-default-env-vars.sh lift up && ./scripts/prisma-default-env-vars.sh generate",
-    "db:save": "./scripts/prisma-default-env-vars.sh lift save",
-    "build": "yarn clean && NODE_ENV=production yarn db:up && NODE_ENV=production babel src --out-dir dist",
-    "package": "node ./scripts/package-functions.js",
-    "clean": "rm -rf dist"
+    "jwks-rsa": "^1.7.0"
   }
 }

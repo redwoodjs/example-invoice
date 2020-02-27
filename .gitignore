@@ -7,9 +7,5 @@ yarn-error.log
 .DS_Store
 .netlify
 
-api/prisma/dev.db
-api/generated/*
-
-web/generated
-packages/photon
+api/prisma/dev.sqlite
 
