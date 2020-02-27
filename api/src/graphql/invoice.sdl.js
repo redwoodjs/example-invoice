@@ -1,6 +1,6 @@
 export const schema = gql`
   type Invoice {
-    id: ID!
+    id: Int!
     body: String!
     date: String!
     invoiceNumber: String!
@@ -9,11 +9,11 @@ export const schema = gql`
   }
 
   type Query {
-    invoice(id: ID): Invoice
+    invoice(id: Int): Invoice
   }
 
   input InvoiceInput {
-    id: ID
+    id: Int
     date: String!
     invoiceNumber: String!
     body: String!
