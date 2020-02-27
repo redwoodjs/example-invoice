@@ -1,6 +1,3 @@
-
-
-
 export const invoice = async ({ id }) => {
   const invoices = await db.invoice.findMany({
     where: {
@@ -16,7 +13,7 @@ export const invoice = async ({ id }) => {
 
 export const setInvoice = async ({ input }) => {
   if (input.id) {
-    return db.invoices.update({
+    return db.invoice.update({
       where: {
         id: input.id,
       },
@@ -25,7 +22,7 @@ export const setInvoice = async ({ input }) => {
       },
     })
   } else {
-    return db.invoices.create({
+    return db.invoice.create({
       data: {
         ...input,
       },

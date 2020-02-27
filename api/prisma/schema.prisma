@@ -8,7 +8,7 @@ generator photonjs {
 }
 
 model Invoice {
-  id            String   @default(cuid()) @id
+  id            Int      @id @default(autoincrement())
   invoiceNumber String
   date          String
   body          String

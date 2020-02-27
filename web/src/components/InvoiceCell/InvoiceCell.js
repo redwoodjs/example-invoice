@@ -1,8 +1,7 @@
 import { useState } from 'react'
+import InvoiceEditor from 'src/components/InvoiceEditor'
 
-//import { InvoiceEditor } from 'src/components'
-
-//import Toolbar from './subcomponents/Toolbar'
+import Toolbar from './subcomponents/Toolbar'
 
 export const QUERY = gql`
   query GET_INVOICE($id: ID) {
@@ -17,29 +16,13 @@ export const QUERY = gql`
 
 export const Loading = () => 'Loading...'
 
-export const Failure = () => 'Oh no'
+export const Success = ({ initialInvoice }) => {
+  const [invoice, setInvoice] = useState(initialInvoice)
 
-export const Empty = (props) => {
-  return Success(props)
-}
-
-export const Success = (props) => {
-  console.log(props)
-
-  return null
-  // return <div style={{height: 200, width: 200, background: 'red'}}>
-  // sdsakdopsakd
-  // 1<br/>
-  // 1<br/>
-  // 1<br/>
-  // 1<br/>
-  // </div>
-  // const [invoice, setInvoice] = useState(initialInvoice)
-  // return (
-  //   <>
-  //     xxxxx
-  //     <Toolbar invoiceData={() => invoice} />
-  //     <InvoiceEditor invoice={invoice} setInvoice={setInvoice} />
-  //   </>
-  // )
+  return (
+    <>
+      <Toolbar getInvoiceData={() => invoice} />
+      <InvoiceEditor invoice={invoice} setInvoice={setInvoice} />
+    </>
+  )
 }

@@ -13,11 +13,11 @@ const SET_INVOICE = gql`
   }
 `
 
-export default ({ invoiceData }) => {
+export default ({ getInvoiceData }) => {
   const [setInvoice, { loading }] = useMutation(SET_INVOICE)
 
-  const handleSaveClick = () => {
-    const invoice = invoiceData()
+  const saveInvoice = () => {
+    const invoice = getInvoiceData()
     if (!invoice) {
       return
     }
@@ -41,22 +41,12 @@ export default ({ invoiceData }) => {
         mt={5}
         mb={4}
         css={`
-          display: flex;
-          flex-direction: row;
-          background: red;
+          text-align: right;
         `}
       >
-      xxxxxx
-        <div
-          css={`
-            text-align: right;
-            flex: 1;
-          `}
-        >
-          <Button onClick={handleSaveClick} disabled={loading}>
-            {loading ? 'SAVING...' : 'SAVE'}
-          </Button>
-        </div>
+        <Button onClick={saveInvoice} disabled={loading}>
+          {loading ? 'SAVING...' : 'SAVE'}
+        </Button>
       </Box>
     </>
   )

@@ -31,8 +31,19 @@
       "tag": "CreateField",
       "model": "Invoice",
       "field": "id",
-      "type": "String",
+      "type": "Int",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Invoice",
+          "field": "id"
+        },
+        "directive": "id"
+      }
     },
     {
       "tag": "CreateDirective",
@@ -57,18 +68,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "cuid()"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Invoice",
-          "field": "id"
-        },
-        "directive": "id"
-      }
+      "value": "autoincrement()"
     },
     {
       "tag": "CreateField",
