@@ -29,7 +29,7 @@ const Button = styled(RealButton)`
   line-height: 26px;
   font-weight: normal;
   font-size: 13px;
-  xheight: 28px;
+  height: 28px;
   background: white;
   color: blue;
   border: 1px blue solid;
