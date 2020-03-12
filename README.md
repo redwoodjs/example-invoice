@@ -1,6 +1,6 @@
 # Invoice
 
-This is an example Redwood app, implementing a very minimal todo application.
+This is an example Redwood app, implementing a very minimal invoice application.
 Features you can see in action here:
 
 - Redwood Cells (see TodoListCell.js).
