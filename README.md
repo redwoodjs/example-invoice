@@ -19,11 +19,12 @@ this in the root directory:
 yarn
 ```
 
-Set up the database and generate the database client:
+Set up the database, generate the database client, and populate the database
+with example invoice:
 
 ```terminal
 yarn redwood db up
-yarn redwood db generate
+yarn redwood db seed
 ```
 
 ### Fire it up
