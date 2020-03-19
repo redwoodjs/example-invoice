@@ -1,6 +1,6 @@
 api/prisma/dev.sqlite
 .DS_Store
-.env
+# .env
 .netlify
 dev.db
 dist
