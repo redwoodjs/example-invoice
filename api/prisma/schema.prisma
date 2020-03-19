@@ -1,6 +1,6 @@
-datasource postgresql {
-  url      = env("DATABASE_URL")
-  provider = "postgresql"
+datasource hammerDatasource {
+  provider = env("PRISMA_PROVIDER")
+  url = env("PRISMA_URL")
 }
 
 // Windows users should remove binaryTargets for local dev
