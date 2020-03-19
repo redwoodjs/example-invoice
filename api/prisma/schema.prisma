@@ -1,11 +1,12 @@
-datasource sqlite {
-  url      = "file:./dev.sqlite"
-  provider = "sqlite"
+datasource postgresql {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
 
 // Windows users should remove binaryTargets for local dev
-generator client {
+generator photonjs {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 model Invoice {
