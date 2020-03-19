@@ -3,7 +3,8 @@ datasource sqlite {
   provider = "sqlite"
 }
 
-generator photonjs {
+// Windows users should remove binaryTargets for local dev
+generator client {
   provider = "prisma-client-js"
 }
 
