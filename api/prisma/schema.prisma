@@ -1,12 +1,14 @@
 datasource sqlite {
-  url      = "file:./dev.sqlite"
+  url      = env("DB_HOST")
   provider = "sqlite"
 }
 
 // Windows users should remove binaryTargets for local dev
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
+
 
 model Invoice {
   id            Int      @id @default(autoincrement())

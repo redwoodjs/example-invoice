@@ -1,4 +1,4 @@
-api/prisma/dev.sqlite
+api/prisma/dev.db
 .DS_Store
 .env
 .netlify
