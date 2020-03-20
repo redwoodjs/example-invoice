@@ -44,7 +44,6 @@ export default ({ getInvoiceData }) => {
           text-align: right;
         `}
       >
-        {/* commented out at this level to preserve page top padding */}
         <Button onClick={saveInvoice} disabled={loading}>
           {loading ? 'SAVING...' : 'SAVE'}
         </Button>
