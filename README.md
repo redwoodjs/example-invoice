@@ -8,6 +8,8 @@ Features you can see in action here:
 - SVG loader (see Check.js)
 - StyledComponents usage (and stylistic approach)
 
+See a live version of this app here: https://redwood-example-invoice.netlify.com/
+
 ## Getting Started
 
 ### Setup
