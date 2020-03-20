@@ -83,23 +83,21 @@ const LineItems = ({ value, onChange, ...rest }) => {
             )}
           </tr>
         ))}
-
-        <tr>
-          <td
-            colSpan="3"
-            css={`
-              border-width: 0;
-              border-top-width: 1px;
-            `}
-          />
-          <td
-            css={`
-              vertical-align: middle;
-              padding-right: 8px;
-              border-color: transparent;
-            `}
-          >
-            <Box textAlign="right">
+      </tbody>
+      <tfoot>
+        <tr
+          css={`
+            border: 0;
+            background: red;
+          `}
+        >
+          <td colSpan="4">
+            <Box
+              textAlign="right"
+              css={`
+                padding-right: 7px;
+              `}
+            >
               <Button
                 width="28px"
                 onClick={() =>
@@ -119,7 +117,7 @@ const LineItems = ({ value, onChange, ...rest }) => {
             </Box>
           </td>
         </tr>
-      </tbody>
+      </tfoot>
     </Box>
   )
 }

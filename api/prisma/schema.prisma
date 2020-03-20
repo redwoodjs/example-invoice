@@ -8,6 +8,7 @@ generator photonjs {
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
+
 model Invoice {
   id            Int      @id @default(autoincrement())
   invoiceNumber String

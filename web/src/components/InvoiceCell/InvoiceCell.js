@@ -15,6 +15,9 @@ export const QUERY = gql`
 `
 
 export const afterQuery = ({ invoice }) => {
+  if (!invoice) {
+    return undefined
+  }
   const { id, invoiceNumber, date, body } = invoice
   return {
     initialInvoice: {
