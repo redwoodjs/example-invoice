@@ -1,3 +1,5 @@
+import { db } from 'src/lib/db'
+
 export const invoice = async ({ id }) => {
   const invoices = await db.invoice.findMany({
     where: {

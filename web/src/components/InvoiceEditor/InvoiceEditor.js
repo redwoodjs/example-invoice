@@ -6,7 +6,7 @@ import Summary from 'src/components/Summary'
 
 const MARGIN_BOTTOM = 4
 
-export default ({ invoice, setInvoice }) => {
+export default ({ invoice = DEFAULT_INVOICE, setInvoice }) => {
   const {
     title,
     companyName,
@@ -101,4 +101,31 @@ export default ({ invoice, setInvoice }) => {
       </Flex>
     </>
   )
+}
+const DEFAULT_INVOICE = {
+  title: 'I N V O I C E',
+  companyName: 'Example Inc.',
+  companyInfo: 'example.com\ninfo@example.com',
+  recipient:
+    'Michael Scott Paper Company Inc.\n1725 Slough Avenue\nScranton, Pennsylvania',
+  information: [
+    [{ value: 'Invoice #' }, { value: '044' }],
+    [
+      { value: 'Date' },
+      { value: new Intl.DateTimeFormat().format(new Date()) },
+    ],
+  ],
+  lineItems: [
+    [{ value: 'Description' }, { value: 'Quantity' }, { value: 'Price' }],
+    [{ value: 'Wheel of cheese' }, { value: 1 }, { value: 500 }],
+    [{ value: 'Jar of sausages' }, { value: 2 }, { value: 2.99 }],
+    [{ value: 'Tin of waffles' }, { value: 2 }, { value: 3.01 }],
+  ],
+  summary: [
+    [{ value: 'Subtotal' }, undefined, '0.0'],
+    [{ value: 'Tax Rate' }, { value: 0 }, '0.0'],
+    [{ value: 'Total' }, { value: '$' }, '0.0'],
+  ],
+  notesA: '',
+  notesB: 'Invoice by billable.me',
 }

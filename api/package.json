@@ -3,7 +3,7 @@
   "name": "api",
   "version": "0.0.0",
   "dependencies": {
-    "@redwoodjs/api": "^0.2.5",
+    "@redwoodjs/api": "^0.3.0",
 
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.7.0"

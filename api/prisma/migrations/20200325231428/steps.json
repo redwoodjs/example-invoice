@@ -11,8 +11,8 @@
         "tag": "Source",
         "source": "sqlite"
       },
-      "argument": "url",
-      "value": "\"file:./dev.sqlite\""
+      "argument": "provider",
+      "value": "\"sqlite\""
     },
     {
       "tag": "CreateArgument",
@@ -20,8 +20,8 @@
         "tag": "Source",
         "source": "sqlite"
       },
-      "argument": "provider",
-      "value": "\"sqlite\""
+      "argument": "url",
+      "value": "env(\"DB_HOST\")"
     },
     {
       "tag": "CreateModel",
