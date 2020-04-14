@@ -2,7 +2,8 @@
   "private": true,
   "workspaces": [
     "api",
-    "web"
+    "web",
+    "packages/auth"
   ],
   "devDependencies": {
     "@redwoodjs/core": "^0.4.0"
