@@ -10,8 +10,7 @@
     "build:js": "yarn babel src -d dist --delete-dir-on-start --extensions \".js,.ts\" --source-maps inline"
   },
   "devDependencies": {
-    "auth0-js": "^9.13.2",
-    "@types/auth0-js": "^9.12.4",
+    "@auth0/auth0-spa-js": "^1.7.0",
     "@types/react": "^16.9.34"
   }
 }
