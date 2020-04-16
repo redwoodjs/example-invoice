@@ -2,8 +2,16 @@
   "private": true,
   "name": "@redwoodjs/auth",
   "version": "0.0.0",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "license": "MIT",
-  "dependencies": {},
-  "scripts": {}
+  "dependencies": {
+  },
+  "scripts": {
+    "build:js": "yarn babel src -d dist --delete-dir-on-start --extensions \".js,.ts\" --source-maps inline"
+  },
+  "devDependencies": {
+    "auth0-js": "^9.13.2",
+    "@types/auth0-js": "^9.12.4",
+    "@types/react": "^16.9.34"
+  }
 }
