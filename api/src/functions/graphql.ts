@@ -4,7 +4,6 @@ import {
   makeServices,
 } from '@redwoodjs/api'
 import importAll from '@redwoodjs/api/importAll.macro'
-
 import { db } from 'src/lib/db'
 
 const schemas = importAll('api', 'graphql')
