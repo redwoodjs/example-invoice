@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.7.0",
-    "@redwoodjs/router": "^0.6.0-rc.1",
-    "@redwoodjs/web": "^0.6.0-rc.1",
+    "@redwoodjs/router": "^0.6.0",
+    "@redwoodjs/web": "^0.6.0",
+    "gotrue-js": "^0.9.25",
     "immer": "^5.3.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
