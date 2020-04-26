@@ -1,19 +1,73 @@
 import type { ReactNode } from 'react'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+import type { SupportedAuthTypes, SupportedAuthClients } from './authClient'
+import { createAuthClient } from './authClient'
 
 export const AuthContext = React.createContext({})
 
+/**
+ * @example
+ * ```js
+ *  const client = new Auth0Client(options)
+ *  // ...
+ *  <AuthProvider client={client} type="auth0">
+ *    {children}
+ *  </AuthProvider>
+ * ```
+ */
 export const AuthProvider = ({
   children,
   type,
   client,
 }: {
   children: ReactNode
-  type: 'auth0' | 'netlify'
-  client: () => {}
+  type: SupportedAuthTypes
+  client: SupportedAuthClients
 }): JSX.Element => {
-  console.log('what type did we get?', type, client)
-  // TODO: Take the type and the client and map the functions into something
-  // generic.
-  return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>
+  const [loading, setLoading] = useState(true)
+  const [authenticated, setAuthenticated] = useState(false)
+  const [user, setUser] = useState(null)
+
+  // Map the methods from auth0 and netlify into a unified interface.
+  const rwClient = createAuthClient(client, type)
+
+  // Attempt to restore the authentication state when a user visits the app again.
+  useEffect(() => {
+    const restoreAuthState = async () => {
+      rwClient.restoreAuthState && rwClient.restoreAuthState()
+      const user = await rwClient.currentUser()
+      setUser(user)
+      setAuthenticated(user !== null)
+      setLoading(false)
+    }
+    restoreAuthState()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const login = async (...args) => {
+    const user = await rwClient.login(...args)
+    setUser(user)
+    setAuthenticated(user !== null)
+  }
+
+  const logout = async () => {
+    await rwClient.logout()
+    setUser(null)
+    setAuthenticated(false)
+  }
+
+  return (
+    <AuthContext.Provider
+      value={{
+        loading,
+        authenticated,
+        user,
+        login,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }

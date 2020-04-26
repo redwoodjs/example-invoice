@@ -2,17 +2,13 @@ import React from 'react'
 
 import { AuthContext } from './AuthProvider'
 
-export const useAuth = () => {
-  React.useContext(AuthContext)
+// // authenticated,
+// // loading,
+// // user,
+// login,
+// logout
 
-  // Examples:
-  return {
-    client: () => {},
-    user: null,
-    authenticated: false,
-    loading: false,
-    login: () => {},
-    logout: () => {},
-    getAuthToken: () => {},
-  }
+export const useAuth = () => {
+  const ac = React.useContext(AuthContext)
+  return ac
 }
