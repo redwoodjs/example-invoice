@@ -4,7 +4,23 @@ import React, { useState, useEffect } from 'react'
 import type { SupportedAuthTypes, SupportedAuthClients } from './authClient'
 import { createAuthClient } from './authClient'
 
-export const AuthContext = React.createContext({})
+export interface AuthContextInterface {
+  /**
+   * Indicates if the authentication system is initiating.
+   */
+  loading: boolean
+  authenticated: boolean
+  user: null | object // TODO: Provide a generic interface to the users object.
+  login(): Promise<void>
+  logout(): Promise<void>
+  authToken(): Promise<string>
+  client: null | SupportedAuthClients
+  type: null | SupportedAuthTypes
+}
+
+export const AuthContext = React.createContext<Partial<AuthContextInterface>>(
+  {}
+)
 
 /**
  * @example
@@ -65,6 +81,9 @@ export const AuthProvider = ({
         user,
         login,
         logout,
+        authToken: rwClient.authToken,
+        client: rwClient.client,
+        type: rwClient.type,
       }}
     >
       {children}
