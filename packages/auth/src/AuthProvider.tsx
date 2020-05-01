@@ -51,7 +51,8 @@ export const AuthProvider = ({
   // Attempt to restore the authentication state when a user visits the app again.
   useEffect(() => {
     const restoreAuthState = async () => {
-      rwClient.restoreAuthState && rwClient.restoreAuthState()
+      rwClient.restoreAuthState && (await rwClient.restoreAuthState())
+
       const user = await rwClient.currentUser()
       setUser(user)
       setAuthenticated(user !== null)
