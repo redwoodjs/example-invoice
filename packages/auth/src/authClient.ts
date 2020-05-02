@@ -6,7 +6,7 @@ export interface AuthClient {
   restoreAuthState?(): void | Promise<any>
   login(options?: any): Promise<any>
   logout(): void | Promise<void>
-  authToken(): Promise<string>
+  getToken(): Promise<string>
   currentUser(): Promise<null | NetlifyUser>
   client: SupportedAuthClients
   type: SupportedAuthTypes
@@ -44,7 +44,7 @@ const mapAuthClientAuth0 = (client: Auth0): AuthClientAuth0 => {
     },
     login: async () => client.loginWithRedirect(),
     logout: () => client.logout(),
-    authToken: async () => client.getTokenSilently(),
+    getToken: async () => client.getTokenSilently(),
     currentUser: async () => {
       const user = await client.getUser()
       return user || null
@@ -62,7 +62,7 @@ const mapAuthClientNetlify = (client: Netlify): AuthClientNetlify => {
       const user = await client.currentUser()
       return user.logout()
     },
-    authToken: async () => {
+    getToken: async () => {
       const user = await client.currentUser()
       return user.jwt()
     },
