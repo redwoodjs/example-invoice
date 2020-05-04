@@ -1,4 +1,4 @@
-import { useAuth } from 'rwjs-auth'
+import { useAuth } from '@redwoodjs/auth'
 
 import { Text, Flex, Box, Button } from 'src/lib/primitives'
 
@@ -27,17 +27,7 @@ const UserAuthTools = () => {
   return (
     <>
       {type} you are not authenticated
-      <Button
-        onClick={() =>
-          login({
-            email: 'peter.pistorius@gmail.com',
-            password: 'test',
-            remember: true,
-          })
-        }
-      >
-        Log in
-      </Button>
+      <Button onClick={login}>Log in</Button>
     </>
   )
 }
