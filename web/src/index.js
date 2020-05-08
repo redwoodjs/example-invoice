@@ -7,10 +7,11 @@ import Routes from './Routes'
 import './index.css'
 
 const auth0 = new Auth0Client({
-  domain: 'billable.eu.auth0.com',
-  client_id: 'QOsYIlHvCLqLzmfDU0Z3upFdu1znlkqK',
-  redirect_uri: 'http://localhost:8910/',
+  domain: process.env.AUTH0_DOMAIN,
+  client_id: process.env.AUTH0_CLIENT_ID,
+  redirect_uri: 'http://localhost:8910/invoice',
   cacheLocation: 'localstorage',
+  audience: process.env.AUTH0_AUDIENCE,
 })
 
 ReactDOM.render(
