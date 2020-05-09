@@ -1,34 +1,29 @@
 import { useAuth } from '@redwoodjs/auth'
+import { routes, navigate } from '@redwoodjs/router'
 
 import { Text, Flex, Box, Button } from 'src/lib/primitives'
 
-// create the auth client and pass it into the authprovider
-
 const UserAuthTools = () => {
-  const { loading, authenticated, login, logout, type } = useAuth()
+  const { loading, authenticated, login, logout } = useAuth()
 
   if (loading) {
     return 'loading...'
   }
 
-  if (authenticated) {
-    return (
-      <>
-        {type} you are authenticated
-        <Button
-          onClick={() => logout({ redirectTo: 'http://localhost:8910/' })}
-        >
-          Log out
-        </Button>
-      </>
-    )
-  }
-
   return (
-    <>
-      {type} you are not authenticated
-      <Button onClick={login}>Log in</Button>
-    </>
+    <Button
+      onClick={async () => {
+        if (authenticated) {
+          await logout({ redirectTo: 'http://localhost:8910/' })
+          navigate('/')
+        } else {
+          await login()
+          navigate(routes.invoice())
+        }
+      }}
+    >
+      {authenticated ? 'Log out' : 'Log in'}
+    </Button>
   )
 }
 
@@ -59,7 +54,6 @@ export default () => {
           `}
         >
           <UserAuthTools />
-          <Box css={'margin: 0 20px'}> | </Box>
         </Flex>
       </Flex>
     </Box>

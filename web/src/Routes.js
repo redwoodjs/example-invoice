@@ -8,11 +8,10 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Router, Route, PrivateRoute } from '@redwoodjs/router'
-import { useAuth } from '@redwoodjs/auth'
 
 const Routes = () => {
   return (
-    <Router useAuth={useAuth}>
+    <Router>
       <Route unauthorized path="/" page={LandingPage} name="home" />
       <PrivateRoute path="/invoice" page={InvoicePage} name="invoice" />
     </Router>
