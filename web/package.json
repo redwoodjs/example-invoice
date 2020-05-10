@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.7.0",
-    "@redwoodjs/router": "0.6.1-canary.27",
-    "@redwoodjs/web": "0.6.1-canary.27",
-    "@redwoodjs/auth": "0.6.1-canary.27",
+    "@redwoodjs/router": "0.6.1-canary.29",
+    "@redwoodjs/web": "0.6.1-canary.29",
+    "@redwoodjs/auth": "0.6.1-canary.29",
     "immer": "^5.3.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
