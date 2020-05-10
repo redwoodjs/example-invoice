@@ -29,32 +29,20 @@ const UserAuthTools = () => {
 
 export default () => {
   return (
-    <Box
-      bg="blue"
-      css={`
-        height: 64px;
-      `}
-    >
+    <Box bg="blue" css={``}>
       <Flex
         flexDirection="row"
-        pl="8px"
         m="auto"
         css={`
           max-width: 800px;
-          line-height: 64px;
           color: white;
+          align-items: center;
         `}
       >
         <Text fontSize={5} color="white" flex={1}>
           Billable
         </Text>
-        <Flex
-          css={`
-            align-items: center;
-          `}
-        >
-          <UserAuthTools />
-        </Flex>
+        <UserAuthTools />
       </Flex>
     </Box>
   )
