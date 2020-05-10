@@ -4,7 +4,7 @@ import PageLayout from 'src/layouts/PageLayout'
 export default () => {
   return (
     <PageLayout>
-      <InvoiceCell id={1} />
+      <InvoiceCell />
     </PageLayout>
   )
 }

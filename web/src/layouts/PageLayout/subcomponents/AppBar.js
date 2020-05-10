@@ -4,26 +4,29 @@ import { routes, navigate } from '@redwoodjs/router'
 import { Text, Flex, Box, Button } from 'src/lib/primitives'
 
 const UserAuthTools = () => {
-  const { loading, authenticated, login, logout } = useAuth()
+  const { loading, authenticated, currentUser, login, logout } = useAuth()
 
   if (loading) {
     return 'loading...'
   }
 
+  if (!authenticated) {
+    return null
+  }
+
   return (
-    <Button
-      onClick={async () => {
-        if (authenticated) {
+    <>
+      {currentUser.email}
+      &nbsp;&nbsp;
+      <Button
+        onClick={async () => {
           await logout({ redirectTo: 'http://localhost:8910/' })
           navigate('/')
-        } else {
-          await login()
-          navigate(routes.invoice())
-        }
-      }}
-    >
-      {authenticated ? 'Log out' : 'Log in'}
-    </Button>
+        }}
+      >
+        Log out
+      </Button>
+    </>
   )
 }
 

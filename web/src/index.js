@@ -18,12 +18,10 @@ netlifyIdentity.init()
 // })
 
 ReactDOM.render(
-  <FatalErrorBoundary>
-    <AuthProvider client={netlifyIdentity} type="netlify">
-      <RedwoodProvider>
-        <Routes />
-      </RedwoodProvider>
-    </AuthProvider>
-  </FatalErrorBoundary>,
+  <AuthProvider client={netlifyIdentity} type="netlify">
+    <RedwoodProvider>
+      <Routes />
+    </RedwoodProvider>
+  </AuthProvider>,
   document.getElementById('redwood-app')
 )

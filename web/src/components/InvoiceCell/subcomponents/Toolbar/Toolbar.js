@@ -18,9 +18,11 @@ export default ({ getInvoiceData }) => {
 
   const saveInvoice = () => {
     const invoice = getInvoiceData()
+
     if (!invoice) {
       return
     }
+
     const invoiceNumber = invoice.information[0][1].value
     const date = invoice.information[1][1].value
     setInvoice({
