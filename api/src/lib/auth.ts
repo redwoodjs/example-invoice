@@ -1,12 +1,10 @@
 import { db } from 'src/lib/db'
 import { AuthenticationError } from '@redwoodjs/api'
 
-export const getCurrentUser = async (jwt) => {
-  console.log('x', jwt)
-  const email = jwt?.email
+export const getCurrentUser = async (authToken: { email?: string }) => {
+  const email = authToken?.email
   if (!email) {
-    //throw new AuthenticationError()
-    return undefined
+    throw new AuthenticationError()
   }
 
   let user = await db.user.findOne({ where: { email } })
