@@ -1,0 +1,32 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "DeleteDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Invoice",
+          "field": "invoiceNumber"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "Invoice",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[id, userId]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    }
+  ]
+}

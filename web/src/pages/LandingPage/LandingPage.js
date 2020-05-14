@@ -1,5 +1,5 @@
 import { useAuth } from '@redwoodjs/auth'
-import { navigate, routes } from '@redwoodjs/router'
+import { Redirect, routes } from '@redwoodjs/router'
 
 import { Text, Flex, Box, Button } from 'src/lib/primitives'
 
@@ -13,8 +13,7 @@ export default () => {
   }
 
   if (authenticated) {
-    navigate(routes.invoice())
-    return null
+    return <Redirect to={routes.invoice()} />
   }
 
   return (
