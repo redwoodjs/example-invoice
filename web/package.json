@@ -3,10 +3,11 @@
   "name": "web",
   "version": "0.0.0",
   "dependencies": {
-    "@redwoodjs/router": "0.6.1-canary.35",
-    "@redwoodjs/web": "0.6.1-canary.35",
     "@redwoodjs/auth": "0.6.1-canary.35",
+    "@redwoodjs/router": "^0.6.1-canary.40",
+    "@redwoodjs/web": "^0.6.1-canary.40",
     "immer": "^5.3.6",
+    "netlify-identity-widget": "1.5.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -14,7 +15,6 @@
     "rebass": "^4.0.7",
     "rebass-extend": "^1.0.1",
     "styled-components": "^5.0.1",
-    "styled-system": "^5.1.5",
-    "netlify-identity-widget":"1.5.6"
+    "styled-system": "^5.1.5"
   }
 }
