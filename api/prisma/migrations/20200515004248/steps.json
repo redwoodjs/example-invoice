@@ -195,6 +195,22 @@
       "arity": "Required"
     },
     {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "Invoice",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[id, userId]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
       "tag": "CreateModel",
       "model": "User"
     },
@@ -247,6 +263,17 @@
       "field": "email",
       "type": "String",
       "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "email"
+        },
+        "directive": "unique"
+      }
     },
     {
       "tag": "CreateField",

@@ -3,9 +3,9 @@
   "name": "web",
   "version": "0.0.0",
   "dependencies": {
-    "@redwoodjs/router": "0.6.1-canary.29",
-    "@redwoodjs/web": "0.6.1-canary.29",
-    "@redwoodjs/auth": "0.6.1-canary.29",
+    "@redwoodjs/router": "0.6.1-canary.35",
+    "@redwoodjs/web": "0.6.1-canary.35",
+    "@redwoodjs/auth": "0.6.1-canary.35",
     "immer": "^5.3.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
