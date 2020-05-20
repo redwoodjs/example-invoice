@@ -3,9 +3,9 @@
   "name": "web",
   "version": "0.0.0",
   "dependencies": {
-    "@redwoodjs/auth": "0.6.1-canary.35",
-    "@redwoodjs/router": "^0.6.1-canary.40",
-    "@redwoodjs/web": "^0.6.1-canary.40",
+    "@redwoodjs/auth": "^0.7.0-rc.4",
+    "@redwoodjs/router": "^0.7.0-rc.4",
+    "@redwoodjs/web": "^0.7.0-rc.4",
     "immer": "^5.3.6",
     "netlify-identity-widget": "1.5.6",
     "prop-types": "^15.7.2",

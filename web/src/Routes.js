@@ -14,7 +14,7 @@ const Routes = () => {
     <Router>
       <Route path="/" page={LandingPage} name="home" />
 
-      <Private unauthorized="home">
+      <Private unauthenticated="home">
         <Route path="/invoice" page={InvoicePage} name="invoice" />
       </Private>
     </Router>

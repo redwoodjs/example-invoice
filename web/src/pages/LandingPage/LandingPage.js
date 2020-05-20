@@ -6,13 +6,13 @@ import { Text, Flex, Box, Button } from 'src/lib/primitives'
 import exampleInvoice from './exampleInvoice.png'
 
 export default () => {
-  const { loading, authenticated, login } = useAuth()
+  const { loading, isAuthenticated, logIn } = useAuth()
 
   if (loading) {
     return null
   }
 
-  if (authenticated) {
+  if (isAuthenticated) {
     return <Redirect to={routes.invoice()} />
   }
 
@@ -58,7 +58,7 @@ export default () => {
           </Text>
 
           <Button
-            onClick={login}
+            onClick={logIn}
             css={`
               height: 44px !important;
               font-size: 20px !important;
