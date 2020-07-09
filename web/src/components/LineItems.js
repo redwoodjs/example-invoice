@@ -72,7 +72,7 @@ const LineItems = ({ value, onChange, ...rest }) => {
                   onClick={() =>
                     onChange(
                       produce(value, (draft) => {
-                        delete draft[rowIndex]
+                        draft.splice(rowIndex, 1)
                       })
                     )
                   }
