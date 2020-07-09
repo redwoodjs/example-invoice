@@ -3,19 +3,20 @@ import {
   makeMergedSchema,
   makeServices,
 } from '@redwoodjs/api'
-import importAll from '@redwoodjs/api/importAll.macro'
 import { db } from 'src/lib/db'
+
+//@ts-ignore
+import services from 'src/services/**/*.{ts,js}'
+//@ts-ignore
+import schemas from 'src/graphql/**/*.{ts,js}'
 import { getCurrentUser } from 'src/lib/auth'
 
-const schemas = importAll('api', 'graphql')
-const services = importAll('api', 'services')
-
 export const handler = createGraphQLHandler({
+  getCurrentUser,
   schema: makeMergedSchema({
     schemas,
     services: makeServices({ services }),
   }),
-  getCurrentUser,
   onException: () => {
     db.disconnect()
   },

@@ -1,8 +1,8 @@
 import { db } from 'src/lib/db'
 import { AuthenticationError, context } from '@redwoodjs/api'
 
-export const getCurrentUser = async (authToken: { email?: string }) => {
-  const email = authToken?.email
+export const getCurrentUser = async (decoded) => {
+  const email = decoded?.email
   if (!email) {
     throw new AuthenticationError('Uh, oh')
   }

@@ -1,27 +1,29 @@
 import { db } from 'src/lib/db'
-import { AuthenticationError } from '@redwoodjs/api'
 import { requireAuth } from 'src/lib/auth'
 
-export const invoice = async (_args, { context: { currentUser } }) => {
+export const invoice = async () => {
   requireAuth()
 
   const invoices = await db.invoice.findMany({
-    where: { user: { id: currentUser?.id } },
+    where: { user: { id: context.currentUser?.id } },
   })
   return invoices?.[0]
 }
 
-export const setInvoice = async (
-  { input: { id = -1, ...invoiceData } },
-  { context: { currentUser } }
-) => {
+export const setInvoice = async ({
+  input: { id = -1, invoiceNumber, date, body },
+}) => {
   requireAuth()
 
+  const userId = context.currentUser?.id
+
   const data = {
-    ...invoiceData,
+    date,
+    invoiceNumber,
+    body,
     user: {
       connect: {
-        id: currentUser.id,
+        id: userId,
       },
     },
   }
@@ -29,8 +31,7 @@ export const setInvoice = async (
     create: data,
     update: data,
     where: {
-      // eslint-disable-next-line @typescript-eslint/camelcase
-      id_userId: { id: id, userId: currentUser.id },
+      id_userId: { id: id, userId },
     },
   })
   return invoice
