@@ -1,6 +1,14 @@
 import { db } from 'src/lib/db'
 import { requireAuth } from 'src/lib/auth'
 
+export const invoices = async () => {
+  requireAuth()
+
+  return await db.invoice.findMany({
+    where: { user: { id: context.currentUser?.id } },
+  })
+}
+
 export const invoice = async () => {
   requireAuth()
 
