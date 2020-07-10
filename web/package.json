@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.10.0",
-    "@redwoodjs/auth": "^0.12.1-canary.28",
-    "@redwoodjs/router": "^0.12.1-canary.28",
-    "@redwoodjs/web": "^0.12.1-canary.28",
+    "@redwoodjs/auth": "^0.13.1-canary.2",
+    "@redwoodjs/router": "^0.13.1-canary.2",
+    "@redwoodjs/web": "^0.13.1-canary.2",
     "immer": "^5.3.6",
     "netlify-identity-widget": "1.5.6",
     "prop-types": "^15.7.2",

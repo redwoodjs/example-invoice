@@ -6,7 +6,7 @@
     "packages/auth"
   ],
   "devDependencies": {
-    "@redwoodjs/core": "^0.12.1-canary.28"
+    "@redwoodjs/core": "^0.13.1-canary.2"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config"
