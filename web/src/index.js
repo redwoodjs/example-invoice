@@ -1,6 +1,6 @@
-import { AuthProvider } from '@redwoodjs/auth'
 import ReactDOM from 'react-dom'
 import { RedwoodProvider } from '@redwoodjs/web'
+import { AuthProvider } from '@redwoodjs/auth'
 import netlifyIdentity from 'netlify-identity-widget'
 
 import Routes from './Routes'
