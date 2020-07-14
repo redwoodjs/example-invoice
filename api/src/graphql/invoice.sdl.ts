@@ -9,7 +9,7 @@ export const schema = gql`
   }
 
   type Query {
-    invoices: Invoices[]
+    invoices: [Invoice]
     invoice(id: Int): Invoice
   }
 

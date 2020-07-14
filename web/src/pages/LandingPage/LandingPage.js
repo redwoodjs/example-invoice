@@ -13,7 +13,7 @@ export default () => {
   }
 
   if (isAuthenticated) {
-    return <Redirect to={routes.invoice()} />
+    return <Redirect to={routes.invoice({ id: 'new' })} />
   }
 
   return (

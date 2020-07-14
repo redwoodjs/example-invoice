@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "allowJs": true,
     "paths": {
       "src/*": ["./src/*"]
     }
+
   },
+  "files": ["./src/global.d.ts"],
   "include": ["src/**/*"]
 }

@@ -6,25 +6,24 @@ export const invoices = async () => {
 
   return await db.invoice.findMany({
     where: { user: { id: context.currentUser?.id } },
+    orderBy: { date: 'asc' },
   })
 }
 
-export const invoice = async () => {
+export const invoice = async ({ id }) => {
+  return null
   requireAuth()
-
-  const invoices = await db.invoice.findMany({
-    where: { user: { id: context.currentUser?.id } },
+  const userId = context.currentUser?.id
+  return await db.invoice.findOne({
+    where: { id_userId: { id, userId } },
   })
-  return invoices?.[0]
 }
 
 export const setInvoice = async ({
   input: { id = -1, invoiceNumber, date, body },
 }) => {
   requireAuth()
-
   const userId = context.currentUser?.id
-
   const data = {
     date,
     invoiceNumber,

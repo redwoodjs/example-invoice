@@ -17,5 +17,12 @@
     "rebass-extend": "^1.0.1",
     "styled-components": "^5.0.1",
     "styled-system": "^5.1.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/ui": "^0.3.1",
+    "autoprefixer": "^9.8.5",
+    "postcss-loader": "^3.0.0",
+    "tailwindcss": "^1.4.6",
+    "@redwoodjs/testing": "0.13.1-canary.8"
   }
 }
