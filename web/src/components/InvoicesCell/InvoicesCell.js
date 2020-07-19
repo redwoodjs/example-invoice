@@ -1,7 +1,7 @@
 import { routes, Link } from '@redwoodjs/router'
 
 export const QUERY = gql`
-  query GetInvoices {
+  query GET_INVOICE {
     invoices {
       id
       invoiceNumber
@@ -9,7 +9,6 @@ export const QUERY = gql`
     }
   }
 `
-
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {

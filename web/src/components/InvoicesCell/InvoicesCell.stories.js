@@ -1,4 +1,5 @@
 import { Loading, Empty, Failure, Success } from './InvoicesCell'
+import { standard } from './InvoicesCell.mock'
 
 export const loading = () => {
   return Loading ? <Loading /> : null
@@ -9,12 +10,11 @@ export const empty = () => {
 }
 
 export const failure = () => {
-  // find all the files that have *.mock.*
   return Failure ? <Failure error={new Error('Oh no')} /> : null
 }
 
 export const success = () => {
-  return Success ? <Success {...getMockData('standard')} /> : null
+  return Success ? <Success {...standard()} /> : null
 }
 
 export default { title: 'Cells/InvoicesCell' }

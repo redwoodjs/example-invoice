@@ -1,11 +1,12 @@
 @tailwind base;
 
+
 a {
-  @apply text-indigo-600;
+  @apply text-primary-600;
 }
 
 a:hover {
-  @apply text-indigo-900;
+  @apply text-primary-800;
 }
 
 @tailwind components;
