@@ -1,16 +1,16 @@
-import { msw } from '@redwoodjs/testing'
+import { mockGraphQLQuery } from '@redwoodjs/testing'
 
 import InvoicesPage from './InvoicesPage'
 
-export const generated = () => {
+export const standard = () => {
   return <InvoicesPage />
 }
 
-// export const failure = () => {
-//   msw.graphql.query('GetInvoices', (req, res, ctx) => {
-//     return res(ctx.errors([{ message: 'The server exploded.' }]))
-//   })
-//   return <InvoicesPage />
-// }
+export const failure = () => {
+  mockGraphQLQuery('GET_INVOICE', (_vars, { ctx }) => {
+    ctx.status(401)
+  })
+  return <InvoicesPage />
+}
 
 export default { title: 'Pages/InvoicesPage' }

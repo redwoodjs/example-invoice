@@ -37,11 +37,15 @@ export default () => {
               Example Invoice.
               <br />
               <span className="text-indigo-600">
-                Billing Made Simple.Period.
+                Billing Made Simple. Period.
               </span>
             </h2>
             <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-              Example Invoice is an open source invoice template built with{' '}
+              Example Invoice is{' '}
+              <a href="https://github.com/redwoodjs/example-invoice">
+                an open source
+              </a>{' '}
+              invoice template built with{' '}
               <a href="https://redwoodjs.com">Redwood,</a> the full stack
               framework for the Jamstack.
             </p>
