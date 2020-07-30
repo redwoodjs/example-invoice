@@ -1,5 +1,3 @@
-import { mockGraphQLQuery } from '@redwoodjs/testing'
-
 import InvoicesPage from './InvoicesPage'
 
 export const standard = () => {

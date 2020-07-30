@@ -1,11 +1,12 @@
 import { routes, Link } from '@redwoodjs/router'
 
 export const QUERY = gql`
-  query GET_INVOICE {
-    invoices {
+  query GET_INVOICE($search: string) {
+    invoices(search: $search) {
       id
       invoiceNumber
       date
+      recipient
     }
   }
 `
@@ -53,7 +54,7 @@ export const Success = ({ invoices }) => {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {invoices.map(({ id, invoiceNumber, date }) => {
+              {invoices.map(({ id, invoiceNumber, date, recipient }) => {
                 return (
                   <tr key={'invoice-' + id}>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
@@ -63,7 +64,7 @@ export const Success = ({ invoices }) => {
                       {date}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                      Michael Scott Paper Company Inc.
+                      {recipient}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                       <Link to={routes.invoice({ id })}>Edit</Link>

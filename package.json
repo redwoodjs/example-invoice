@@ -6,7 +6,8 @@
     "packages/auth"
   ],
   "devDependencies": {
-    "@redwoodjs/core": "^0.13.1-canary.2"
+    "@redwoodjs/core": "^0.14.1-canary.6",
+    "lodash-decorators": "^6.0.1"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config"
