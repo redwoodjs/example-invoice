@@ -13,6 +13,11 @@ export const invoices = async () => {
 
 export const invoice = async ({ id }) => {
   requireAuth()
+
+  if (id === 'new') {
+    return null
+  }
+
   const userId = context.currentUser?.id
   return await db.invoice.findOne({
     where: { id_userId: { id, userId } },
@@ -20,11 +25,12 @@ export const invoice = async ({ id }) => {
 }
 
 export const setInvoice = async ({
-  input: { id = -1, invoiceNumber, date, body },
+  input: { id, invoiceNumber, date, body },
 }) => {
   requireAuth()
   const userId = context.currentUser?.id
   const data = {
+    id,
     date,
     invoiceNumber,
     body,
@@ -34,12 +40,13 @@ export const setInvoice = async ({
       },
     },
   }
-  const invoice = await db.invoice.upsert({
-    create: data,
-    update: data,
-    where: {
-      id_userId: { id: id, userId },
-    },
-  })
-  return invoice
+
+  if (typeof id === 'undefined') {
+    return db.invoice.create({ data })
+  } else {
+    return db.invoice.update({
+      where: { id_userId: { id, userId } },
+      data,
+    })
+  }
 }

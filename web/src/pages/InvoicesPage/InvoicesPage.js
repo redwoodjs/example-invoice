@@ -16,7 +16,7 @@ const InvoicesPage = () => {
 
         <div className="ml-4 mt-2 flex-shrink-0">
           <span className="inline-flex rounded-md shadow-sm">
-            <Button onClick={() => navigate(routes.newInvoice())}>
+            <Button onClick={() => navigate(routes.invoice({ id: 'new' }))}>
               Create new invoice
             </Button>
           </span>
