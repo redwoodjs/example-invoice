@@ -1,12 +1,11 @@
 import { routes, Link } from '@redwoodjs/router'
 
 export const QUERY = gql`
-  query GET_INVOICE($search: string) {
-    invoices(search: $search) {
+  query InvoicesQuery {
+    invoices {
       id
       invoiceNumber
       date
-      recipient
     }
   }
 `
@@ -16,7 +15,7 @@ export const Empty = () => {
   return (
     <div className="text-gray-500 text-center py-4">
       You don't have any invoices,{' '}
-      <Link to={routes.invoice({ id: '-1' })}>create one?</Link>
+      <Link to={routes.invoice({ id: 'new' })}>create one?</Link>
     </div>
   )
 }
@@ -47,14 +46,11 @@ export const Success = ({ invoices }) => {
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                   Invoice Date
                 </th>
-                <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  Recipient
-                </th>
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
               </tr>
             </thead>
             <tbody className="bg-white">
-              {invoices.map(({ id, invoiceNumber, date, recipient }) => {
+              {invoices.map(({ id, invoiceNumber, date }) => {
                 return (
                   <tr key={'invoice-' + id}>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
@@ -62,9 +58,6 @@ export const Success = ({ invoices }) => {
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                       {date}
-                    </td>
-                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                      {recipient}
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                       <Link to={routes.invoice({ id })}>Edit</Link>

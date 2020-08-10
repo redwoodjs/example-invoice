@@ -1,6 +1,6 @@
 import InvoicesPage from './InvoicesPage'
 
-export const standard = () => {
+export const generated = () => {
   return <InvoicesPage />
 }
 

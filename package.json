@@ -6,8 +6,15 @@
     "packages/auth"
   ],
   "devDependencies": {
-    "@redwoodjs/core": "^0.14.1-canary.6",
+    "@redwoodjs/core": "^0.15.4-canary.11",
+    "@redwoodjs/testing": "^0.15.3",
     "lodash-decorators": "^6.0.1"
+  },
+  "dependencies": {
+    "@prisma/client": "2.4.0"
+  },
+  "resolutions": {
+    "@prisma/client": "2.4.0"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config"

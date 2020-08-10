@@ -3,15 +3,15 @@ import { requireAuth } from 'src/lib/auth'
 
 export const invoices = async () => {
   requireAuth()
-
   return await db.invoice.findMany({
     where: { user: { id: context.currentUser?.id } },
-    orderBy: { date: 'asc' },
+    orderBy: {
+      date: 'asc',
+    },
   })
 }
 
 export const invoice = async ({ id }) => {
-  return null
   requireAuth()
   const userId = context.currentUser?.id
   return await db.invoice.findOne({

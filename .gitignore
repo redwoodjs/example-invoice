@@ -8,3 +8,4 @@ dist-babel
 node_modules
 yarn-error.log
 .env
+web/public/mockServiceWorker.js

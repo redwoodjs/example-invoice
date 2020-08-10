@@ -4,7 +4,6 @@ import {
   makeServices,
 } from '@redwoodjs/api'
 import { db } from 'src/lib/db'
-
 //@ts-ignore
 import services from 'src/services/**/*.{ts,js}'
 //@ts-ignore

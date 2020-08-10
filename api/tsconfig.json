@@ -3,14 +3,12 @@
     "target": "esnext",
     "moduleResolution": "node",
     "module": "esnext",
-    "strict": true,
     "esModuleInterop": true,
+    "noEmit": true,
     "baseUrl": "./",
     "paths": {
       "src/*": ["./src/*"]
     },
-    "declaration": true,
-    "declarationDir": "./dist"
   },
   "include": ["src"]
 }
