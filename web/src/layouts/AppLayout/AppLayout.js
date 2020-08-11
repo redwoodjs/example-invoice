@@ -1,59 +1,39 @@
-import { routes } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
 
-const AppLayout = ({ children }) => {
+import Button from 'src/components/Button'
+
+const AppLayout = ({ children, title }) => {
+  const { isAuthenticated, logIn, logOut } = useAuth()
+
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="bg-white border-b border-gray-200">
+    <div className="bg-gray-100">
+      <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                {/* <img
-                  className="block lg:hidden h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg"
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <img
+                  className="h-8 w-8"
+                  src="https://tailwindui.com/img/logos/workflow-mark-on-dark.svg"
                   alt="Workflow logo"
                 />
-                <img
-                  className="hidden lg:block h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-on-white.svg"
-                  alt="Workflow logo"
-                /> */}
-                Billable
               </div>
-              {/* <div className="-my-px ml-6 flex">
-                <a
-                  href={routes.invoices()}
-                  className="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
-                >
-                  Invoices
-                </a>
-              </div> */}
             </div>
-            <div className="ml-6 flex items-center">
-              <div className="ml-3 relative">
-                <div>
-                  <button
-                    className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
-                    id="user-menu"
-                    aria-label="User menu"
-                    aria-haspopup="true"
-                  >
-                    Log in / Log out
-                  </button>
-                </div>
-              </div>
+            <div>
+              <div className="ml-4 flex items-center">Log out</div>
             </div>
           </div>
         </div>
       </nav>
 
-      <div className="py-10">
-        <main>
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div className="px-4 py-8 sm:px-0">{children}</div>
-          </div>
-        </main>
-      </div>
+      <header>
+        <h1 className="text-3xl font-bold leading-tight text-gray-900 px-4 py-2 pt-6">
+          {title}
+        </h1>
+      </header>
+      <main>
+        <div className="p-4">{children}</div>
+      </main>
     </div>
   )
 }

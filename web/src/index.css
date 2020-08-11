@@ -1,5 +1,8 @@
 @tailwind base;
 
+html, body {
+  @apply bg-gray-100;
+}
 
 a {
   @apply text-primary-600;

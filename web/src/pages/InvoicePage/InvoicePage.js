@@ -1,5 +1,10 @@
 import InvoiceCell from './subcomponents/InvoiceCell'
+import AppLayout from 'src/layouts/AppLayout'
 
 export default ({ id }) => {
-  return <InvoiceCell id={id} />
+  return (
+    <AppLayout>
+      <InvoiceCell id={id} />
+    </AppLayout>
+  )
 }

@@ -6,7 +6,7 @@ export const invoices = async () => {
   return await db.invoice.findMany({
     where: { user: { id: context.currentUser?.id } },
     orderBy: {
-      date: 'asc',
+      date: 'desc',
     },
   })
 }
