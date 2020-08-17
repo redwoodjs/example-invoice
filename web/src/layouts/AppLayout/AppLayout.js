@@ -1,9 +1,13 @@
 import { useAuth } from '@redwoodjs/auth'
+import { routes } from '@redwoodjs/router'
 
 import Button from 'src/components/Button'
 
 const AppLayout = ({ children, title }) => {
   const { isAuthenticated, logIn, logOut } = useAuth()
+
+  // routes.peterp()
+  // routes.yolo()
 
   return (
     <div className="bg-gray-100">
@@ -20,7 +24,11 @@ const AppLayout = ({ children, title }) => {
               </div>
             </div>
             <div>
-              <div className="ml-4 flex items-center">Log out</div>
+              <div className="ml-4 flex items-center">
+                <a href="#" onClick={isAuthenticated ? logOut : logIn}>
+                  {isAuthenticated ? 'Log out' : 'Log in'}
+                </a>
+              </div>
             </div>
           </div>
         </div>
