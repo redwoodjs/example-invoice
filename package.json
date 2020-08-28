@@ -5,7 +5,9 @@
     "web"
   ],
   "devDependencies": {
-    "@redwoodjs/core": "^0.15.4-canary.20"
+    "@redwoodjs/core": "^0.15.4-canary.20",
+    "line-column": "^1.0.2",
+    "webpack-merge": "^5.1.2"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config"

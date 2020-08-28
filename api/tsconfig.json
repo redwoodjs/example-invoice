@@ -10,5 +10,5 @@
       "src/*": ["./src/*"]
     },
   },
-  "include": ["src"]
+  "include": ["src", "../.generated/index.d.ts"]
 }
