@@ -2,7 +2,7 @@
   "private": true,
   "workspaces": [
     "api",
-    "web",
+    "web"
   ],
   "devDependencies": {
     "@redwoodjs/core": "^0.15.4-canary.20"

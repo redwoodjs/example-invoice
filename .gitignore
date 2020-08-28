@@ -9,3 +9,7 @@ node_modules
 yarn-error.log
 .env
 web/public/mockServiceWorker.js
+
+
+# Deployment
+.serverless
