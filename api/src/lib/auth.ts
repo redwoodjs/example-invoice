@@ -1,10 +1,10 @@
 import { db } from 'src/lib/db'
-import { AuthenticationError, context } from '@redwoodjs/api'
+import { AuthenticationError } from '@redwoodjs/api'
 
 export const getCurrentUser = async (decoded) => {
   const email = decoded?.email
   if (!email) {
-    throw new AuthenticationError('Uh, oh')
+    throw new AuthenticationError('Unauthenticated')
   }
 
   let user = await db.user.findOne({ where: { email } })
@@ -14,11 +14,8 @@ export const getCurrentUser = async (decoded) => {
   return user
 }
 
-// Use this function in your services to check that a user is logged in, and
-// optionally raise an error if they're not.
-
 export const requireAuth = () => {
   if (!context.currentUser) {
-    throw new AuthenticationError()
+    throw new AuthenticationError('Unauthenticated')
   }
 }

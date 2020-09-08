@@ -2,11 +2,12 @@
   "private": true,
   "workspaces": [
     "api",
-    "web",
-    "packages/auth"
+    "web"
   ],
   "devDependencies": {
-    "@redwoodjs/core": "^0.12.1-canary.28"
+    "@redwoodjs/core": "^0.15.4-canary.20",
+    "line-column": "^1.0.2",
+    "webpack-merge": "^5.1.2"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config"

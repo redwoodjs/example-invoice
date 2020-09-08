@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.10.0",
-    "@redwoodjs/auth": "^0.12.1-canary.28",
-    "@redwoodjs/router": "^0.12.1-canary.28",
-    "@redwoodjs/web": "^0.12.1-canary.28",
+    "@redwoodjs/auth": "^0.15.4-canary.20",
+    "@redwoodjs/forms": "^0.15.4-canary.20",
+    "@redwoodjs/router": "^0.15.4-canary.20",
+    "@redwoodjs/web": "^0.15.4-canary.20",
     "immer": "^5.3.6",
     "netlify-identity-widget": "1.5.6",
     "prop-types": "^15.7.2",
@@ -17,5 +18,11 @@
     "rebass-extend": "^1.0.1",
     "styled-components": "^5.0.1",
     "styled-system": "^5.1.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/ui": "^0.5.0",
+    "autoprefixer": "^9.8.5",
+    "postcss-loader": "^3.0.0",
+    "tailwindcss": "^1.6.2"
   }
 }

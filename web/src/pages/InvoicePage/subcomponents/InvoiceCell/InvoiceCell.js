@@ -4,8 +4,8 @@ import InvoiceEditor from 'src/components/InvoiceEditor'
 import Toolbar from './subcomponents/Toolbar'
 
 export const QUERY = gql`
-  query GET_INVOICE {
-    invoice {
+  query InvoiceQuery($id: String!) {
+    invoice(id: $id) {
       id
       invoiceNumber
       date

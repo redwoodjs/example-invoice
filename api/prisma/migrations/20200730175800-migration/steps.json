@@ -21,7 +21,7 @@
         "source": "sqlite"
       },
       "argument": "url",
-      "value": "env(\"DB_HOST\")"
+      "value": "\"***\""
     },
     {
       "tag": "CreateModel",
