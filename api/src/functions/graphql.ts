@@ -17,6 +17,6 @@ export const handler = createGraphQLHandler({
     services: makeServices({ services }),
   }),
   onException: () => {
-    db.disconnect()
+    db.$disconnect()
   },
 })
