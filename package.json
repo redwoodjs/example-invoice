@@ -5,13 +5,26 @@
     "web"
   ],
   "devDependencies": {
+    "eslint": "7.11.0",
+    "@graphql-eslint/eslint-plugin": "^0.4.1",
     "@redwoodjs/core": "^0.18.0",
     "line-column": "^1.0.2",
     "time-require": "^0.1.2",
     "webpack-merge": "^5.1.2"
   },
   "eslintConfig": {
-    "extends": "@redwoodjs/eslint-config"
+    "extends": "@redwoodjs/eslint-config",
+    "overrides": [
+      {
+        "files": ["*.tsx", "*.ts", "*.jsx", "*.js"],
+        "processor": "@graphql-eslint/graphql"
+      },
+      {
+        "files": ["*.graphql"],
+        "parser": "@graphql-eslint/eslint-plugin",
+        "plugins": ["@graphql-eslint"]
+      }
+    ]
   },
   "engines": {
     "node": ">=12",
