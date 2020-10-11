@@ -2,7 +2,6 @@ import { useState } from 'react'
 import InvoiceEditor from 'src/components/InvoiceEditor'
 
 import Toolbar from './subcomponents/Toolbar'
-
 export const QUERY = gql`
   query InvoiceQuery($id: String!) {
     invoice(id: $id) {
