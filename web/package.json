@@ -2,6 +2,10 @@
   "private": true,
   "name": "web",
   "version": "0.0.0",
+  "browserslist": {
+    "development": [ "last 1 version" ],
+    "production": ["defaults", "not IE 11", "not IE_Mob 11"]
+  },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.10.0",
     "@redwoodjs/auth": "^0.19.3",
