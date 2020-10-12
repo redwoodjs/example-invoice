@@ -2,12 +2,16 @@
   "private": true,
   "name": "web",
   "version": "0.0.0",
+  "browserslist": {
+    "development": [ "last 1 version" ],
+    "production": ["defaults", "not IE 11", "not IE_Mob 11"]
+  },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.10.0",
-    "@redwoodjs/auth": "^0.15.4-canary.20",
-    "@redwoodjs/forms": "^0.15.4-canary.20",
-    "@redwoodjs/router": "^0.15.4-canary.20",
-    "@redwoodjs/web": "^0.15.4-canary.20",
+    "@redwoodjs/auth": "^0.19.3",
+    "@redwoodjs/forms": "^0.19.3",
+    "@redwoodjs/router": "^0.19.3",
+    "@redwoodjs/web": "^0.19.3",
     "immer": "^5.3.6",
     "netlify-identity-widget": "1.5.6",
     "prop-types": "^15.7.2",
@@ -21,8 +25,8 @@
   },
   "devDependencies": {
     "@tailwindcss/ui": "^0.5.0",
-    "autoprefixer": "^9.8.5",
-    "postcss-loader": "^3.0.0",
-    "tailwindcss": "^1.6.2"
+    "autoprefixer": "9.8.6",
+    "postcss-loader": "4.0.2",
+    "tailwindcss": "^1.8.13"
   }
 }

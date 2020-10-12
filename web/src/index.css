@@ -1,4 +1,5 @@
-@tailwind base;
+@import "tailwindcss/base";
+
 
 html, body {
   @apply bg-gray-100;
@@ -12,5 +13,5 @@ a:hover {
   @apply text-primary-800;
 }
 
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
