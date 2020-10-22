@@ -1,11 +1,11 @@
 datasource sqlite {
-  provider = "sqlite"
+  provider = ["sqlite", "postgresql"]
   url = "***"
 }
 
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+  binaryTargets = "native"
 }
 
 model Invoice {

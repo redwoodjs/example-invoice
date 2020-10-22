@@ -12,7 +12,7 @@
         "source": "sqlite"
       },
       "argument": "provider",
-      "value": "\"sqlite\""
+      "value": "[\"sqlite\", \"postgresql\"]"
     },
     {
       "tag": "CreateArgument",
@@ -31,7 +31,7 @@
       "tag": "CreateField",
       "model": "Invoice",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -57,7 +57,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "cuid()"
     },
     {
       "tag": "CreateDirective",
@@ -191,7 +191,7 @@
       "tag": "CreateField",
       "model": "Invoice",
       "field": "userId",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -218,7 +218,7 @@
       "tag": "CreateField",
       "model": "User",
       "field": "id",
-      "type": "Int",
+      "type": "String",
       "arity": "Required"
     },
     {
@@ -244,7 +244,7 @@
         "directive": "default"
       },
       "argument": "",
-      "value": "autoincrement()"
+      "value": "cuid()"
     },
     {
       "tag": "CreateDirective",
