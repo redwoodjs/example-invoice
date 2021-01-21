@@ -12,7 +12,7 @@
     "@redwoodjs/forms": "^0.19.3",
     "@redwoodjs/router": "^0.19.3",
     "@redwoodjs/web": "^0.19.3",
-    "immer": "^5.3.6",
+    "immer": "^8.0.1",
     "netlify-identity-widget": "1.5.6",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
