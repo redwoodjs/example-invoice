@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import { RedwoodProvider } from '@redwoodjs/web'
+import { RedwoodApolloProvider } from '@redwoodjs/web'
 import { AuthProvider } from '@redwoodjs/auth'
 import netlifyIdentity from 'netlify-identity-widget'
 
@@ -10,9 +10,9 @@ netlifyIdentity.init()
 
 ReactDOM.render(
   <AuthProvider client={netlifyIdentity} type="netlify">
-    <RedwoodProvider>
+    <RedwoodApolloProvider>
       <Routes />
-    </RedwoodProvider>
+    </RedwoodApolloProvider>
   </AuthProvider>,
   document.getElementById('redwood-app')
 )
