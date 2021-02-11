@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom'
-import { RedwoodApolloProvider } from '@redwoodjs/web'
+import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 import { AuthProvider } from '@redwoodjs/auth'
 import netlifyIdentity from 'netlify-identity-widget'
 
